@@ -12,4 +12,7 @@ public class ConcessionService {
             return false;
         }
     }
+
+    public void createConcession(User user, Course course) {
+    }
 }
