@@ -3,6 +3,10 @@ public class ConcessionService {
     }
 
     public Boolean applyConcession(User user, Course course) {
-        return true;
+        if (user.isValidForConcession() && course.isValidForConcession()){
+            return true;
+        } else {
+            return false;
+        }
     }
 }
