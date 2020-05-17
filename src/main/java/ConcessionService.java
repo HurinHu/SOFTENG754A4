@@ -30,4 +30,7 @@ public class ConcessionService {
         Concession concession = _db.getConcession(user, course, date);
         concession.setStatus(ConcessionStatus.concession_enrolled);
     }
+
+    public void cancelConcession(User user, Course course, Date date) {
+    }
 }
