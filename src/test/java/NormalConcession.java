@@ -1,6 +1,8 @@
 import org.junit.Test;
 import org.mockito.Mockito;
 
+import java.util.Date;
+
 import static org.junit.Assert.assertEquals;
 
 public class NormalConcession {
@@ -43,5 +45,20 @@ public class NormalConcession {
         concessionService.createConcession(user, course);
         int output = db.getConcessionPool().size();
         assertEquals(3, output);
+    }
+
+    @Test
+    public void testCheckConcessionStatus() {
+        Database db = Mockito.mock(Database.class);
+        Course course = new Course();
+        User user = new User();
+        ConcessionService concessionService = new ConcessionService(db);
+
+        Concession c = new Concession(user, course);
+        Date date = new Date(System.currentTimeMillis());
+        // mocking the step when get data from database
+        Mockito.when(db.getConcession(user, course, date)).thenReturn(c);
+        ConcessionStatus output = concessionService.checkConcession(user, course, date);
+        assertEquals(ConcessionStatus.concession_waiting, output);
     }
 }
