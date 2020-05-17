@@ -21,7 +21,8 @@ public class ConcessionService {
         _db.setConcessionPool(concession);
     }
 
-    public ConcessionStatus checkConcession(User user, Course course, Date date) {
-        return null;
+    public ConcessionStatus checkConcession(User user, Course course, Date date){
+        Concession concession = _db.getConcession(user, course, date);
+        return concession.getStatus();
     }
 }
