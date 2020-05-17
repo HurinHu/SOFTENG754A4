@@ -21,4 +21,8 @@ public class Database {
     public Concession getConcession(User user, Course course, Date date) {
         return null;
     }
+
+	public String getDescription(int course_id) {
+		return null;
+	}
 }
