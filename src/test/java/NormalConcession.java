@@ -78,6 +78,23 @@ public class NormalConcession {
         concessionService.approveConcession(user, course, date);
         ConcessionStatus output = concessionService.checkConcession(user, course, date);
         assertEquals(ConcessionStatus.concession_enrolled, output);
+    }
 
+    @Test
+    public void testCancelAConcession() {
+        Database db = Mockito.mock(Database.class);
+        Course course = new Course();
+        User user = new User();
+        ConcessionService concessionService = new ConcessionService(db);
+
+        Concession c = new Concession(user, course);
+        Date date = new Date(System.currentTimeMillis());
+        // mocking the step when get data from database
+        Mockito.when(db.getConcession(user, course, date)).thenReturn(c);
+
+        // Cancel the concession then the status of this concession would be changed to concession_cancelled
+        concessionService.cancelConcession(user, course, date);
+        ConcessionStatus output = concessionService.checkConcession(user, course, date);
+        assertEquals(ConcessionStatus.concession_cancelled, output);
     }
 }
