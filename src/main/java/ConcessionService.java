@@ -14,5 +14,7 @@ public class ConcessionService {
     }
 
     public void createConcession(User user, Course course) {
+        Concession concession = new Concession(user, course);
+        _db.setConcessionPool(concession);
     }
 }
