@@ -25,4 +25,7 @@ public class ConcessionService {
         Concession concession = _db.getConcession(user, course, date);
         return concession.getStatus();
     }
+
+    public void approveConcession(User user, Course course, Date date) {
+    }
 }
