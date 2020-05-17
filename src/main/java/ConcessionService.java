@@ -1,3 +1,5 @@
+import java.util.Date;
+
 public class ConcessionService {
     private Database _db;
 
@@ -17,5 +19,9 @@ public class ConcessionService {
     public void createConcession(User user, Course course) {
         Concession concession = new Concession(user, course);
         _db.setConcessionPool(concession);
+    }
+
+    public ConcessionStatus checkConcession(User user, Course course, Date date) {
+        return null;
     }
 }

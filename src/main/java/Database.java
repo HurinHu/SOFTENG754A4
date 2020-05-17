@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 public class Database {
@@ -15,5 +16,9 @@ public class Database {
 
     public List<Concession> getConcessionPool() {
         return _concessionsPool;
+    }
+
+    public Concession getConcession(User user, Course course, Date date) {
+        return null;
     }
 }
