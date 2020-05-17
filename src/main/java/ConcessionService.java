@@ -32,5 +32,7 @@ public class ConcessionService {
     }
 
     public void cancelConcession(User user, Course course, Date date) {
+        Concession concession = _db.getConcession(user, course, date);
+        concession.setStatus(ConcessionStatus.concession_cancelled);
     }
 }
