@@ -29,4 +29,19 @@ public class NormalConcession {
         Boolean output3 = concessionService.applyConcession(user3, course3);
         assertEquals(false, output3);
     }
+
+    @Test
+    public void testCreateConcession() {
+        Database db = new Database();
+        Course course = new Course();
+        User user = new User();
+        ConcessionService concessionService = new ConcessionService(db);
+
+        // create 3 concessions and check whether it creates successfully
+        concessionService.createConcession(user, course);
+        concessionService.createConcession(user, course);
+        concessionService.createConcession(user, course);
+        int output = db.getConcessionPool().size();
+        assertEquals(3, output);
+    }
 }
