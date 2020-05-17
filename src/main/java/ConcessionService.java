@@ -7,6 +7,7 @@ public class ConcessionService {
 
     public Boolean applyConcession(User user, Course course) {
         if (user.isValidForConcession() && course.isValidForConcession()){
+            createConcession(user, course);
             return true;
         } else {
             return false;
