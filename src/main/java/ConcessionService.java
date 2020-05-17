@@ -1,5 +1,8 @@
 public class ConcessionService {
-    public ConcessionService(Database db) {
+    private Database _db;
+
+    public ConcessionService(Database db){
+        _db = db;
     }
 
     public Boolean applyConcession(User user, Course course) {
