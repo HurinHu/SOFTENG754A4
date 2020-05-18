@@ -123,24 +123,34 @@ public class CourseTest {
 
   @Test
   public void testGetCourseTimeslots() {
-	  int id1 = 1;
-	  String time1 = "Tue 11:00-12:00";
-	  String time2 = "Wed 13:00-15:00";
-	  int courseId1 = 1;
-	  int courseId2 = 2;
-	  int capacity1 = 50;
-	  int capacity2 = 50;
-	  TimeSlot ts1 = new TimeSlot(id1,time1,courseId1,capacity1);
-	  TimeSlot ts2 = new TimeSlot(id1,time2,courseId1,capacity2);
-	  List<TimeSlot> timeslots = new ArrayList<TimeSlot>();
-	  timeslots.add(ts1);
-	  timeslots.add(ts2);
-	  Course course = new Course(id1,timeslots);
-	  //Mockito.when(course.getTimeSlots(1)).thenReturn(timeslots);
-	  List<TimeSlot> outputTs = course.getTimeSlots(id1);
-	  assertEquals(outputTs,timeslots);
+    int id1 = 1;
+    String time1 = "Tue 11:00-12:00";
+    String time2 = "Wed 13:00-15:00";
+    int courseId1 = 1;
+    int courseId2 = 2;
+    int capacity1 = 50;
+    int capacity2 = 50;
+    TimeSlot ts1 = new TimeSlot(id1,time1,courseId1,capacity1);
+    TimeSlot ts2 = new TimeSlot(id1,time2,courseId1,capacity2);
+    List<TimeSlot> timeslots = new ArrayList<TimeSlot>();
+    timeslots.add(ts1);
+    timeslots.add(ts2);
+    Course course = new Course(id1,timeslots);
+    //Mockito.when(course.getTimeSlots(1)).thenReturn(timeslots);
+    List<TimeSlot> outputTs = course.getTimeSlots(id1);
+    assertEquals(outputTs,timeslots);
 //	  assertEquals(outputTs.get(0)._time,"Tue 11:00-12:00");
 //	  assertEquals(outputTs.get(1)._time,"Wed 13:00-15:00");
-	  
+
+  }
+
+  @Test
+  public void testGetCourseLocation() {
+    int course_id = 123;
+    Database db = Mockito.mock(Database.class);
+    Mockito.when(db.getCourseLocation(course_id)).thenReturn("201N-346");
+    Course course = new Course(db, course_id);
+    String location = course.getLocation();
+    assertEquals("201N-346",location);
   }
 }

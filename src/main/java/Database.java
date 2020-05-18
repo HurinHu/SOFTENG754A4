@@ -48,4 +48,8 @@ public class Database {
         Integer userId = user_id;
         return null;
     }
+
+    public String getCourseLocation(int courseId){
+    	return null;
+	}
 }
