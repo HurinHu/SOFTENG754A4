@@ -18,4 +18,9 @@ public class Enrollment {
     return capacity;
   }
 
+  public int getEnrolledStudentNum(Course course) {
+    int enrolledStudent = -1;
+    return enrolledStudent;
+  }
+
 }
