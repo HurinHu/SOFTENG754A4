@@ -33,4 +33,8 @@ public class Database {
 	public int getCapacity(int course_id) {
 		return 0;
 	}
+
+	public int getEnrolled(int course_id) {
+    	return 0;
+  	}
 }
