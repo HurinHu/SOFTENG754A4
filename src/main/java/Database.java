@@ -38,7 +38,7 @@ public class Database {
     	return 0;
   	}
 
-	public String getStatus(int course_id, int student_id) {
+	public String getStatus(int course_id, int user_id) {
     	return null;
 	}
 }

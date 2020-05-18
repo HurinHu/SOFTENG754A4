@@ -1,12 +1,15 @@
 public class Enrollment {
 
   private Database db;
+  private User user;
 
   public Enrollment(Database db) {
 	  this.db = db;
   }
 
   public Enrollment(Database db, User user) {
+	  this.db = db;
+	  this.user = user;
   }
 
   public int getCourseCapacity(Course course) {
@@ -45,6 +48,18 @@ public class Enrollment {
   }
 
   public String getCourseStatus(Course course) {
-    return null;
+    int course_id = -1;
+    int user_id = -1;
+    String status = "";
+    course_id = course.getCourseId();
+    user_id = this.user.getId();
+    if (course_id == -1) {
+      throw new RuntimeException("Course is not exist");
+    } else if (user_id == -1) {
+      throw new RuntimeException("Student is not exist");
+    } else {
+      status = this.db.getStatus(course_id, user_id);
+    }
+    return status;
   }
 }
