@@ -1,10 +1,8 @@
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 public class Database {
     List<Concession> _concessionsPool = new ArrayList<>();
+    Map<Integer,Map> _enrolledCourses = new Hashtable<>();
 
     public Database(){
 
@@ -45,4 +43,9 @@ public class Database {
 	public boolean setStatus(int course_id, int user_id) {
     	return false;
   	}
+
+  	public Map getEnrolledCourse(int user_id){
+        Integer userId = user_id;
+        return _enrolledCourses.get(userId);
+    }
 }
