@@ -192,10 +192,10 @@ public class CourseTest {
 	  int timeslotId = 1; 
 	  Database db = Mockito.mock(Database.class);
 	  Course course = new Course(db,courseId);
-	  List<Integer> compulsorycapacityresult;
+	  List<Integer> compulsorycapacityresult = new ArrayList<Integer>();
 	  compulsorycapacityresult.add(1);
 	  compulsorycapacityresult.add(3);
-	  List<Integer> electivecapacityresult;
+	  List<Integer> electivecapacityresult = new ArrayList<Integer>();
 	  electivecapacityresult.add(100);
 	  electivecapacityresult.add(80);
 	  

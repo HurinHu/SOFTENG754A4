@@ -69,5 +69,15 @@ public boolean checkTimetableClash(int courseId, int timeslotId) {
 public int getCourseCapacityForTimeSlot(int courseId, int timeslotId) {
 	return 0;
 }
+
+public List<Integer> getCourseCapacityForCompulsory(int courseId, int timeslotId) {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+public List<Integer> getCourseCapacityForElective(int courseId, int timeslotId) {
+	// TODO Auto-generated method stub
+	return null;
+}
   
 }
