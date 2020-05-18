@@ -39,4 +39,8 @@ public class ConcessionService {
         Concession concession = _db.getConcession(user, course, date);
         concession.setStatus(ConcessionStatus.concession_cancelled);
     }
+
+    public String createConcessionForMasterStudent(User user, Course course) {
+        return null;
+    }
 }

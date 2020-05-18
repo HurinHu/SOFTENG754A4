@@ -48,4 +48,10 @@ public class Database {
         Integer userId = user_id;
         return null;
     }
+
+	public boolean isMeetRequirement(User user, Course course) {return true;
+	}
+
+	public boolean enrollCourse(int id, int courseId) {return false;
+	}
 }
