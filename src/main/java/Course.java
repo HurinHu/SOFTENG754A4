@@ -66,7 +66,7 @@ public class Course {
 
 	public String selectTimeSlot(int courseId) {
 		// TODO Auto-generated method stub
-		return null;
+		return this.db.selectTimeSlot(this.id);
 	}
 	
 }
