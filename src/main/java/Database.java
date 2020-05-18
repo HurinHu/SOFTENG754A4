@@ -48,4 +48,9 @@ public class Database {
         Integer userId = user_id;
         return null;
     }
+
+	public String selectTimeSlot(int courseId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

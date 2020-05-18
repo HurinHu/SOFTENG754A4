@@ -4,7 +4,6 @@ public class Course {
 	private Database db;
 	private int id;
 	private List<TimeSlot> _timeslots;
-	private String _time;
     public Course(){
 
     }
@@ -56,7 +55,18 @@ public class Course {
 	}
 	
 	
-	List<TimeSlot> getTimeSlots(int courseId){
-		return this._timeslots; 
+
+	public List<TimeSlot> getTimeSlots(int courseId){
+		if(courseId == this.id) {
+			return this._timeslots; 
+		}
+		throw new RuntimeException("Course status is empty");
+		
 	}
+
+	public String selectTimeSlot(int courseId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 }
