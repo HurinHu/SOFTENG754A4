@@ -37,4 +37,12 @@ public class Database {
 	public int getEnrolled(int course_id) {
     	return 0;
   	}
+
+	public String getStatus(int course_id, int user_id) {
+    	return null;
+	}
+
+	public boolean setStatus(int course_id, int user_id) {
+    	return false;
+  	}
 }
