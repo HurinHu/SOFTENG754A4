@@ -65,5 +65,9 @@ public class Database {
 public boolean checkTimetableClash(int courseId, int timeslotId) {
 	return false;
 }
+
+public int getCourseCapacityForTimeSlot(int courseId, int timeslotId) {
+	return 0;
+}
   
 }
