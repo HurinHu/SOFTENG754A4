@@ -78,9 +78,8 @@ public class Course {
 		 return this.db.checkTimetableClash(courseId,timeslotId);
 	}
 
-	public boolean getCourseCapacityForTimeSlot(int courseId, int timeslotId) {
-		// TODO Auto-generated method stub
-		return false;
+	public int getCourseCapacityForTimeSlot(int courseId, int timeslotId) {
+		return this.db.getCourseCapacityForTimeSlot( courseId,  timeslotId);
 	}
 
 }

@@ -182,7 +182,7 @@ public class CourseTest {
 	  Database db = Mockito.mock(Database.class);
 	  Course course = new Course(db,courseId);
 	  Mockito.when(db.getCourseCapacityForTimeSlot(courseId,timeslotId)).thenReturn(100);
-	  boolean capacity = course.getCourseCapacityForTimeSlot(courseId,timeslotId);
+	  int capacity = course.getCourseCapacityForTimeSlot(courseId,timeslotId);
 	  assertEquals(capacity,100);
   }
   

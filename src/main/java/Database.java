@@ -67,7 +67,6 @@ public boolean checkTimetableClash(int courseId, int timeslotId) {
 }
 
 public int getCourseCapacityForTimeSlot(int courseId, int timeslotId) {
-	
 	return 0;
 }
   
