@@ -53,7 +53,6 @@ public class Course {
 	
 	
 	List<TimeSlot> getTimeSlots(int courseId){
-		return new ArrayList<TimeSlot>();
-	//	return this._timeslots; 
+		return this._timeslots; 
 	}
 }
