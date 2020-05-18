@@ -10,6 +10,7 @@ public class ConcessionService {
     public Boolean applyConcession(User user, Course course) {
         if (user.isValidForConcession() && course.isValidForConcession()){
             if (user.isMasterStudent()){
+                createConcessionForMasterStudent(user, course);
                 return true;
             } else {
                 createConcession(user, course);
@@ -41,6 +42,16 @@ public class ConcessionService {
     }
 
     public String createConcessionForMasterStudent(User user, Course course) {
-        return null;
+        if (_db.isMeetRequirement(user, course)){
+            Enrollment enrollment = new Enrollment(_db, user);
+            if (enrollment.enrollCourse(course)){
+                return "enrolled";
+            } else {
+                return "failed";
+            }
+        } else {
+            createConcession (user, course);
+            return "concession";
+        }
     }
 }
