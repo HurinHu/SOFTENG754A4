@@ -3,13 +3,19 @@ import java.util.*;
 public class Course {
 	private Database db;
 	private int id;
-
+	private List<TimeSlot> _timeslots;
+	private String _time;
     public Course(){
 
     }
 
 	public Course(Database db) {
 		this.db = db;
+	}
+	
+	public Course(int id, List<TimeSlot> ts) {
+		this.id = id;
+		this._timeslots = ts;
 	}
 
 	public Course(Database db, int course_id) {
@@ -43,5 +49,11 @@ public class Course {
 		} else {
 			return this.db.createCourse(description,capacity,concession,compulsory_program,prerequisite,timeslots,location,status);
 		}
+	}
+	
+	
+	List<TimeSlot> getTimeSlots(int courseId){
+		return new ArrayList<TimeSlot>();
+	//	return this._timeslots; 
 	}
 }
