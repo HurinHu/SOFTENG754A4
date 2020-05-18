@@ -148,6 +148,7 @@ public class CourseTest {
   public void testGetCourseLocation() {
     int course_id = 123;
     Database db = Mockito.mock(Database.class);
+    Mockito.when(db.getCourseLocation(course_id)).thenReturn("201N-346");
     Course course = new Course(db, course_id);
     String location = course.getLocation();
     assertEquals("201N-346",location);
