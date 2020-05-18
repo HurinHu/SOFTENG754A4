@@ -174,4 +174,16 @@ public class CourseTest {
 	  assertEquals(clash,true);
   }
   
+  
+  @Test
+  public void testGetCourseCapacityForTimeSlot() {
+	  int courseId = 1;
+	  int timeslotId = 1; 
+	  Database db = Mockito.mock(Database.class);
+	  Course course = new Course(db,courseId);
+	  Mockito.when(db.getCourseCapacityForTimeSlot(courseId,timeslotId)).thenReturn(100);
+	  boolean capacity = course.getCourseCapacityForTimeSlot(courseId,timeslotId);
+	  assertEquals(capacity,100);
+  }
+  
 }
