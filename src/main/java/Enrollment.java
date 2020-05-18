@@ -19,7 +19,14 @@ public class Enrollment {
   }
 
   public int getEnrolledStudentNum(Course course) {
+    int course_id = -1;
     int enrolledStudent = -1;
+    course_id = course.getCourseId();
+    if (course_id != -1) {
+      enrolledStudent = this.db.getEnrolled(course_id);
+    } else {
+      throw new RuntimeException("Course is not exist");
+    }
     return enrolledStudent;
   }
 
