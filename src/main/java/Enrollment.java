@@ -31,7 +31,14 @@ public class Enrollment {
   }
 
   public int getRemainingSeats(Course course) {
-    return 0;
+    int capacity = this.getCourseCapacity(course);
+    int enrolledStudent = this.getEnrolledStudentNum(course);
+    int remaining = capacity - enrolledStudent;
+    if (remaining >= 0) {
+      return remaining;
+    } else {
+      throw new RuntimeException("Internal Error");
+    }
   }
 
 }
