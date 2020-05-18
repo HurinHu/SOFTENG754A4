@@ -162,4 +162,16 @@ public class CourseTest {
     String location = course.getLocation();
     assertEquals("201N-346",location);
   }
+  
+  @Test
+  public void testGetTimeClash() {
+	  int courseId = 1;
+	  int timeslotId = 1; 
+	  Database db = Mockito.mock(Database.class);
+	  Course course = new Course(db,courseId);
+	  Mockito.when(db.checkTimetableClash(courseId,timeslotId)).thenReturn(true);
+	  boolean clash = course.checkTimetableClash(courseId,timeslotId);
+	  assertEquals(clash,true);
+  }
+  
 }
