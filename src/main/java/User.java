@@ -26,4 +26,8 @@ public class User {
   	public String getCourseTime(int course_id){
         return _enrolledCourses.get(course_id);
     }
+
+    public boolean isMasterStudent() {
+        return false;
+    }
 }
