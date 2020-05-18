@@ -133,4 +133,42 @@ public class EnrollmentTest {
     }
   }
 
+  @Test
+  public void testSetCourseConfirmed() {
+    Course course = Mockito.mock(Course.class);
+    Database db = Mockito.mock(Database.class);
+    User user = Mockito.mock(User.class);
+    // confirmed success
+    Mockito.when(course.getCourseId()).thenReturn(123);
+    Mockito.when(user.getId()).thenReturn(321);
+    Mockito.when(db.setStatus(123, 321)).thenReturn(true);
+    Enrollment enrollment = new Enrollment(db,user);
+    boolean status = enrollment.setCourseConfirmed(course);
+    assertTrue(status);
+
+    // confirmed fail
+    Mockito.when(course.getCourseId()).thenReturn(124);
+    Mockito.when(user.getId()).thenReturn(322);
+    Mockito.when(db.setStatus(124, 322)).thenReturn(false);
+    status = enrollment.setCourseConfirmed(course);
+    assertFalse(status);
+
+    // course id not exist
+    try{
+      Mockito.when(course.getCourseId()).thenReturn(-1);
+      Mockito.when(user.getId()).thenReturn(326);
+      status = enrollment.setCourseConfirmed(course);
+    } catch (Exception e) {
+      assertEquals("Course is not exist", e.getMessage());
+    }
+
+    // student id not exist
+    try{
+      Mockito.when(course.getCourseId()).thenReturn(128);
+      Mockito.when(user.getId()).thenReturn(-1);
+      status = enrollment.setCourseConfirmed(course);
+    } catch (Exception e) {
+      assertEquals("Student is not exist", e.getMessage());
+    }
+  }
 }
