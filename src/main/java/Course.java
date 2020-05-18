@@ -4,6 +4,9 @@ public class Course {
 	private Database db;
 	private int id;
 	private List<TimeSlot> _timeslots;
+	private String _time;
+	private String _location;
+
     public Course(){
 
     }
@@ -65,8 +68,11 @@ public class Course {
 	}
 
 	public String selectTimeSlot(int courseId) {
-		// TODO Auto-generated method stub
 		return this.db.selectTimeSlot(this.id);
 	}
 	
+	public String getLocation(){
+    	return this.db.getCourseLocation(this.id);
+	}
+
 }
