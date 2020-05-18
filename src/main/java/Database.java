@@ -58,7 +58,6 @@ public class Database {
 	}
 
 public boolean checkTimetableClash(int courseId, int timeslotId) {
-	// TODO Auto-generated method stub
 	return false;
 }
   

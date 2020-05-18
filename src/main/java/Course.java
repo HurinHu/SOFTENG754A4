@@ -75,8 +75,7 @@ public class Course {
 	}
 
 	public boolean checkTimetableClash(int courseId, int timeslotId) {
-		// TODO Auto-generated method stub
-		return false;
+		 return this.db.checkTimetableClash(courseId,timeslotId);
 	}
 
 }
