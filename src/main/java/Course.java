@@ -30,6 +30,18 @@ public class Course {
 	}
 
 	public boolean create(String description,int capacity,boolean concession,List<String> compulsory_program,List<String> prerequisite,List<String> timeslots,String location,String status) {
-		return true;
+		if (description == null || description.equals("")) {
+			throw new RuntimeException("Course description is empty");
+		} else if (capacity <= 0) {
+			throw new RuntimeException("Course capacity is invalid");
+		} else if (timeslots == null || timeslots.size() <= 0) {
+			throw new RuntimeException("Course timeslots is empty");
+		} else if (location == null || location.equals("")) {
+			throw new RuntimeException("Course location is empty");
+		} else if (status == null || status.equals("")) {
+			throw new RuntimeException("Course status is empty");
+		} else {
+			return this.db.createCourse(description,capacity,concession,compulsory_program,prerequisite,timeslots,location,status);
+		}
 	}
 }
