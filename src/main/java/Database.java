@@ -56,14 +56,18 @@ public class Database {
 
 	public String selectTimeSlot(int courseId) {
 		return null;
-  }
+  	}
   
-  public String getCourseLocation(int courseId){
-    return null;
+  	public String getCourseLocation(int courseId){
+		return null;
 	}
 
-public boolean checkTimetableClash(int courseId, int timeslotId) {
-	return false;
-}
+	public boolean checkTimetableClash(int courseId, int timeslotId) {
+		return false;
+	}
+
+	public Map getUsersGpa(int user_id){
+    	return null;
+	}
   
 }

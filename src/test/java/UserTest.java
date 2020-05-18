@@ -40,6 +40,7 @@ public class UserTest {
         table.put(123,"9");
         table.put(345,"6");
         Mockito.when(db.getUsersGpa(user2_id)).thenReturn(Gpatable);
-        assertEquals(timeClashAllowed,false);
+        boolean timeClashAllowed2 = user.checkTimeTableClashOneHour();
+        assertEquals(timeClashAllowed2,false);
     }
 }

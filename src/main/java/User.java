@@ -14,6 +14,11 @@ public class User {
         this._db = db;
         this._enrolledCourses = db.getEnrolledCourse(this._user_id);
     }
+    public User(Database db, int user_id){
+        this._db = db;
+        this._user_id = user_id;
+        this._enrolledCourses = db.getEnrolledCourse(this._user_id);
+    }
 
     public boolean isValidForConcession() {
         return true;
@@ -28,6 +33,10 @@ public class User {
     }
 
     public boolean isMasterStudent() {
+        return false;
+    }
+
+    public boolean checkTimeTableClashOneHour(){
         return false;
     }
 }
