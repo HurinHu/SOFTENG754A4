@@ -186,4 +186,28 @@ public class CourseTest {
 	  assertEquals(capacity,100);
   }
   
+  @Test
+  public void testGetCompulsoryAndElectiveTimeSlotCapacity() {
+	  int courseId = 1;
+	  int timeslotId = 1; 
+	  Database db = Mockito.mock(Database.class);
+	  Course course = new Course(db,courseId);
+	  List<Integer> compulsorycapacityresult = new ArrayList<Integer>();
+	  compulsorycapacityresult.add(1);
+	  compulsorycapacityresult.add(3);
+	  List<Integer> electivecapacityresult = new ArrayList<Integer>();
+	  electivecapacityresult.add(100);
+	  electivecapacityresult.add(80);
+	  
+	  Mockito.when(db.getCourseCapacityForCompulsory(courseId,timeslotId)).thenReturn(compulsorycapacityresult);
+	  Mockito.when(db.getCourseCapacityForElective(courseId,timeslotId)).thenReturn(electivecapacityresult);
+	  
+	  List<Integer> compulsorycapacity = course.getCourseCapacityForCompulsory(courseId,timeslotId);
+	  List<Integer> electivecapacity = course.getCourseCapacityForElective(courseId,timeslotId);
+
+	  assertEquals(compulsorycapacity,compulsorycapacityresult);
+	  
+	  assertEquals(electivecapacity,electivecapacityresult);
+  }
+  
 }

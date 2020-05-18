@@ -82,4 +82,12 @@ public class Course {
 		return this.db.getCourseCapacityForTimeSlot( courseId,  timeslotId);
 	}
 
+	public List<Integer> getCourseCapacityForCompulsory(int courseId, int timeslotId) {
+		return this.db.getCourseCapacityForCompulsory( courseId,  timeslotId);
+	}
+
+	public List<Integer> getCourseCapacityForElective(int courseId, int timeslotId) {
+		return this.db.getCourseCapacityForElective( courseId,  timeslotId);
+	}
+
 }

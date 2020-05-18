@@ -63,6 +63,19 @@ public class Database {
 	}
 
 
+
+public int getCourseCapacityForTimeSlot(int courseId, int timeslotId) {
+	return 0;
+}
+
+public List<Integer> getCourseCapacityForCompulsory(int courseId, int timeslotId) {
+	return null;
+}
+
+public List<Integer> getCourseCapacityForElective(int courseId, int timeslotId) {
+	return null;
+}
+
 	public boolean checkTimetableClash(int courseId, int timeslotId) {
 		return false;
 	}
@@ -72,9 +85,8 @@ public class Database {
 	}
 
 
-	public int getCourseCapacityForTimeSlot(int courseId, int timeslotId) {
-		return 0;
-	}
+
+
 
   
 }
