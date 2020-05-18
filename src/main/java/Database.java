@@ -66,7 +66,7 @@ public class Database {
 		return false;
 	}
 
-	public Map getUsersGpa(int user_id){
+	public Hashtable<Integer,String> getUsersGpa(int user_id){
     	return null;
 	}
   
