@@ -62,4 +62,8 @@ public class Enrollment {
     }
     return status;
   }
+
+  public boolean setCourseConfirmed(Course course) {
+    return false;
+  }
 }

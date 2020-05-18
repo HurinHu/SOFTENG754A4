@@ -41,4 +41,8 @@ public class Database {
 	public String getStatus(int course_id, int user_id) {
     	return null;
 	}
+
+	public boolean setStatus(int course_id, int student_id) {
+    	return false;
+  	}
 }
