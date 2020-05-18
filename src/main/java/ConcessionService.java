@@ -31,9 +31,12 @@ public class ConcessionService {
         return concession.getStatus();
     }
 
-    public void approveConcession(User user, Course course, Date date) {
+    public String approveConcession(User user, Course course, Date date) {
         Concession concession = _db.getConcession(user, course, date);
         concession.setStatus(ConcessionStatus.concession_enrolled);
+        Enrollment enrollment = new Enrollment(_db, user);
+        enrollment.enrollCourse(course);
+        return "enrolled";
     }
 
     public void cancelConcession(User user, Course course, Date date) {

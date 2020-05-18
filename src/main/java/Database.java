@@ -62,6 +62,7 @@ public class Database {
 		return null;
 	}
 
+
 	public boolean checkTimetableClash(int courseId, int timeslotId) {
 		return false;
 	}
@@ -69,5 +70,11 @@ public class Database {
 	public Hashtable<Integer,String> getUsersGpa(int user_id){
     	return null;
 	}
+
+
+	public int getCourseCapacityForTimeSlot(int courseId, int timeslotId) {
+		return 0;
+	}
+
   
 }
