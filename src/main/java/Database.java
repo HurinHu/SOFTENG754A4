@@ -37,4 +37,8 @@ public class Database {
 	public int getEnrolled(int course_id) {
     	return 0;
   	}
+
+	public String getStatus(int course_id, int student_id) {
+    	return null;
+	}
 }

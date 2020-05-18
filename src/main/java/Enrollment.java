@@ -6,6 +6,9 @@ public class Enrollment {
 	  this.db = db;
   }
 
+  public Enrollment(Database db, User user) {
+  }
+
   public int getCourseCapacity(Course course) {
     int course_id = -1;
     int capacity = -1;
@@ -41,4 +44,7 @@ public class Enrollment {
     }
   }
 
+  public String getCourseStatus(Course course) {
+    return null;
+  }
 }
