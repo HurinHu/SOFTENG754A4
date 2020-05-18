@@ -56,5 +56,10 @@ public class Database {
   public String getCourseLocation(int courseId){
     return null;
 	}
+
+public boolean checkTimetableClash(int courseId, int timeslotId) {
+	// TODO Auto-generated method stub
+	return false;
+}
   
 }

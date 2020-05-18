@@ -74,4 +74,9 @@ public class Course {
     	return this.db.getCourseLocation(this.id);
 	}
 
+	public boolean checkTimetableClash(int courseId, int timeslotId) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }
