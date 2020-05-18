@@ -5,6 +5,7 @@ public class Course {
 	private int id;
 	private List<TimeSlot> _timeslots;
 	private String _time;
+	private String _location;
     public Course(){
 
     }
@@ -56,7 +57,21 @@ public class Course {
 	}
 	
 	
-	List<TimeSlot> getTimeSlots(int courseId){
-		return this._timeslots; 
+
+	public List<TimeSlot> getTimeSlots(int courseId){
+		if(courseId == this.id) {
+			return this._timeslots; 
+		}
+		throw new RuntimeException("Course status is empty");
+		
 	}
+
+	public String selectTimeSlot(int courseId) {
+		return this.db.selectTimeSlot(this.id);
+	}
+
+	public String getLocation(){
+    	return this.db.getCourseLocation(this.id);
+	}
+
 }

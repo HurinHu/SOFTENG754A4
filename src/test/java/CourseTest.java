@@ -139,8 +139,27 @@ public class CourseTest {
 	  //Mockito.when(course.getTimeSlots(1)).thenReturn(timeslots);
 	  List<TimeSlot> outputTs = course.getTimeSlots(id1);
 	  assertEquals(outputTs,timeslots);
-//	  assertEquals(outputTs.get(0)._time,"Tue 11:00-12:00");
-//	  assertEquals(outputTs.get(1)._time,"Wed 13:00-15:00");
-	  
+  }
+  
+  
+  @Test
+  public void testSelectTimeSlot() {
+	  int courseId = 1;
+	  Database db = Mockito.mock(Database.class);
+	  Course course = new Course(db,courseId);
+	  Mockito.when(db.selectTimeSlot(courseId)).thenReturn("Tue 11:00-12:00");
+	  String selectedTime = course.selectTimeSlot(courseId);
+	  assertEquals(selectedTime,"Tue 11:00-12:00");
+
+  }
+
+  @Test
+  public void testGetCourseLocation() {
+    int course_id = 123;
+    Database db = Mockito.mock(Database.class);
+    Mockito.when(db.getCourseLocation(course_id)).thenReturn("201N-346");
+    Course course = new Course(db, course_id);
+    String location = course.getLocation();
+    assertEquals("201N-346",location);
   }
 }
