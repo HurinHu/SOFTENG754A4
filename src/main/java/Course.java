@@ -83,13 +83,11 @@ public class Course {
 	}
 
 	public List<Integer> getCourseCapacityForCompulsory(int courseId, int timeslotId) {
-		// TODO Auto-generated method stub
-		return null;
+		return this.db.getCourseCapacityForCompulsory( courseId,  timeslotId);
 	}
 
 	public List<Integer> getCourseCapacityForElective(int courseId, int timeslotId) {
-		// TODO Auto-generated method stub
-		return null;
+		return this.db.getCourseCapacityForElective( courseId,  timeslotId);
 	}
 
 }
