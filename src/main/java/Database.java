@@ -49,12 +49,21 @@ public class Database {
         return null;
     }
 
+	public boolean isMeetRequirement(User user, Course course) {return true;
+	}
+
+	public boolean enrollCourse(int id, int courseId) {return false;}
+
 	public String selectTimeSlot(int courseId) {
-		// TODO Auto-generated method stub
 		return null;
   }
   
   public String getCourseLocation(int courseId){
     return null;
 	}
+
+public boolean checkTimetableClash(int courseId, int timeslotId) {
+	return false;
+}
+  
 }
