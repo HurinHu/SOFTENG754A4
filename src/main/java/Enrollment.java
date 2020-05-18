@@ -30,4 +30,8 @@ public class Enrollment {
     return enrolledStudent;
   }
 
+  public int getRemainingSeats(Course course) {
+    return 0;
+  }
+
 }
