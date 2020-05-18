@@ -50,11 +50,11 @@ public class Database {
     }
 
 	public String selectTimeSlot(int courseId) {
-		// TODO Auto-generated method stub
 		return null;
   }
   
   public String getCourseLocation(int courseId){
     return null;
 	}
+  
 }
