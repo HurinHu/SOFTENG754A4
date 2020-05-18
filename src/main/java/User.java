@@ -3,7 +3,7 @@ import java.util.Hashtable;
 import java.util.Map;
 
 public class User {
-    int _user_id;
+    int _user_id = 123;
     Database _db;
     Map<Integer,String> _enrolledCourses = new Hashtable<>();//<course_id,course time>
     public User(){

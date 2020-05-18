@@ -46,6 +46,6 @@ public class Database {
 
   	public Map getEnrolledCourse(int user_id){
         Integer userId = user_id;
-        return _enrolledCourses.get(userId);
+        return null;
     }
 }
