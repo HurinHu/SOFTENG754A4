@@ -64,6 +64,18 @@ public class Enrollment {
   }
 
   public boolean setCourseConfirmed(Course course) {
-    return false;
+    int course_id = -1;
+    int user_id = -1;
+    boolean status;
+    course_id = course.getCourseId();
+    user_id = this.user.getId();
+    if (course_id == -1) {
+      throw new RuntimeException("Course is not exist");
+    } else if (user_id == -1) {
+      throw new RuntimeException("Student is not exist");
+    } else {
+      status = this.db.setStatus(course_id, user_id);
+    }
+    return status;
   }
 }

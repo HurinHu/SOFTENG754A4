@@ -42,7 +42,7 @@ public class Database {
     	return null;
 	}
 
-	public boolean setStatus(int course_id, int student_id) {
+	public boolean setStatus(int course_id, int user_id) {
     	return false;
   	}
 }
