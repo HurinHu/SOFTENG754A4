@@ -29,4 +29,8 @@ public class Database {
 	public boolean createCourse(String description,int capacity,boolean concession,List<String> compulsory_program,List<String> prerequisite,List<String> timeslots,String location,String status) {
 		return false;
 	}
+
+	public int getCapacity(int course_id) {
+		return 0;
+	}
 }

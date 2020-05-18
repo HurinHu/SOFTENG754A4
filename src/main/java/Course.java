@@ -21,6 +21,10 @@ public class Course {
         return true;
     }
 
+	public int getCourseId() {
+    	return this.id;
+	}
+
 	public String getCourseDescription() {
 		if (this.id != -1) {
 			return this.db.getDescription(this.id);
