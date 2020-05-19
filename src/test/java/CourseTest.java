@@ -229,6 +229,20 @@ public class CourseTest {
 	  assertEquals(prequest,prequests);
   }
   
+  @Test
+  public void testGetConflictCourse() {
+	  int courseId = 1; 
+	  int conflictCourseId1 = 2;
+	  Database db = Mockito.mock(Database.class);
+	  Course course = new Course(db,courseId);
+	  Course conflictCourse1 = new Course(db,conflictCourseId1);
+	  List<Course> conflictCourses = new ArrayList<Course>();
+	  conflictCourses.add(conflictCourse1);
+	  Mockito.when(db.getConflictCourse(courseId)).thenReturn(conflictCourses);
+	  List<Course> conflictOutput = course.getConflictCourse(courseId);
+	  assertEquals(conflictOutput,conflictCourses);
+  }
+  
   
   
 }
