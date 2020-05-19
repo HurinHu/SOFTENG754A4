@@ -18,7 +18,8 @@ public class ProgramRequirementsService {
         if (output <= 0){
             return "You have met the requirement of the programme!";
         } else {
-            return "You haven't met the requirement of programme, still need to take 2 compulsory courses to complete.";
+            String result = String.format("You haven't met the requirement of programme, still need to take %d compulsory courses to complete.", output);
+            return result;
         }
     }
 }
