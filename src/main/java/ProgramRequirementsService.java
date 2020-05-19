@@ -14,6 +14,11 @@ public class ProgramRequirementsService {
     }
 
     public String isMeetTheRequirement() {
-        return null;
+        int output = _db.getCompulsoryCoursesRequirementOfProgram(_db.getProgramme(_user.getId())) - _db.getSelectedCompulsoryCourseNumber(_user.getId());
+        if (output <= 0){
+            return "You have met the requirement of the programme!";
+        } else {
+            return "You haven't met the requirement of programme, still need to take 2 compulsory courses to complete.";
+        }
     }
 }
