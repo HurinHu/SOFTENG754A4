@@ -243,6 +243,18 @@ public class CourseTest {
 	  assertEquals(conflictOutput,conflictCourses);
   }
   
+  @Test
+  public void testCheckEligibility() {
+	  int courseId = 1; 
+	  Database db = Mockito.mock(Database.class);
+	  Course course = new Course(db,courseId);
+	  User user = new User();
+	  Mockito.when(db.checkEligibility(course,user)).thenReturn(true);
+	  assertEquals(course.checkEligibility(course,user),true);
+  }
+  
+  
+  
   
   
 }
