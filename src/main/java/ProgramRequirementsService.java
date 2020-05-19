@@ -12,4 +12,8 @@ public class ProgramRequirementsService {
     public List<Course> getCompulsoryCourses(){
         return _db.getCompulsoryCourses(_db.getProgramme(_user.getId()));
     }
+
+    public String isMeetTheRequirement() {
+        return null;
+    }
 }

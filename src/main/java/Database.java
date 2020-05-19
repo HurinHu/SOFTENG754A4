@@ -85,4 +85,8 @@ public class Database {
 	public List<Course> getCompulsoryCourses(int userId){return null;}
 
 	public int getProgramme(int userId) {return 0; }
+
+	public int getSelectedCompulsoryCourseNumber(int userId) {return 0;}
+
+	public int getCompulsoryCoursesRequirementOfProgram(int programmeId) {return 0;}
 }
