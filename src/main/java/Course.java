@@ -99,7 +99,7 @@ public class Course {
 	}
 
 	public boolean checkEligibility(Course course, User user) {
-		return false;
+		return this.db.checkEligibility(course,user);
 	}
 
 }
