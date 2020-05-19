@@ -91,8 +91,7 @@ public class Course {
 	}
 
 	public List<Course> getPrerequestCourse(int courseId) {
-		// TODO Auto-generated method stub
-		return null;
+		return this.db.getPrerequestCourse( courseId);
 	}
 
 }
