@@ -90,4 +90,9 @@ public class Course {
 		return this.db.getCourseCapacityForElective( courseId,  timeslotId);
 	}
 
+	public List<Course> getPrerequestCourse(int courseId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
