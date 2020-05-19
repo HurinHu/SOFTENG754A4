@@ -98,4 +98,8 @@ public class Course {
 		return this.db.getConflictCourse( courseId);
 	}
 
+	public boolean checkEligibility(Course course, User user) {
+		return false;
+	}
+
 }

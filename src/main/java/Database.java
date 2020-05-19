@@ -97,4 +97,8 @@ public class Database {
 	public List<Course> getConflictCourse(int courseId) {
 		return null;
 	}
+
+	public boolean checkEligibility(Course course, User user) {
+		return false;
+	}
 }
