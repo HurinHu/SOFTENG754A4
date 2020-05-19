@@ -95,7 +95,7 @@ public class Course {
 	}
 
 	public List<Course> getConflictCourse(int courseId) {
-		return null;
+		return this.db.getConflictCourse( courseId);
 	}
 
 }
