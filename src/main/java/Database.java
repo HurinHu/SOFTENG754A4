@@ -62,17 +62,15 @@ public class Database {
 		return null;
 	}
 
-
-
-public int getCourseCapacityForTimeSlot(int courseId, int timeslotId) {
+	public int getCourseCapacityForTimeSlot(int courseId, int timeslotId) {
 	return 0;
 }
 
-public List<Integer> getCourseCapacityForCompulsory(int courseId, int timeslotId) {
+	public List<Integer> getCourseCapacityForCompulsory(int courseId, int timeslotId) {
 	return null;
 }
 
-public List<Integer> getCourseCapacityForElective(int courseId, int timeslotId) {
+	public List<Integer> getCourseCapacityForElective(int courseId, int timeslotId) {
 	return null;
 }
 
@@ -84,9 +82,7 @@ public List<Integer> getCourseCapacityForElective(int courseId, int timeslotId) 
     	return null;
 	}
 
+	public List<Course> getCompulsoryCourses(int userId){return null;}
 
-
-
-
-  
+	public int getProgramme(int userId) {return 0; }
 }
