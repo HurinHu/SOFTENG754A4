@@ -1,11 +1,15 @@
 import java.util.List;
 
 public class ProgramRequirementsService {
-    public ProgramRequirementsService(Database db, User user) {
+    Database _db;
+    User _user;
 
+    public ProgramRequirementsService(Database db, User user){
+        _db = db;
+        _user = user;
     }
 
-    public List<Course> getCompulsoryCourses() {
-        return null;
+    public List<Course> getCompulsoryCourses(){
+        return _db.getCompulsoryCourses(_db.getProgramme(_user.getId()));
     }
 }
