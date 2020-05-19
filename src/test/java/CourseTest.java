@@ -210,4 +210,25 @@ public class CourseTest {
 	  assertEquals(electivecapacity,electivecapacityresult);
   }
   
+  
+  @Test
+  public void testGetPrerequestCourse() {
+	  int courseId = 1; 
+	  int prequestCourseId1 = 2;
+	  int prequestCourseId2 = 3;
+	  Database db = Mockito.mock(Database.class);
+	  Course course = new Course(db,courseId);
+	  Course prerequestCourse1 = new Course(db,prequestCourseId1);
+	  Course prerequestCourse2 = new Course(db,prequestCourseId2);
+	  List<Course> prequests = new ArrayList<Course>();
+	  prequests.add(prerequestCourse1);
+	  prequests.add(prerequestCourse2);
+	  
+	  Mockito.when(db.getPrerequestCourse(courseId)).thenReturn(prequests);
+	  List<Course> prequest = course.getPrerequestCourse(courseId);
+	  assertEquals(prequest,prequests);
+  }
+  
+  
+  
 }

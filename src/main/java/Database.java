@@ -89,4 +89,9 @@ public class Database {
 	public int getSelectedCompulsoryCourseNumber(int userId) {return 0;}
 
 	public int getCompulsoryCoursesRequirementOfProgram(int programmeId) {return 0;}
+
+	public List<Course> getPrerequestCourse(int courseId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

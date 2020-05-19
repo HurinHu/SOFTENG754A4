@@ -90,4 +90,8 @@ public class Course {
 		return this.db.getCourseCapacityForElective( courseId,  timeslotId);
 	}
 
+	public List<Course> getPrerequestCourse(int courseId) {
+		return this.db.getPrerequestCourse( courseId);
+	}
+
 }
