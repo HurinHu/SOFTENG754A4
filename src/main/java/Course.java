@@ -94,4 +94,8 @@ public class Course {
 		return this.db.getPrerequestCourse( courseId);
 	}
 
+	public List<Course> getConflictCourse(int courseId) {
+		return null;
+	}
+
 }
