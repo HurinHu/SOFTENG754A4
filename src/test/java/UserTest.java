@@ -1,10 +1,12 @@
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.mockito.Mockito;
 
 import java.util.Hashtable;
 
 import static org.junit.Assert.assertEquals;
 
+@Category(UnitTest.class)
 public class UserTest {
 
     @Test
