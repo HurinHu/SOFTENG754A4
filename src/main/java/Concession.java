@@ -6,6 +6,7 @@ public class Concession {
     private Course _course;
     private ConcessionStatus _status;
     private String _date;
+    
 
     public Concession(User user, Course course) {
         _user = user;
