@@ -254,9 +254,4 @@ public class CourseTest {
 	  Mockito.when(db.checkEligibility(course,user)).thenReturn(true);
 	  assertEquals(course.checkEligibility(course,user),true);
   }
-  
-  
-  
-  
-  
 }
