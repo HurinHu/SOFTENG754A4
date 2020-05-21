@@ -1,5 +1,5 @@
 import static org.junit.Assert.assertEquals;
-
+import java.util.*;
 import java.util.Date;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
@@ -20,6 +20,43 @@ public class EnrollTest {
 			result = enrol.enrollCourse(course);
 		}
 		assertEquals(result,true);
+	}
+
+	@Test
+	public void testCreateCourseFollowedByCheckingCourseInfo() {
+		Database db = new Database();
+		Course course = new Course(db);
+		String description = "course description";
+		int capacity = 100;
+		boolean concession = true;
+		List<String> compulsory_program = new ArrayList<>();
+		compulsory_program.add("Master of Engineering Studies");
+		compulsory_program.add("Master of Science");
+		List<String> prerequisite = new ArrayList<>();
+		prerequisite.add("COMPSCI 321");
+		prerequisite.add("COMPSCI 350");
+		List<String> timeslots = new ArrayList<>();
+		timeslots.add("Tue 11:00-12:00");
+		timeslots.add("Wed 13:00-15:00");
+		timeslots.add("Fri 10:00-12:00");
+		String location = "some where";
+		String status = "open";
+		course.create(description,capacity,concession,compulsory_program,prerequisite,timeslots,location,status);
+		List<Course> courses =  db.getCourses();
+		assertEquals(courses.size(), 1);
+		Course c = courses.get(courses.size()-1);
+		assertEquals(c.getCourseId(), 1);
+		assertEquals(c.getCourseDescription(), description);
+		assertEquals(c.getLocation(), location);
+		description = "another course description";
+		location = "some where else";
+		course.create(description,capacity,concession,compulsory_program,prerequisite,timeslots,location,status);
+		courses =  db.getCourses();
+		assertEquals(courses.size(), 2);
+		c = courses.get(courses.size()-1);
+		assertEquals(c.getCourseId(), 2);
+		assertEquals(c.getCourseDescription(), description);
+		assertEquals(c.getLocation(), location);
 	}
 
 

@@ -3,6 +3,7 @@ import java.util.*;
 public class Database {
     List<Concession> _concessionsPool = new ArrayList<>();
     Map<Integer,Map> _enrolledCourses = new Hashtable<>();
+	List<Course> courseList = new ArrayList<>();
 
     public Database(){
 
@@ -21,11 +22,25 @@ public class Database {
     }
 
 	public String getDescription(int course_id) {
-		return null;
+		String desc = "";
+		for(Course course: courseList){
+			if(course.getCourseId() == course_id) {
+				desc = course.getCourseDescription();
+			}
+		}
+		return desc;
 	}
 
 	public boolean createCourse(String description,int capacity,boolean concession,List<String> compulsory_program,List<String> prerequisite,List<String> timeslots,String location,String status) {
-		return false;
+		Course course;
+		if(courseList.size()>0){
+			int id = courseList.get(courseList.size() - 1).getCourseId();
+			course = new Course(id+1, description, capacity, concession, compulsory_program,prerequisite, timeslots, location, status);
+		}else{
+			course = new Course(1, description, capacity, concession, compulsory_program,prerequisite, timeslots, location, status);
+		}
+		courseList.add(course);
+		return true;
 	}
 
 	public int getCapacity(int course_id) {
@@ -100,5 +115,9 @@ public class Database {
 
 	public boolean checkEligibility(Course course, User user) {
 		return false;
+	}
+
+	public List<Course> getCourses() {
+		return courseList;
 	}
 }

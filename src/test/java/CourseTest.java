@@ -10,8 +10,8 @@ public class CourseTest {
   public void testGetCourseDescription() {
     int course_id = 123;
     Database db = Mockito.mock(Database.class);
-    Course course = new Course(db, course_id);
     Mockito.when(db.getDescription(course_id)).thenReturn("some description");
+	Course course = new Course(db, course_id);
     String descripion = course.getCourseDescription();
     assertEquals("some description", descripion);
     try{
