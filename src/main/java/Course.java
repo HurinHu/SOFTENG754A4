@@ -6,6 +6,7 @@ public class Course {
 	private List<TimeSlot> _timeslots;
 	private String _time;
 	private String _location;
+	private String _description;
     public Course(){
 
     }
@@ -22,7 +23,15 @@ public class Course {
 	public Course(Database db, int course_id) {
 		this.db = db;
     	this.id = course_id;
+		this._location = this.db.getCourseLocation(this.id);
+		this._description = this.db.getDescription(this.id);
     }
+
+	public Course(int id, String description,int capacity,boolean concession,List<String> compulsory_program,List<String> prerequisite,List<String> timeslots,String location,String status) {
+		this.id = id;
+		this._description = description;
+		this._location = location;
+	}
 
     public Boolean isValidForConcession() {
         return true;
@@ -33,8 +42,8 @@ public class Course {
 	}
 
 	public String getCourseDescription() {
-		if (this.id != -1) {
-			return this.db.getDescription(this.id);
+		if (this.getCourseId() != -1) {
+			return this._description;
 		} else {
 			throw new RuntimeException("Course is not exist");
 		}
@@ -71,7 +80,11 @@ public class Course {
 	}
 
 	public String getLocation(){
-    	return this.db.getCourseLocation(this.id);
+		if (this.getCourseId() != -1) {
+			return this._location;
+		}else{
+			throw new RuntimeException("Course is not exist");
+		}
 	}
 
 	public boolean checkTimetableClash(int courseId, int timeslotId) {

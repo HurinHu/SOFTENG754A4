@@ -1,15 +1,17 @@
 import static org.junit.Assert.*;
 import java.util.*;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.mockito.*;
 
+@Category(UnitTest.class)
 public class CourseTest {
   @Test
   public void testGetCourseDescription() {
     int course_id = 123;
     Database db = Mockito.mock(Database.class);
-    Course course = new Course(db, course_id);
     Mockito.when(db.getDescription(course_id)).thenReturn("some description");
+	Course course = new Course(db, course_id);
     String descripion = course.getCourseDescription();
     assertEquals("some description", descripion);
     try{
@@ -252,9 +254,4 @@ public class CourseTest {
 	  Mockito.when(db.checkEligibility(course,user)).thenReturn(true);
 	  assertEquals(course.checkEligibility(course,user),true);
   }
-  
-  
-  
-  
-  
 }
