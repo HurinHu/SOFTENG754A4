@@ -2,9 +2,6 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import io.cucumber.java.en.Then;
 import static org.junit.Assert.*;
-import io.cucumber.junit.Cucumber;
-import io.cucumber.junit.CucumberOptions;
-import org.junit.runner.RunWith;
 
 class IsItFriday {
     static String isItFriday(String today) {
@@ -12,19 +9,7 @@ class IsItFriday {
     }
 }
 
-
-@RunWith(Cucumber.class)
-@CucumberOptions(features="src/test/resources/cucumber",
-				glue={"stepDefinitions"},
-				tags={"@CompleteTesting"},
-//				plugin={"pretty"},
-//				plugin={"pretty", "html:target/cucumber-reports"},
-				plugin={"pretty", "json:target/cucumber-reports/Cucumber.json"},
-//				plugin={"pretty", "junit:target/cucumber-reports/cucumber.xml"},
-//				plugin={"com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"},
-//				plugin={"de.monochromata.cucumber.report.PrettyReports:target/cucumber"},
-				monochrome=true)
-public class Stepdefs {
+public class Test_example {
     private String today;
     private String actualAnswer;
 
