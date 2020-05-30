@@ -15,11 +15,30 @@ dependencies {
     compile 'org.slf4j:slf4j-api:1.7.12'
     testCompile 'junit:junit:4.12'
     testCompile 'org.mockito:mockito-core:1.+'
+	testCompile 'io.cucumber:cucumber-java:5.6.0'
+    testCompile 'io.cucumber:cucumber-junit:5.6.0'
 }
 
 jacocoTestReport {
     reports {
         xml.enabled true
         html.enabled false
+    }
+}
+
+configurations {
+    cucumberRuntime {
+        extendsFrom testRuntime
+    }
+}
+
+task cucumber() {
+    dependsOn assemble, compileTestJava
+    doLast {
+        javaexec {
+            main = "io.cucumber.core.cli.Main"
+            classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
+            args = ['--plugin', 'pretty', 'src/test/resources']
+        }
     }
 }
