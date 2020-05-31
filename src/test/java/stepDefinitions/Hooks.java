@@ -10,6 +10,7 @@ import org.openqa.selenium.TakesScreenshot;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 
+
 public class Hooks {
 public static WebDriver driver;
 	private static String OS = System.getProperty("os.name").toLowerCase();
@@ -29,7 +30,7 @@ public static WebDriver driver;
 			System.setProperty("webdriver.chrome.driver", "driver/chromedriver(linux)");
 			driver=new ChromeDriver(options);
 		}
-		driver.get("https://testsheepnz.github.io/BasicCalculator.html");
+		driver.get("http://localhost:8181/api/data");
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		this.takeSnapShot(driver, "target/screenshot/screenshot.png") ;
