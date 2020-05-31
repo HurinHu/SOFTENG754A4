@@ -63,7 +63,7 @@ public class Test_example {
 	
 	@After
 	public void closeBrowser(){
-		this.takeSnapShot(driver, "target/screenshot/Tes_example.png") ;
+		this.takeSnapShot(driver, "target/screenshot/Test_example.png") ;
 		driver.quit();
 	}
 	
