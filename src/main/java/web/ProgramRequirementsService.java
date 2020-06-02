@@ -15,6 +15,10 @@ public class ProgramRequirementsService {
         return _db.getCompulsoryCourses(_db.getProgramme(_user.getId()));
     }
 
+    public List<Course> getElectiveCourses(){
+        return _db.getElectiveCourses(_db.getProgramme(_user.getId()));
+    }
+
     public String isMeetTheRequirement() {
         int output = _db.getCompulsoryCoursesRequirementOfProgram(_db.getProgramme(_user.getId())) - _db.getSelectedCompulsoryCourseNumber(_user.getId());
         if (output <= 0){

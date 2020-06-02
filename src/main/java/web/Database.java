@@ -1,6 +1,8 @@
 package web;
 
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Database {
     List<Concession> _concessionsPool = new ArrayList<>();
@@ -99,8 +101,25 @@ public class Database {
     	return null;
 	}
 
-	public List<Course> getCompulsoryCourses(int userId){return null;}
+	public List<Course> getCompulsoryCourses(int userId){
+    	List<Course> compulsoryCourses = new ArrayList<>();
+		Course course = new Course(1,"SOFTENG754");
+		Course course1 = new Course(2,"SOFTENG751");
+		Course course2 = new Course(3,"SOFTENG701");
+		compulsoryCourses.add(course);
+		compulsoryCourses.add(course1);
+		compulsoryCourses.add(course2);
+    	return compulsoryCourses;
+    }
 
+    public List<Course> getElectiveCourses(int userId){
+		List<Course> electiveCourses = new ArrayList<>();
+		List<String> electiveList = Stream.of("COMPSCI754", "COMPSCI751", "COMPSCI761").collect(Collectors.toList());
+		electiveList.forEach(item->{
+			electiveCourses.add(new Course(9,item));
+		});
+		return electiveCourses;
+	}
 	public int getProgramme(int userId) {return 0; }
 
 	public int getSelectedCompulsoryCourseNumber(int userId) {return 0;}

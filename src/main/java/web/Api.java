@@ -62,4 +62,14 @@ public class Api {
         return "{'status':'success'}";
     }
 
+	@RequestMapping(value="/api/getProgrammeRequirement", method= {RequestMethod.GET})
+	public Object getProgrammeRequirement() {
+		return db.getCompulsoryCourses(1);
+	}
+
+	@RequestMapping(value="/api/getElectiveCourses", method= {RequestMethod.GET})
+	public Object getElectiveCourses() {
+		return db.getElectiveCourses(1);
+	}
+
 }
