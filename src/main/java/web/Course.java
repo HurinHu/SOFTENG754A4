@@ -46,6 +46,17 @@ public class Course {
 		this._prerequisite = prerequisite;
 		this._timeslot = timeslots;
 		this._status = status;
+        this._concession = concession;
+	}
+  
+    public Course(int id, String name, String description,int capacity,boolean concession,String location,String status) {
+		this.id = id;
+		this._description = description;
+		this._location = location;
+		this._name = name;
+		this._capacity = capacity;
+		this._status = status;
+        this._concession = concession;
 	}
 
     public Boolean isValidForConcession() {
@@ -144,6 +155,10 @@ public class Course {
 	
 	public String getStatus() {
 		return this._status;
+	}
+  
+    public void setStatus(String status) {
+		this._status = status;
 	}
 	
 	public List<String> getCompulsory() {

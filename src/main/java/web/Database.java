@@ -6,9 +6,20 @@ public class Database {
     List<Concession> _concessionsPool = new ArrayList<>();
     Map<Integer,Map> _enrolledCourses = new Hashtable<>();
 	List<Course> courseList = new ArrayList<>();
+    List<Course> cartList = new ArrayList<>();
 
     public Database(){
-
+        cartList.add(new Course(1, "SOFTENG 701", "Some description", 50, true, "404-404", "In Cart"));
+        cartList.add(new Course(2, "SOFTENG 702", "Some description", 40, false, "403-404", "In Cart"));
+        cartList.add(new Course(3, "SOFTENG 703", "Some description", 80, true, "405-401", "Enrolled"));
+        cartList.add(new Course(4, "SOFTENG 704", "Some description", 100, false, "402-403", "In Cart"));
+        cartList.add(new Course(5, "SOFTENG 705", "Some description", 50, false, "404-405", "In Cart"));
+        cartList.add(new Course(6, "SOFTENG 750", "Some description", 80, true, "402-403", "In Cart"));
+        cartList.add(new Course(7, "SOFTENG 751", "Some description", 50, true, "406-402", "Concession Applied"));
+        cartList.add(new Course(8, "SOFTENG 752", "Some description", 50, true, "404-403", "In Cart"));
+        cartList.add(new Course(9, "SOFTENG 753", "Some description", 50, true, "404-403", "In Cart"));
+        cartList.add(new Course(10, "SOFTENG 754", "Some description", 50, true, "404-403", "In Cart"));
+        cartList.add(new Course(11, "SOFTENG 756", "Some description", 50, true, "404-403", "In Cart"));
     }
 
     public void setConcessionPool(Concession concession) {
@@ -122,4 +133,16 @@ public class Database {
 	public List<Course> getCourses() {
 		return courseList;
 	}
+
+    public List<Course> getCarts() {
+        return cartList;
+    }
+
+    public void setCarts(int id, String status) {
+        for(Course course : cartList) {
+            if (course.getCourseId() == id) {
+                course.setStatus(status);
+            }
+        }
+    }
 }
