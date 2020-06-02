@@ -1,11 +1,29 @@
+buildscript {
+    repositories {
+        maven {
+            url  "http://dl.bintray.com/barryearles/maven" 
+        }
+    }
+
+    dependencies {
+        classpath "com.github.paralleltasks:parallel-tasks-gradle-plugin:1.0.1"
+    }
+}
+
 plugins {
     id 'java'
     id 'jacoco'
+	id 'org.springframework.boot' version '2.0.5.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.7.RELEASE'
 }
 
-version '1.0-SNAPSHOT'
+apply plugin: 'com.github.paralleltasks'
 
+version '1.0-SNAPSHOT'
 sourceCompatibility = 1.8
+bootJar{
+	mainClassName = 'main.java.App'
+}
 
 repositories {
     jcenter()
@@ -13,13 +31,39 @@ repositories {
 
 dependencies {
     compile 'org.slf4j:slf4j-api:1.7.12'
+	compile group: 'de.monochromata.cucumber', name: 'reporting-plugin', version: '4.0.52'
+	compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.14.0'
+	testCompile group: 'org.springframework', name: 'spring-beans', version: '4.3.0.RELEASE'
+	testCompile group: 'org.springframework', name: 'spring-core', version: '4.3.0.RELEASE'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
     testCompile 'junit:junit:4.12'
     testCompile 'org.mockito:mockito-core:1.+'
+	testCompile 'io.cucumber:cucumber-java:5.6.0'
+    testCompile 'io.cucumber:cucumber-junit:5.6.0'
+	testCompile 'org.springframework.boot:spring-boot-starter-test'
+	testCompile 'org.springframework.boot:spring-boot-starter-web'
 }
 
 jacocoTestReport {
     reports {
         xml.enabled true
         html.enabled false
+    }
+}
+
+configurations {
+    cucumberRuntime {
+        extendsFrom testRuntime
+    }
+}
+
+task cucumber() {
+    dependsOn assemble, compileTestJava
+    doLast {
+        javaexec {
+            main = "io.cucumber.core.cli.Main"
+            classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
+            args = ['--plugin', 'de.monochromata.cucumber.report.PrettyReports:target/cucumber', 'src/test/resources']
+        }
     }
 }

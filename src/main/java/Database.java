@@ -4,6 +4,9 @@ public class Database {
     List<Concession> _concessionsPool = new ArrayList<>();
     Map<Integer,Map> _enrolledCourses = new Hashtable<>();
 	List<Course> courseList = new ArrayList<>();
+	//Course course1 = new Course(1, "SOFTENG754", 100, true,{"a","b"} ,{"a","b"}, {"a","b"}, "303G01", "open");
+	//this.courseList.add(this.course1);
+	
 
     public Database(){
 
