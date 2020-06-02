@@ -63,17 +63,27 @@ public class Api {
     }
 
     @RequestMapping(value="/api/cartlist", method= {RequestMethod.GET})
-	public Object cartlist() {
-		List<Course> carts = db.getCarts();
+	  public Object cartlist() {
+		    List<Course> carts = db.getCarts();
         return carts;
     }
 
     @RequestMapping(value="/api/setCarts", method= {RequestMethod.GET})
-	public Object setCarts(@RequestParam(value="id", required=true) int id, @RequestParam(value="status", required=true) String status) {
-		db.setCarts(id, status);
+	  public Object setCarts(@RequestParam(value="id", required=true) int id, @RequestParam(value="status", required=true) String status) {
+		    db.setCarts(id, status);
         return new Response("success");
     }
 
+    @RequestMapping(value="/api/getProgrammeRequirement", method= {RequestMethod.GET})
+    public Object getProgrammeRequirement() {
+        return db.getCompulsoryCourses(1);
+    }
+
+    @RequestMapping(value="/api/getElectiveCourses", method= {RequestMethod.GET})
+    public Object getElectiveCourses() {
+        return db.getElectiveCourses(1);
+    }
+  
 }
 
 class Response{

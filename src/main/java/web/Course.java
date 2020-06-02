@@ -59,7 +59,12 @@ public class Course {
         this._concession = concession;
 	}
 
-    public Boolean isValidForConcession() {
+	public Course(int id, String name) {
+    	this.id = id;
+    	this._name = name;
+	}
+
+	public Boolean isValidForConcession() {
         return true;
     }
 

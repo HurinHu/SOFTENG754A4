@@ -1,7 +1,11 @@
 Feature: Programme Requirement
-  Everybody wants to know when it's Friday
 
-  Scenario: Sunday isn't Friday
-    Given today is Sunday
-    When I ask whether it's Friday yet
-    Then I should be told "Nope"
+  Scenario: student want to know the programme requirement of his programme
+    Given user logged in as a Software Engineering Student
+    And he is in his "4" year study
+    When he clicks enrol
+    And he clicks my programme requirement tab
+    Then he should see all the compulsory courses for software engineering degree
+    And he should see the available elective courses
+
+
