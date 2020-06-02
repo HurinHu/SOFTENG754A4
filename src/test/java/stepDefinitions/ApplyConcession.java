@@ -19,6 +19,7 @@ import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.cucumber.java.Scenario;
 
 import static org.junit.Assert.*;
 
@@ -27,19 +28,23 @@ public class ApplyConcession extends BaseUtil {
     private  BaseUtil base;
 	private String user_role;
     private String course;
-    private String status;
     private WebDriverWait wait;
     private List<WebElement> rows;
+    private Scenario scenario;
 
     public ApplyConcession(BaseUtil base) {
         this.base = base;
-        this.base.setScreenShot("ApplyConcession.png");
         this.wait = new WebDriverWait(this.base.driver, 20);
     }
 
     @Before
-	public void reset(){
-		this.base.driver.get("http://localhost:8181/api/setCarts?id=6&status=In%20Cart");
+	public void reset(Scenario scenario){
+        this.scenario = scenario;
+        if(scenario.getName().equals("Student can apply concession")){
+            this.base.driver.get("http://localhost:8181/api/setCarts?id=6&status=In%20Cart");
+        }else if(scenario.getName().equals("Enrol the course after concession approved")){
+            this.base.driver.get("http://localhost:8181/api/setCarts?id=6&status=Enrolled");
+        }
 	}
 
     @Given("the user logged in as non-Master student and he can apply concession for a course")
@@ -58,6 +63,7 @@ public class ApplyConcession extends BaseUtil {
 
     @When("the course {string} is required to concession")
     public void the_course_is_required_to_concession(String course) {
+        this.base.setScreenShot("ApplyConcession1.png");
         this.course = course;
         try {
 	        this.wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(By.tagName("tr"),10));
@@ -76,6 +82,26 @@ public class ApplyConcession extends BaseUtil {
         }
     }
 
+    @When("the course {string} concession is approved")
+    public void the_course_concession_is_approved(String course) {
+        this.base.setScreenShot("ApplyConcession2.png");
+        try {
+	        this.wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(By.tagName("tr"),10));
+	    }
+	    catch(TimeoutException e){
+	        throw new NoSuchElementException("cartlist");
+	    }
+        this.rows = this.base.driver.findElement(By.id("cartlist")).findElements(By.tagName("tr"));
+        for (WebElement row : this.rows){
+            List<WebElement> cells = row.findElements(By.tagName("td"));
+            if (cells.get(0).getText().equals(this.course)){
+                String id = cells.get(2).findElement(By.tagName("button")).getAttribute("data-id");
+                this.base.driver.get("http://localhost:8181/concession.html");
+                break;
+            }
+        }
+    }
+
     @Then("click {string} button")
     public void click_button(String apply) {
         for (WebElement row : this.rows){
@@ -88,7 +114,7 @@ public class ApplyConcession extends BaseUtil {
     }
 
     @Then("the status shows {string}")
-    public void the_status_shows(String string) {
+    public void the_status_shows(String status) {
         try {
 	        wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(By.tagName("tr"),10));
 	    }
@@ -99,7 +125,7 @@ public class ApplyConcession extends BaseUtil {
         for (WebElement row : this.rows){
             List<WebElement> cells = row.findElements(By.tagName("td"));
             if (cells.get(0).getText().equals(this.course)){
-                assertEquals("Concession Applied", cells.get(1).getText());
+                assertEquals(status, cells.get(1).getText());
                 break;
             }
         }
