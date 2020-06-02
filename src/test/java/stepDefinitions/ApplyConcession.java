@@ -81,13 +81,26 @@ public class ApplyConcession extends BaseUtil {
             }
         }
     }
-  
+
     @When("the course {string} concession is approved")
     public void the_course_concession_is_approved(String course) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        this.base.setScreenShot("ApplyConcession2.png");
+        try {
+	        this.wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(By.tagName("tr"),10));
+	    }
+	    catch(TimeoutException e){
+	        throw new NoSuchElementException("cartlist");
+	    }
+        this.rows = this.base.driver.findElement(By.id("cartlist")).findElements(By.tagName("tr"));
+        for (WebElement row : this.rows){
+            List<WebElement> cells = row.findElements(By.tagName("td"));
+            if (cells.get(0).getText().equals(this.course)){
+                String id = cells.get(2).findElement(By.tagName("button")).getAttribute("data-id");
+                this.base.driver.get("http://localhost:8181/concession.html");
+                break;
+            }
+        }
     }
-
 
     @Then("click {string} button")
     public void click_button(String apply) {
