@@ -24,16 +24,15 @@ public class Test_example extends BaseUtil {
 
 	private String today;
     private String actualAnswer;
-    private  BaseUtil base;
+    private BaseUtil base;
 
     public Test_example(BaseUtil base) {
         this.base = base;
         this.base.setScreenShot("Test_example.png");
     }
-
-	@Given("today is Sunday")
+    @Given("today is Sunday")
     public void today_is_Sunday() {
-        today = "Sunday";
+        this.today = "Sunday";
     }
 
     @When("I ask whether it's Friday yet")
@@ -41,11 +40,12 @@ public class Test_example extends BaseUtil {
         this.base.driver.get("http://localhost:8181/test.html");
         this.base.driver.manage().window().maximize();
 		List<WebElement> text= this.base.driver.findElements(By.tagName("h1"));
-        actualAnswer = text.get(0).getText();
+        this.actualAnswer = text.get(0).getText();
     }
 
     @Then("I should be told {string}")
     public void i_should_be_told(String expectedAnswer) {
-        assertEquals(expectedAnswer, actualAnswer);
+        assertEquals(expectedAnswer, this.actualAnswer);
     }
+
 }
