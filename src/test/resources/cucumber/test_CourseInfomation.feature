@@ -5,5 +5,5 @@ Feature: Is Course Information displayed?
     Given The student has logged in to the system   
     When the student clicked the course information button 
     And he selected SOFTENG754
-    Then the student should be told "303G01"
+    Then student should be told "303G01"
   
