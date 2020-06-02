@@ -38,7 +38,7 @@ public class Api {
     }
 	
 	@RequestMapping(value="/api/course", method= {RequestMethod.POST})
-	public String createcourse(@RequestParam(value="name", required=true) String name, @RequestParam(value="description", required=true) String description, @RequestParam(value="concession", required=true) boolean concession,@RequestParam(value="capacity", required=true) int capacity,@RequestParam(value="compulsory", required=true) String[] compulsory,@RequestParam(value="prerequisite", required=true) String[] prerequisite, @RequestParam(value="timeslots", required=true) String[] timeslot, @RequestParam(value="location", required=true) String location,@RequestParam(value="status", required=true) String status) {
+	public Object createcourse(@RequestParam(value="name", required=true) String name, @RequestParam(value="description", required=true) String description, @RequestParam(value="concession", required=true) boolean concession,@RequestParam(value="capacity", required=true) int capacity,@RequestParam(value="compulsory", required=true) String[] compulsory,@RequestParam(value="prerequisite", required=true) String[] prerequisite, @RequestParam(value="timeslots", required=true) String[] timeslot, @RequestParam(value="location", required=true) String location,@RequestParam(value="status", required=true) String status) {
 
 		List<String> compulsory_program = new ArrayList<>();
 		List<String> prerequisites = new ArrayList<>();
@@ -59,17 +59,39 @@ public class Api {
 			}
 		}
 				db.createCourse(name,description,capacity,concession,compulsory_program,prerequisites,timeslots,location,status);
-        return "{'status':'success'}";
+        return new Response("success");
     }
 
-	@RequestMapping(value="/api/getProgrammeRequirement", method= {RequestMethod.GET})
-	public Object getProgrammeRequirement() {
-		return db.getCompulsoryCourses(1);
-	}
+    @RequestMapping(value="/api/cartlist", method= {RequestMethod.GET})
+	  public Object cartlist() {
+		    List<Course> carts = db.getCarts();
+        return carts;
+    }
 
-	@RequestMapping(value="/api/getElectiveCourses", method= {RequestMethod.GET})
-	public Object getElectiveCourses() {
-		return db.getElectiveCourses(1);
-	}
+    @RequestMapping(value="/api/setCarts", method= {RequestMethod.GET})
+	  public Object setCarts(@RequestParam(value="id", required=true) int id, @RequestParam(value="status", required=true) String status) {
+		    db.setCarts(id, status);
+        return new Response("success");
+    }
 
+    @RequestMapping(value="/api/getProgrammeRequirement", method= {RequestMethod.GET})
+    public Object getProgrammeRequirement() {
+        return db.getCompulsoryCourses(1);
+    }
+
+    @RequestMapping(value="/api/getElectiveCourses", method= {RequestMethod.GET})
+    public Object getElectiveCourses() {
+        return db.getElectiveCourses(1);
+    }
+  
+}
+
+class Response{
+    private String status;
+    public Response(String status){
+        this.status = status;
+    }
+    public String getStatus(){
+        return this.status;
+    }
 }
