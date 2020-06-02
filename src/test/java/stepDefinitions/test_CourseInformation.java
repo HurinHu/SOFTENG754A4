@@ -21,11 +21,12 @@ import static org.junit.Assert.*;
 public class test_CourseInformation {
 	private String user_type;
 	private String actualLocation = "";
-	
+	private String Softeng754Location = "";
 	public static WebDriver driver;
 	private static String OS = System.getProperty("os.name").toLowerCase();
 	private String today;
     private String actualAnswer;
+    private String courseNames;
 	@Before
 	public void startBrowser(){
 		String browser="Chrome";
@@ -57,12 +58,31 @@ public void the_student_has_logged_in_to_the_system() {
 public void the_student_clicked_the_course_information_button() {
     // Write code here that turns the phrase above into concrete actions
     //hrow new io.cucumber.java.PendingException();
+	List<WebElement> locations= driver.findElements(By.id("locations"));
+    this.actualLocation = locations.get(0).getText();
+    
+	List<WebElement> courses= driver.findElements(By.id("courses"));
+    this.courseNames = courses.get(0).getText();
+	
 }
 
 @When("he selected SOFTENG754")
 public void he_selected_SOFTENG754() {
     // Write code here that turns the phrase above into concrete actions
   //  throw new io.cucumber.java.PendingException();
+	String[] actualResult = this.actualLocation.split("\n");
+	//String result = actualResult[actualResult.length-1];
+	//this.Softeng754Location = result;
+	String[] actualCourse = this.courseNames.split("\n");
+	//String result = actualResult[actualResult.length-1];
+	//this.Softeng754Location = result;
+	
+	for( int i = 0; i < actualCourse.length - 1; i++)
+	{
+	   if(actualCourse[i].trim().equals("SOFTENG754")) {
+		   this.Softeng754Location = actualResult[i];
+	   }
+	}
 }
 
 
@@ -70,7 +90,10 @@ public void he_selected_SOFTENG754() {
 @Then("student should be told {string}")
 public void student_should_be_told(String expectedAnswer) {
     // Write code here that turns the phrase above into concrete actions
-    assertEquals(expectedAnswer, actualLocation);
+	
+	
+	System.out.println(expectedAnswer);
+    assertEquals(expectedAnswer, this.Softeng754Location.trim());
 }
 
 @After
