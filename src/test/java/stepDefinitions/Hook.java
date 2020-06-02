@@ -23,6 +23,7 @@ public class Hook  extends BaseUtil {
 
 	@Before
 	public void startBrowser(Scenario scenario){
+		this.base.scenario = scenario;
 		String browser="Chrome";
 		ChromeOptions options = new ChromeOptions();
         options.addArguments("headless");

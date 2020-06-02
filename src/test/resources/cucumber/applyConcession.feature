@@ -9,11 +9,13 @@ Feature: Apply concession
 
   Scenario: Enrol the course after concession approved
     Given the user logged in as non-Master student and he can apply concession for a course
-    When the course "SOFTENG 750" concession is approved
-    Then the status shows "Concession Applied"
+    When the course "SOFTENG 750" is required to concession
+    And the course "SOFTENG 750" concession is approved
+    Then the status shows "Enrolled"
 
   Scenario: Concession rejected
     Given the user logged in as non-Master student and he can apply concession for a course
-    When the course "SOFTENG 750" concession is rejected
+    When the course "SOFTENG 750" is required to concession
+    And the course "SOFTENG 750" concession is rejected
     Then the status shows "Concession Rejected"
 
