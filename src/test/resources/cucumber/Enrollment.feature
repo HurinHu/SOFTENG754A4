@@ -27,4 +27,7 @@ Feature: Enrollment
     Then the selected course will be added to "Add classes" tab view and the course status shows "unenrolled"
     And the unselected course will stay in "Enrollment cart" tab view and the course status shows "In cart"
 
-
+  Scenario:	Students want to see capacity of courses
+    Given the user logged in as a student and in enrollment page
+    When "Softeng754" has added to enrollment cart
+    Then he can see the capacity of "Softeng754" is "110" in "Enrollment cart" tab view
