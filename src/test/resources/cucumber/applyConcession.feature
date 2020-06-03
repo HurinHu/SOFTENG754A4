@@ -24,3 +24,9 @@ Feature: Apply concession
 	When the course "SOFTENG 750" is required to concession
 	Then the course "SOFTENG 750" concession is approved
 	And the status shows "Enrolled"
+
+  Scenario: Master student apply concession and rejected without delay
+	Given the user logged in as "Master student" and he can apply concession for a course
+	When the course "SOFTENG 750" is required to concession
+	Then the course "SOFTENG 750" concession is rejected
+	And the status shows "Concession Rejected"
