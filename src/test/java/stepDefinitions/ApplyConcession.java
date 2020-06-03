@@ -64,7 +64,7 @@ public class ApplyConcession extends BaseUtil {
                 try {
                     this.wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(By.tagName("option"),1));
                 } catch(TimeoutException e){
-                    throw new NoSuchElementException("cartlist");
+                    throw new NoSuchElementException("users");
                 }
                 Select user= new Select(this.base.driver.findElement(By.id("users")));
                 if(this.user_role.equals("non-Master student")){

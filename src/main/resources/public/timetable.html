@@ -1,12 +1,17 @@
 <html>
 	<head>
-		<title>Apply Concession</title>
+		<title>Timetable</title>
 		<meta charset="utf-8">
     	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 		<style>
 			.custom-select{
 				width: 160px;
+			}
+			button{
+				position: absolute;
+				top: 65px;
+				right: 15px;
 			}
 		</style>
 	</head>
@@ -37,25 +42,15 @@
 		
 		<div class="container">
             <br>
-		    <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th>Course Title</th>
-                  <th>Status</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody id="cartlist">
-                
-              </tbody>
-            </table>
+			<div class="accordion" id="courselist">
+			</div>
 		</div>
 
 		<script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
 		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 		<script>
-            const base_url = "http://localhost:8181/api";
+            const base_url = "http://192.168.1.180:8181/api";
 			$(document).ready(function(){
 				getUsers();
                 getCarts();
@@ -77,42 +72,44 @@
 				  	url: base_url+"/cartlist",
 				  	method: "GET"
 				}).done((data) => {
-					let cartlist = "";
+					let courselist = "";
+					let checklist = Check(data);
+					let clash = "time clash";
 					$.each( data, function( key, value ) {
-                        let button = "";
-                        if(value.status == "In Cart" && value.concession){
-                            button = "<button class='btn btn-sm btn-success' data-id='"+value.courseId+"' >Apply</button>";
-                        }else if(value.status == "In Cart" && !value.concession){
-                            button = "<button class='btn btn-sm btn-success' data-id='"+value.courseId+"' >Enrol</button>";
-                        }
-						cartlist += "<tr><td data-id='"+value.courseId+"'>"+value.courseName+"</td><td>"+value.status+"</td><td>"+button+"</td></tr>";
+						courselist += "<div class=\"card\" data-id=\""+value.courseId+"\"><div class=\"card-header row\" data-toggle=\"collapse\" data-target=\"#collapse"+value.courseId+"\" aria-expanded=\"false\" aria-controls=\"collapse"+value.courseId+"\"><div class=\"col-4\">"+value.courseName+"</div><div class=\"col-3\">"+value.time+"</div><div class=\"col-2 text-center text-danger\">"+(checklist[key].clash?clash:"")+"</div><div class=\"col-3 text-right\">"+value.status+"</div></div><div id=\"collapse"+value.courseId+"\" class=\"collapse\" data-parent=\"#courselist\"><div class=\"card-body\"><div class=\"form-check\"><input class=\"form-check-input\" type=\"radio\" name=\"time"+value.courseId+"\" id=\"time"+value.courseId+"_1\" value=\""+value.timeslots[0]+"\" checked><label class=\"form-check-label\" for=\"time"+value.courseId+"_1\">"+value.timeslots[0]+"</label></div><div class=\"form-check\"><input class=\"form-check-input\" type=\"radio\" name=\"time"+value.courseId+"\" id=\"time"+value.courseId+"_2\" value=\""+value.timeslots[1]+"\"><label class=\"form-check-label\" for=\"time"+value.courseId+"_2\">"+value.timeslots[1]+"</label></div><button class=\"btn btn-sm btn-success\">Select</button></div></div></div>";
 					});
-					$("#cartlist").html(cartlist);
-                    RefreshListener();
+					$("#courselist").html(courselist);
 				});
             }
-            function updateStatus(id, status) {
-                $.ajax({
-                      url: base_url+"/setCarts?id="+id+"&status="+status,
-                      method: "GET"
-                  }).done((data) => {
-                      getCarts();
-                  });
-            }
-
-            function RefreshListener() {
-                $('button').click(function() {
-                    if($(this).text() == "Apply"){
-                        if($("#users").val() == "Undergraduate Student"){
-                            updateStatus($(this).data('id'),"Concession Applied");
-                        }else if($("#users").val() == "Master Student"){
-                            updateStatus($(this).data('id'),"Enrolled");
-                        }
-                    }else if($(this).text() == "Enrol"){
-                        updateStatus($(this).data('id'),"Enrolled");
-                    }
-                });
-            }
+			function Check(data) {
+				let dataset = [];
+				$.each( data, function( key, value ) {
+					dataset.push({time: value.time, clash: false});
+				});
+				$.each( dataset, function( key, value ) {
+					$.each( dataset, function( key1, value1 ) {
+						if(key != key1){
+							if(value.time != "" && value1.time && checkClash(value.time, value1.time)){
+								dataset[key].clash = true;
+								dataset[key1].clash = true;
+							}
+						}
+					});
+				});
+				return dataset;
+			}
+			function checkClash(data1, data2) {
+				let d1 = data1.split(' ');
+				let d2 = data2.split(' ');
+				if(d1[0] == d2[0]) {
+					let t1 = d1[1].split('-');
+					let t2 = d2[1].split('-');
+					if(parseInt(t1[0].split(':')[0])<=parseInt(t2[1].split(':')[0])&&parseInt(t2[0].split(':')[0])<=parseInt(t1[1].split(':')[0])){
+						return true;
+					}
+				}
+				return false;
+			}
 		</script>
 	</body>
 </html>

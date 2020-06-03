@@ -47,7 +47,8 @@ public class Hook  extends BaseUtil {
 
 	@After
 	public void closeBrowser(Scenario scenario){
-		this.takeSnapShot("target/screenshot/"+this.base.screenshot) ;
+		this.takeSnapShot("target/screenshot/"+this.base.screenshot);
+		this.base.driver.close();
 		this.base.driver.quit();
         if (scenario.isFailed()) {
             System.out.println("Scenario Failed: "+scenario.getName());
