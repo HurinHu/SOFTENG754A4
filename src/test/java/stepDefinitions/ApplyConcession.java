@@ -26,8 +26,8 @@ import static org.junit.Assert.*;
 public class ApplyConcession extends BaseUtil {
 
     private BaseUtil base;
-    private String user_role;
     private String course;
+    private String user_role;
     private WebDriverWait wait;
     private List<WebElement> rows;
 
@@ -35,31 +35,49 @@ public class ApplyConcession extends BaseUtil {
         this.base = base;
     }
 
-    @Given("the user logged in as non-Master student and he can apply concession for a course")
-    public void the_user_logged_in_as_non_Master_student_and_he_can_apply_concession_for_a_course() {
+    @Given("the user logged in as {string} and he can apply concession for a course")
+    public void the_user_logged_in_as_and_he_can_apply_concession_for_a_course(String user_role) {
         this.wait = new WebDriverWait(this.base.driver, 20);
-        this.base.driver.get("http://localhost:8181/api/setCarts?id=6&status=In%20Cart");
+        this.user_role = user_role;
         this.base.driver.get("http://localhost:8181/concession.html");
         try {
             this.wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(By.tagName("option"),1));
         } catch(TimeoutException e){
             throw new NoSuchElementException("cartlist");
         }
-        this.base.driver.manage().window().maximize();
-        Select user= new Select(this.base.driver.findElement(By.id("users")));
-        user.selectByValue("Undergraduate Student");
     }
 
     @When("the course {string} is required to concession")
     public void the_course_is_required_to_concession(String course) {
-        this.wait = new WebDriverWait(this.base.driver, 20);
-        this.base.driver.get("http://localhost:8181/concession.html");
-        this.base.setScreenShot("ApplyConcession1.png");
+        if(this.base.scenario.getName().equals("Student can apply concession")){
+            this.base.setScreenShot("ApplyConcession1.png");
+        }else if(this.base.scenario.getName().equals("Enrol the course after concession approved")){
+            this.base.setScreenShot("ApplyConcession2.png");
+        }else if(this.base.scenario.getName().equals("Concession rejected")){
+            this.base.setScreenShot("ApplyConcession3.png");
+        }else if(this.base.scenario.getName().equals("Master student apply concession and approved without delay")){
+            this.base.setScreenShot("ApplyConcession4.png");
+        }
         this.course = course;
-        try {
-            this.wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(By.tagName("tr"),10));
-        } catch(TimeoutException e){
-            throw new NoSuchElementException("cartlist");
+        this.rows = this.base.driver.findElement(By.id("cartlist")).findElements(By.tagName("tr"));
+        for (WebElement row : this.rows){
+            List<WebElement> cells = row.findElements(By.tagName("td"));
+            if (cells.get(0).getText().equals(course)){
+                this.base.driver.get("http://localhost:8181/api/setCarts?id="+cells.get(0).getAttribute("data-id")+"&status=In%20Cart");
+                this.base.driver.get("http://localhost:8181/concession.html");
+                try {
+                    this.wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(By.tagName("option"),1));
+                } catch(TimeoutException e){
+                    throw new NoSuchElementException("cartlist");
+                }
+                Select user= new Select(this.base.driver.findElement(By.id("users")));
+                if(this.user_role.equals("non-Master student")){
+                      user.selectByValue("Undergraduate Student");
+                }else if(this.user_role.equals("Master student")){
+                      user.selectByValue("Master Student");
+                }
+                break;
+            }
         }
         this.rows = this.base.driver.findElement(By.id("cartlist")).findElements(By.tagName("tr"));
         for (WebElement row : this.rows){
@@ -74,50 +92,52 @@ public class ApplyConcession extends BaseUtil {
 
     @When("the course {string} concession is approved")
     public void the_course_concession_is_approved(String course) {
-        this.wait = new WebDriverWait(this.base.driver, 20);
-        if(this.base.scenario.getName().equals("Enrol the course after concession approved")){
-            this.base.driver.get("http://localhost:8181/api/setCarts?id=6&status=Enrolled");
-        }
-        this.base.driver.get("http://localhost:8181/concession.html");
-        this.base.setScreenShot("ApplyConcession2.png");
-        this.course = course;
-        try {
-            this.wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(By.tagName("tr"),10));
-        } catch(TimeoutException e){
-            throw new NoSuchElementException("cartlist");
-        }
-        this.rows = this.base.driver.findElement(By.id("cartlist")).findElements(By.tagName("tr"));
-        for (WebElement row : this.rows){
-            List<WebElement> cells = row.findElements(By.tagName("td"));
-            if (cells.get(0).getText().equals(course)){
-                this.base.driver.get("http://localhost:8181/concession.html");
-                break;
-            }
-        }
+          this.course = course;
+          this.rows = this.base.driver.findElement(By.id("cartlist")).findElements(By.tagName("tr"));
+          for (WebElement row : this.rows){
+              List<WebElement> cells = row.findElements(By.tagName("td"));
+              if (cells.get(0).getText().equals(course)){
+                  this.base.driver.get("http://localhost:8181/api/setCarts?id="+cells.get(0).getAttribute("data-id")+"&status=Enrolled");
+                  this.base.driver.get("http://localhost:8181/concession.html");
+                  try {
+                      this.wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(By.tagName("option"),1));
+                  } catch(TimeoutException e){
+                      throw new NoSuchElementException("cartlist");
+                  }
+                  Select user= new Select(this.base.driver.findElement(By.id("users")));
+                  if(this.user_role.equals("non-Master student")){
+                        user.selectByValue("Undergraduate Student");
+                  }else if(this.user_role.equals("Master student")){
+                        user.selectByValue("Master Student");
+                  }
+                  break;
+              }
+          }
     }
 
     @When("the course {string} concession is rejected")
     public void the_course_concession_is_rejected(String course) {
-        this.wait = new WebDriverWait(this.base.driver, 20);
-        if(this.base.scenario.getName().equals("Concession rejected")){
-            this.base.driver.get("http://localhost:8181/api/setCarts?id=6&status=Concession%20Rejected");
-        }
-        this.base.driver.get("http://localhost:8181/concession.html");
-        this.base.setScreenShot("ApplyConcession3.png");
         this.course = course;
-        try {
-            this.wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(By.tagName("tr"),10));
-        } catch(TimeoutException e){
-            throw new NoSuchElementException("cartlist");
-        }
-        this.rows = this.base.driver.findElement(By.id("cartlist")).findElements(By.tagName("tr"));
-        for (WebElement row : this.rows){
-            List<WebElement> cells = row.findElements(By.tagName("td"));
-            if (cells.get(0).getText().equals(course)){
-                this.base.driver.get("http://localhost:8181/concession.html");
-                break;
-            }
-        }
+          this.rows = this.base.driver.findElement(By.id("cartlist")).findElements(By.tagName("tr"));
+          for (WebElement row : this.rows){
+              List<WebElement> cells = row.findElements(By.tagName("td"));
+              if (cells.get(0).getText().equals(course)){
+                  this.base.driver.get("http://localhost:8181/api/setCarts?id="+cells.get(0).getAttribute("data-id")+"&status=Concession%20Rejected");
+                  this.base.driver.get("http://localhost:8181/concession.html");
+                  try {
+                      this.wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(By.tagName("option"),1));
+                  } catch(TimeoutException e){
+                      throw new NoSuchElementException("cartlist");
+                  }
+                  Select user= new Select(this.base.driver.findElement(By.id("users")));
+                  if(this.user_role.equals("non-Master student")){
+                        user.selectByValue("Undergraduate Student");
+                  }else if(this.user_role.equals("Master student")){
+                        user.selectByValue("Master Student");
+                  }
+                  break;
+              }
+          }
     }
 
     @Then("click {string} button")
@@ -134,7 +154,7 @@ public class ApplyConcession extends BaseUtil {
     @Then("the status shows {string}")
     public void the_status_shows(String status) {
         try {
-            wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(By.tagName("tr"),10));
+            this.wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(By.tagName("tr"),10));
         } catch(TimeoutException e){
             throw new NoSuchElementException("cartlist");
         }
