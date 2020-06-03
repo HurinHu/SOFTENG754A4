@@ -35,8 +35,8 @@ public class ApplyConcession extends BaseUtil {
         this.base = base;
     }
 
-    @Given("the user logged in as non-Master student and he can apply concession for a course")
-    public void the_user_logged_in_as_non_Master_student_and_he_can_apply_concession_for_a_course() {
+    @Given("the user logged in as {string} and he can apply concession for a course")
+    public void the_user_logged_in_as_and_he_can_apply_concession_for_a_course(String user_role) {
         this.wait = new WebDriverWait(this.base.driver, 20);
         this.base.driver.get("http://localhost:8181/api/setCarts?id=6&status=In%20Cart");
         this.base.driver.get("http://localhost:8181/concession.html");
@@ -47,7 +47,11 @@ public class ApplyConcession extends BaseUtil {
         }
         this.base.driver.manage().window().maximize();
         Select user= new Select(this.base.driver.findElement(By.id("users")));
-        user.selectByValue("Undergraduate Student");
+        switch(user_role){
+            case "non-Master student":
+                user.selectByValue("Undergraduate Student");
+                break;
+        }
     }
 
     @When("the course {string} is required to concession")
