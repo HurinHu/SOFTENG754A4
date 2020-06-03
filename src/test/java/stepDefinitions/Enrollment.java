@@ -35,7 +35,9 @@ public class Enrollment extends BaseUtil {
         } else if(this.base.scenario.getName().equals("Students want to confirm selected courses")){
             this.base.setScreenShot("Enrollment2.png");
         } else if(this.base.scenario.getName().equals("Students want to cancel selected courses")){
-            this.base.setScreenShot("Enrollment3png");
+            this.base.setScreenShot("Enrollment3.png");
+        } else if(this.base.scenario.getName().equals("Students want to see capacity of courses")){
+            this.base.setScreenShot("Enrollment4.png");
         }
 
         this.base.driver.get("http://localhost:8181/enrollment.html");
@@ -145,6 +147,35 @@ public class Enrollment extends BaseUtil {
             List<WebElement> cells = row.findElements(By.tagName("td"));
             if (cells.get(1).getText().equals(unselectedCourse)){
                 assertEquals(status,cells.get(cells.size()-1).getText());
+                break;
+            }
+        }
+    }
+
+
+
+    @When("{string} has added to enrollment cart")
+    public void hasAddedToEnrollmentCart(String course) {
+        this.base.driver.findElement(By.xpath(".//button[text()='Add classes']")).click();
+
+        this.rows = this.base.driver.findElement(By.id("tbody")).findElements(By.tagName("tr"));
+        for (WebElement row : this.rows){
+            List<WebElement> cells = row.findElements(By.tagName("td"));
+            if (cells.get(1).getText().equals(course)){
+                assertEquals(cells.get(cells.size()-1).getText(), "Add to cart");
+                cells.get(cells.size()-1).click();
+            }
+        }
+    }
+
+    @Then("he can see the capacity of {string} is {string} in {string} tab view")
+    public void heCanSeeTheCapacityOfIsInTabView(String course, String capacity, String tabView) {
+        this.base.driver.findElement(By.xpath(".//button[text()='"+tabView+"']")).click();
+        this.rows = this.base.driver.findElement(By.id("cartBody")).findElements(By.tagName("tr"));
+        for (WebElement row : this.rows){
+            List<WebElement> cells = row.findElements(By.tagName("td"));
+            if (cells.get(1).getText().equals(course)){
+                assertEquals(capacity,cells.get(3).getText());
                 break;
             }
         }
