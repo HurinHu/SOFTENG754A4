@@ -20,6 +20,8 @@ public class TimeTable extends BaseUtil {
 
 	private BaseUtil base;
     private String course;
+	private String time1;
+	private String time2;
 	private String timeclash;
     private WebDriverWait wait;
     private List<WebElement> rows;
@@ -60,9 +62,34 @@ public class TimeTable extends BaseUtil {
 	}
 
 	@Given("the user logged in and view a course {string}")
-	public void the_user_logged_in_and_view_a_course(String string) {
-		// Write code here that turns the phrase above into concrete actions
-		throw new io.cucumber.java.PendingException();
+	public void the_user_logged_in_and_view_a_course(String course) {
+		this.wait = new WebDriverWait(this.base.driver, 20);
+        this.course = course;
+        this.base.driver.get("http://localhost:8181/timetable.html");
+        try {
+            this.wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(By.tagName("option"),1));
+        } catch(TimeoutException e){
+            throw new NoSuchElementException("users");
+        }
+		this.rows = this.base.driver.findElement(By.id("courselist")).findElements(By.className("card"));
+		String id;
+        for (WebElement row : this.rows){
+            List<WebElement> cells = row.findElement(By.className("card-header")).findElements(By.tagName("div"));
+			id = row.getAttribute("data-id");
+            if (cells.get(0).getText().equals(this.course)){
+                this.base.driver.get("http://localhost:8181/api/setCarts?id="+id+"&status=In%20Cart");
+				this.base.driver.get("http://localhost:8181/api/setTime?id="+id+"&time=");
+                this.base.driver.get("http://localhost:8181/timetable.html");
+                try {
+                    this.wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(By.className("card"),10));
+                } catch(TimeoutException e){
+                    throw new NoSuchElementException("courselist");
+                }
+                Select user= new Select(this.base.driver.findElement(By.id("users")));
+                user.selectByValue("Undergraduate Student");
+                break;
+            }
+		}
 	}
 
 	@When("the course {string} time is clashed with other enrolled courses")
@@ -80,11 +107,25 @@ public class TimeTable extends BaseUtil {
             }
 		}
 	}
-
 	@When("user select a course {string}")
-	public void user_select_a_course(String string) {
-		// Write code here that turns the phrase above into concrete actions
-		throw new io.cucumber.java.PendingException();
+	public void user_select_a_course(String course) throws InterruptedException {
+		if(this.base.scenario.getName().equals("Student should view course time slots")){
+            this.base.setScreenShot("Timetable2.png");
+		 }
+		this.rows = this.base.driver.findElement(By.id("courselist")).findElements(By.className("card"));
+		this.time1 = "";
+		this.time2 = "";
+        for (WebElement row : this.rows){
+            List<WebElement> cells = row.findElement(By.className("card-header")).findElements(By.tagName("div"));
+            if (cells.get(0).getText().equals(this.course)){
+                row.click();
+				List<WebElement> labels = row.findElement(By.className("card-body")).findElements(By.className("form-check"));
+				Thread.sleep(500);
+				this.time1 = labels.get(0).getText();
+				this.time2 = labels.get(1).getText();
+                break;
+            }
+		}
 	}
 
 	@Then("{string} notification should be shown")
@@ -93,9 +134,9 @@ public class TimeTable extends BaseUtil {
 	}
 
 	@Then("time slots {string} and {string} should be shown")
-	public void time_slots_and_should_be_shown(String string, String string2) {
-		// Write code here that turns the phrase above into concrete actions
-		throw new io.cucumber.java.PendingException();
+	public void time_slots_and_should_be_shown(String time1, String time2) {
+		assertEquals(time1, this.time1);
+		assertEquals(time2, this.time2);
 	}
 
 }
