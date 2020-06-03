@@ -85,8 +85,7 @@
                         }else if(value.status == "In Cart" && !value.concession){
                             button = "<button class='btn btn-sm btn-success' data-id='"+value.courseId+"' >Enrol</button>";
                         }
-                        
-						cartlist += "<tr><td>"+value.courseName+"</td><td>"+value.status+"</td><td>"+button+"</td></tr>";
+						cartlist += "<tr><td data-id='"+value.courseId+"'>"+value.courseName+"</td><td>"+value.status+"</td><td>"+button+"</td></tr>";
 					});
 					$("#cartlist").html(cartlist);
                     RefreshListener();
@@ -104,7 +103,11 @@
             function RefreshListener() {
                 $('button').click(function() {
                     if($(this).text() == "Apply"){
-                        updateStatus($(this).data('id'),"Concession Applied");
+                        if($("#users").val() == "Undergraduate Student"){
+                            updateStatus($(this).data('id'),"Concession Applied");
+                        }else if($("#users").val() == "Master Student"){
+                            updateStatus($(this).data('id'),"Enrolled");
+                        }
                     }else if($(this).text() == "Enrol"){
                         updateStatus($(this).data('id'),"Enrolled");
                     }
