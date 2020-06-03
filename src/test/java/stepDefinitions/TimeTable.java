@@ -59,6 +59,12 @@ public class TimeTable extends BaseUtil {
 		}
 	}
 
+	@Given("the user logged in and view a course {string}")
+	public void the_user_logged_in_and_view_a_course(String string) {
+		// Write code here that turns the phrase above into concrete actions
+		throw new io.cucumber.java.PendingException();
+	}
+
 	@When("the course {string} time is clashed with other enrolled courses")
 	public void the_course_time_is_clashed_with_other_enrolled_courses(String course) {
 		 if(this.base.scenario.getName().equals("Student should know the time clash")){
@@ -75,9 +81,21 @@ public class TimeTable extends BaseUtil {
 		}
 	}
 
+	@When("user select a course {string}")
+	public void user_select_a_course(String string) {
+		// Write code here that turns the phrase above into concrete actions
+		throw new io.cucumber.java.PendingException();
+	}
+
 	@Then("{string} notification should be shown")
 	public void notification_should_be_shown(String error) {
 		assertEquals(error, this.timeclash);
+	}
+
+	@Then("time slots {string} and {string} should be shown")
+	public void time_slots_and_should_be_shown(String string, String string2) {
+		// Write code here that turns the phrase above into concrete actions
+		throw new io.cucumber.java.PendingException();
 	}
 
 }
