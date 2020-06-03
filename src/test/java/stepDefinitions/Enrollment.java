@@ -25,7 +25,6 @@ public class Enrollment extends BaseUtil {
 
     public Enrollment(BaseUtil base) {
         this.base = base;
-        this.base.setScreenShot("EnrollmentFeature.png");
         this.wait = new WebDriverWait(this.base.driver, 20);
     }
 
@@ -35,6 +34,8 @@ public class Enrollment extends BaseUtil {
             this.base.setScreenShot("Enrollment1.png");
         } else if(this.base.scenario.getName().equals("Students want to confirm selected courses")){
             this.base.setScreenShot("Enrollment2.png");
+        } else if(this.base.scenario.getName().equals("Students want to cancel selected courses")){
+            this.base.setScreenShot("Enrollment3png");
         }
 
         this.base.driver.get("http://localhost:8181/enrollment.html");
