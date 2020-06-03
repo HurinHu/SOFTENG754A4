@@ -20,6 +20,8 @@ public class Enrollment extends BaseUtil {
     private WebDriverWait wait;
     private String course;
     private List<WebElement> rows;
+    private String selectedCourse;
+    private String unselectedCourse;
 
     public Enrollment(BaseUtil base) {
         this.base = base;
@@ -31,7 +33,10 @@ public class Enrollment extends BaseUtil {
     public void the_user_logged_in_as_a_student_and_in_enrollment_page() {
         if(this.base.scenario.getName().equals("Students want to add courses to enrollment cart")){
             this.base.setScreenShot("Enrollment1.png");
+        } else if(this.base.scenario.getName().equals("Students want to confirm selected courses")){
+            this.base.setScreenShot("Enrollment2.png");
         }
+
         this.base.driver.get("http://localhost:8181/enrollment.html");
         this.base.driver.manage().window().maximize();
         Select user= new Select(this.base.driver.findElement(By.id("users")));
@@ -73,6 +78,72 @@ public class Enrollment extends BaseUtil {
             List<WebElement> cells = row.findElements(By.tagName("td"));
             if (cells.get(1).getText().equals(course)){
                 assertEquals(status,cells.get(cells.size()-2).getText());
+                break;
+            }
+        }
+    }
+
+
+    @And("he has added courses {string} and {string} to enrollment cart")
+    public void heHasAddedCoursesAndToEnrollmentCart(String course1, String course2) {
+        this.base.driver.findElement(By.xpath(".//button[text()='Add classes']")).click();
+
+        this.rows = this.base.driver.findElement(By.id("tbody")).findElements(By.tagName("tr"));
+        for (WebElement row : this.rows){
+            List<WebElement> cells = row.findElements(By.tagName("td"));
+            if (cells.get(1).getText().equals(course1) || cells.get(1).getText().equals(course2)){
+                assertEquals(cells.get(cells.size()-1).getText(), "Add to cart");
+                cells.get(cells.size()-1).click();
+            }
+        }
+
+    }
+
+    @When("{string} is selected in enrollment cart")
+    public void isSelectedInEnrollmentCart(String course) {
+        this.selectedCourse = course;
+        this.base.driver.findElement(By.xpath(".//button[text()= 'Enrollment cart']")).click();
+        this.rows = this.base.driver.findElement(By.id("cartBody")).findElements(By.tagName("tr"));
+        for (WebElement row : this.rows){
+            List<WebElement> cells = row.findElements(By.tagName("td"));
+            if (cells.get(1).getText().equals(course)){
+                cells.get(cells.size()-1).click();
+                break;
+            }
+        }
+    }
+
+    @And("{string} is not selected in enrollment cart")
+    public void isNotSelectedInEnrollment(String course) {
+        this.unselectedCourse = course;
+    }
+
+    @And("he click {string} button in enrollment cart page")
+    public void heClickButtonInEnrollmentCartPage(String button) {
+        this.base.driver.findElement(By.xpath(".//button[text()='"+button+"']")).click();
+    }
+
+    @Then("the selected course will be added to {string} tab view and the course status shows {string}")
+    public void theSelectedCourseWillBeAddedToAndTheCourseStatusShows(String tabView, String status) {
+        this.base.driver.findElement(By.xpath(".//button[text()='"+tabView+"']")).click();
+        this.rows = this.base.driver.findElement(By.id("statusBody")).findElements(By.tagName("tr"));
+        for (WebElement row : this.rows){
+            List<WebElement> cells = row.findElements(By.tagName("td"));
+            if (cells.get(1).getText().equals(selectedCourse)){
+                assertEquals(status,cells.get(cells.size()-1).getText());
+                break;
+            }
+        }
+    }
+
+    @And("the unselected course will stay in {string} tab view and the course status shows {string}")
+    public void theUnselectedCourseWillStayInAndTheCourseStatusShows(String tabView, String status) {
+        this.base.driver.findElement(By.xpath(".//button[text()='"+tabView+"']")).click();
+        this.rows = this.base.driver.findElement(By.id("statusBody")).findElements(By.tagName("tr"));
+        for (WebElement row : this.rows){
+            List<WebElement> cells = row.findElements(By.tagName("td"));
+            if (cells.get(1).getText().equals(unselectedCourse)){
+                assertEquals(status,cells.get(cells.size()-1).getText());
                 break;
             }
         }

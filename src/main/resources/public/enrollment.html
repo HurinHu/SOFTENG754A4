@@ -98,8 +98,34 @@
 
 <div class="container" >
     <div class="tab">
-        <button class="tablinks" onclick="changeTab(event, 'addClasses')" id="defaultOpen">Add classes</button>
+        <button class="tablinks" onclick="changeTab(event, 'enrollmentStatus')" id="defaultOpen">Current Enrollment Status</button>
+        <button class="tablinks" onclick="changeTab(event, 'addClasses')">Add classes</button>
         <button class="tablinks" onclick="changeTab(event, 'enrollmentCart')">Enrollment cart</button>
+    </div>
+
+    <div id="enrollmentStatus" class="tabcontent">
+        <div>
+            <h2>Current enrollment status</h2>
+            <table id="statusTable" class="display nowrap" style="width:100%">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Capacity</th>
+                    <th>Concession</th>
+                    <th>Program</th>
+                    <th>Prerequisite</th>
+                    <th>Timeslots</th>
+                    <th>Location</th>
+                    <th>Status</th>
+                </tr>
+                </thead>
+                <tbody id ="statusBody">
+
+                </tbody>
+            </table>
+        </div>
     </div>
 
     <div id="addClasses" class="tabcontent">
@@ -149,6 +175,9 @@
 
                 </tbody>
             </table>
+        </div>
+        <div>
+            <button id="confirm enrollment" onclick="confirmEnrollment()">confirm the selected courses</button>
         </div>
     </div>
 </div>
@@ -277,6 +306,58 @@
 
     // Get the element with id="defaultOpen" and click on it
     document.getElementById("defaultOpen").click();
+</script>
+
+<script>
+    function confirmEnrollment() {
+        let cartBody = document.querySelector('#cartBody');
+        let cks=document.getElementsByName("select");
+        for(let index=0;index<cks.length;index++){
+            if(cks[index].checked==true){
+                let statusBody = document.querySelector('#statusBody');
+                let node = cks[index].parentNode.parentNode;
+                let cln = node.cloneNode(true);
+                statusBody.appendChild(cln);
+                cln.removeChild(cln.lastChild);
+                cln.removeChild(cln.lastChild);
+
+                let td = document.createElement('td');
+                td.innerHTML = "enrolled";
+                cln.appendChild(td);
+
+                cartBody.removeChild(cks[index].parentNode.parentNode);
+                index -= 1;
+            }
+        }
+    }
+</script>
+
+<script>
+    function cancelEnrollment() {
+        let cartBody = document.querySelector('#cartBody');
+        let cks=document.getElementsByName("select");
+        for(let index=0;index<cks.length;index++){
+            if(cks[index].checked==true){
+                let tbody = document.querySelector('#tbody');
+                let node = cks[index].parentNode.parentNode;
+                let cln = node.cloneNode(true);
+                tbody.appendChild(cln);
+
+                cln.removeChild(cln.lastChild);
+                cln.removeChild(cln.lastChild);
+                let td = document.createElement('td');
+                td.innerHTML = "unenrolled";
+                cln.appendChild(td);
+
+                td = document.createElement('td');
+                td.innerHTML = "<a href='javascript:;'>Add to cart</a>";
+                cln.appendChild(td);
+
+                cartBody.removeChild(cks[index].parentNode.parentNode);
+                index -= 1;
+            }
+        }
+    }
 </script>
 
 <script>
