@@ -92,6 +92,12 @@ public class TimeTable extends BaseUtil {
 		}
 	}
 
+	@Given("the user logged in and select a course {string} time slots")
+	public void the_user_logged_in_and_select_a_course_time_slots(String course) {
+		// Write code here that turns the phrase above into concrete actions
+		throw new io.cucumber.java.PendingException();
+	}
+
 	@When("the course {string} time is clashed with other enrolled courses")
 	public void the_course_time_is_clashed_with_other_enrolled_courses(String course) {
 		 if(this.base.scenario.getName().equals("Student should know the time clash")){
@@ -107,6 +113,7 @@ public class TimeTable extends BaseUtil {
             }
 		}
 	}
+
 	@When("user select a course {string}")
 	public void user_select_a_course(String course) throws InterruptedException {
 		if(this.base.scenario.getName().equals("Student should view course time slots")){
@@ -128,6 +135,12 @@ public class TimeTable extends BaseUtil {
 		}
 	}
 
+	@When("user select a time slots {string}")
+	public void user_select_a_time_slots(String time) {
+		// Write code here that turns the phrase above into concrete actions
+		throw new io.cucumber.java.PendingException();
+	}
+
 	@Then("{string} notification should be shown")
 	public void notification_should_be_shown(String error) {
 		assertEquals(error, this.timeclash);
@@ -137,6 +150,12 @@ public class TimeTable extends BaseUtil {
 	public void time_slots_and_should_be_shown(String time1, String time2) {
 		assertEquals(time1, this.time1);
 		assertEquals(time2, this.time2);
+	}
+
+	@Then("available time slots {string} should be able to select")
+	public void available_time_slots_should_be_able_to_select(String time) {
+		// Write code here that turns the phrase above into concrete actions
+		throw new io.cucumber.java.PendingException();
 	}
 
 }
