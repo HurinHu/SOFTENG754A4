@@ -49,7 +49,7 @@ public class Course {
         this._concession = concession;
 	}
   
-    public Course(int id, String name, String description,int capacity,boolean concession,String location,String status) {
+    public Course(int id, String name, String description,int capacity,boolean concession,String location,String status, List<String> timeslots, String time) {
 		this.id = id;
 		this._description = description;
 		this._location = location;
@@ -57,6 +57,8 @@ public class Course {
 		this._capacity = capacity;
 		this._status = status;
         this._concession = concession;
+		this._timeslot = timeslots;
+		this._time = time;
 	}
 
 	public Course(int id, String name) {
@@ -176,5 +178,13 @@ public class Course {
 	
 	public List<String> getTimeslots() {
 		return this._timeslot;
+	}
+	
+	public String getTime() {
+		return this._time;
+	}
+	
+	public void setTime(String time) {
+		this._time = time;
 	}
 }

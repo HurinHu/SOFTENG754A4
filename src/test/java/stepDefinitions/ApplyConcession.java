@@ -1,9 +1,6 @@
 import base.BaseUtil;
 
 import java.util.*;
-import java.util.concurrent.TimeUnit;
-import org.apache.commons.io.FileUtils;
-import java.io.File;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.OutputType;
@@ -12,9 +9,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-
-import io.cucumber.java.After;
-import io.cucumber.java.Before;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -70,7 +64,7 @@ public class ApplyConcession extends BaseUtil {
                 try {
                     this.wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(By.tagName("option"),1));
                 } catch(TimeoutException e){
-                    throw new NoSuchElementException("cartlist");
+                    throw new NoSuchElementException("users");
                 }
                 Select user= new Select(this.base.driver.findElement(By.id("users")));
                 if(this.user_role.equals("non-Master student")){

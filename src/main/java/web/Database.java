@@ -11,17 +11,50 @@ public class Database {
     List<Course> cartList = new ArrayList<>();
 
     public Database(){
-        cartList.add(new Course(1, "SOFTENG 701", "Some description", 50, true, "404-404", "In Cart"));
-        cartList.add(new Course(2, "SOFTENG 702", "Some description", 40, false, "403-404", "In Cart"));
-        cartList.add(new Course(3, "SOFTENG 703", "Some description", 80, true, "405-401", "Enrolled"));
-        cartList.add(new Course(4, "SOFTENG 704", "Some description", 100, false, "402-403", "In Cart"));
-        cartList.add(new Course(5, "SOFTENG 705", "Some description", 50, false, "404-405", "In Cart"));
-        cartList.add(new Course(6, "SOFTENG 750", "Some description", 80, true, "402-403", "In Cart"));
-        cartList.add(new Course(7, "SOFTENG 751", "Some description", 50, true, "406-402", "Concession Applied"));
-        cartList.add(new Course(8, "SOFTENG 752", "Some description", 50, true, "404-403", "In Cart"));
-        cartList.add(new Course(9, "SOFTENG 753", "Some description", 50, true, "404-403", "In Cart"));
-        cartList.add(new Course(10, "SOFTENG 754", "Some description", 50, true, "404-403", "In Cart"));
-        cartList.add(new Course(11, "SOFTENG 756", "Some description", 50, true, "404-403", "In Cart"));
+		List<String> timeslots = new ArrayList<>();
+		timeslots.add("Wed 10:00-12:00");
+		timeslots.add("Thu 13:00-15:00");
+        cartList.add(new Course(1, "SOFTENG 701", "Some description", 50, true, "404-404", "In Cart", timeslots,""));
+		timeslots = new ArrayList<>();
+		timeslots.add("Mon 09:00-11:00");
+		timeslots.add("Thu 13:00-15:00");
+        cartList.add(new Course(2, "SOFTENG 702", "Some description", 40, false, "403-404", "In Cart", timeslots,""));
+		timeslots = new ArrayList<>();
+		timeslots.add("Tue 14:00-16:00");
+		timeslots.add("Fri 11:00-12:00");
+        cartList.add(new Course(3, "SOFTENG 703", "Some description", 80, true, "405-401", "Enrolled", timeslots,"Tue 14:00-16:00"));
+		timeslots = new ArrayList<>();
+		timeslots.add("Mon 14:00-15:00");
+		timeslots.add("Thu 14:00-16:00");
+        cartList.add(new Course(4, "SOFTENG 704", "Some description", 100, false, "402-403", "In Cart", timeslots,""));
+		timeslots = new ArrayList<>();
+		timeslots.add("Wed 08:00-10:00");
+		timeslots.add("Thu 11:00-13:00");
+        cartList.add(new Course(5, "SOFTENG 705", "Some description", 50, false, "404-405", "In Cart", timeslots,""));
+		timeslots = new ArrayList<>();
+		timeslots.add("Mon 15:00-18:00");
+		timeslots.add("Thu 09:00-10:00");
+        cartList.add(new Course(6, "SOFTENG 750", "Some description", 80, true, "402-403", "In Cart", timeslots,""));
+		timeslots = new ArrayList<>();
+		timeslots.add("Wed 12:00-13:00");
+		timeslots.add("Fri 15:00-16:00");
+        cartList.add(new Course(7, "SOFTENG 751", "Some description", 50, true, "406-402", "Concession Applied", timeslots,"Fri 15:00-16:00"));
+		timeslots = new ArrayList<>();
+		timeslots.add("Tue 09:00-11:00");
+		timeslots.add("Thu 14:00-15:00");
+        cartList.add(new Course(8, "SOFTENG 752", "Some description", 50, true, "404-403", "In Cart", timeslots,""));
+		timeslots = new ArrayList<>();
+		timeslots.add("Wed 11:00-13:00");
+		timeslots.add("Thu 08:00-10:00");
+        cartList.add(new Course(9, "SOFTENG 753", "Some description", 50, true, "404-403", "Enrolled", timeslots,"Thu 08:00-10:00"));
+		timeslots = new ArrayList<>();
+		timeslots.add("Mon 10:00-12:00");
+		timeslots.add("Wed 13:00-14:00");
+        cartList.add(new Course(10, "SOFTENG 754", "Some description", 50, true, "404-403", "In Cart", timeslots,""));
+		timeslots = new ArrayList<>();
+		timeslots.add("Mon 09:00-11:00");
+		timeslots.add("Thu 13:00-15:00");
+        cartList.add(new Course(11, "SOFTENG 756", "Some description", 50, true, "404-403", "Enrolled", timeslots,"Thu 13:00-15:00"));
     }
 
     public void setConcessionPool(Concession concession) {
@@ -161,6 +194,14 @@ public class Database {
         for(Course course : cartList) {
             if (course.getCourseId() == id) {
                 course.setStatus(status);
+            }
+        }
+    }
+	
+	public void setTime(int id, String time) {
+        for(Course course : cartList) {
+            if (course.getCourseId() == id) {
+                course.setTime(time);
             }
         }
     }

@@ -1,6 +1,7 @@
 import base.BaseUtil;
 
 import java.util.*;
+import java.util.logging.Level;
 import java.util.concurrent.TimeUnit;
 import org.apache.commons.io.FileUtils;
 import java.io.File;
@@ -28,6 +29,9 @@ public class Hook  extends BaseUtil {
 		ChromeOptions options = new ChromeOptions();
         options.addArguments("headless");
         options.addArguments("window-size=1200x600");
+        System.setProperty("webdriver.chrome.args", "--disable-logging");
+        System.setProperty("webdriver.chrome.silentOutput", "true");
+        java.util.logging.Logger.getLogger("org.openqa.selenium").setLevel(Level.OFF);
 		if (isWindows()) {
 			System.setProperty("webdriver.chrome.driver", "driver/chromedriver.exe");
 			this.base.driver = new ChromeDriver(options);
@@ -43,7 +47,8 @@ public class Hook  extends BaseUtil {
 
 	@After
 	public void closeBrowser(Scenario scenario){
-		this.takeSnapShot("target/screenshot/"+this.base.screenshot) ;
+		this.takeSnapShot("target/screenshot/"+this.base.screenshot);
+		this.base.driver.close();
 		this.base.driver.quit();
         if (scenario.isFailed()) {
             System.out.println("Scenario Failed: "+scenario.getName());
