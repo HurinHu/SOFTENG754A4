@@ -57,6 +57,8 @@ public class ApplyConcession extends BaseUtil {
             this.base.setScreenShot("ApplyConcession3.png");
         }else if(this.base.scenario.getName().equals("Master student apply concession and approved without delay")){
             this.base.setScreenShot("ApplyConcession4.png");
+        }else if(this.base.scenario.getName().equals("Master student apply concession and rejected without delay")){
+            this.base.setScreenShot("ApplyConcession5.png");
         }
         this.course = course;
         this.rows = this.base.driver.findElement(By.id("cartlist")).findElements(By.tagName("tr"));
