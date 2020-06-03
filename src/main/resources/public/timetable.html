@@ -50,10 +50,10 @@
 		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 		<script>
-            const base_url = "http://192.168.1.180:8181/api";
+            const base_url = "http://localhost:8181/api";
 			$(document).ready(function(){
 				getUsers();
-                getCarts();
+                getCourses();
 			});
             function getUsers() {
                 $.ajax({
@@ -67,7 +67,7 @@
 					$("#users").html(options);
 				});
             }
-            function getCarts() {
+            function getCourses() {
                 $.ajax({
 				  	url: base_url+"/cartlist",
 				  	method: "GET"
@@ -79,8 +79,17 @@
 						courselist += "<div class=\"card\" data-id=\""+value.courseId+"\"><div class=\"card-header row\" data-toggle=\"collapse\" data-target=\"#collapse"+value.courseId+"\" aria-expanded=\"false\" aria-controls=\"collapse"+value.courseId+"\"><div class=\"col-4\">"+value.courseName+"</div><div class=\"col-3\">"+value.time+"</div><div class=\"col-2 text-center text-danger\">"+(checklist[key].clash?clash:"")+"</div><div class=\"col-3 text-right\">"+value.status+"</div></div><div id=\"collapse"+value.courseId+"\" class=\"collapse\" data-parent=\"#courselist\"><div class=\"card-body\"><div class=\"form-check\"><input class=\"form-check-input\" type=\"radio\" name=\"time"+value.courseId+"\" id=\"time"+value.courseId+"_1\" value=\""+value.timeslots[0]+"\" checked><label class=\"form-check-label\" for=\"time"+value.courseId+"_1\">"+value.timeslots[0]+"</label></div><div class=\"form-check\"><input class=\"form-check-input\" type=\"radio\" name=\"time"+value.courseId+"\" id=\"time"+value.courseId+"_2\" value=\""+value.timeslots[1]+"\"><label class=\"form-check-label\" for=\"time"+value.courseId+"_2\">"+value.timeslots[1]+"</label></div><button class=\"btn btn-sm btn-success\">Select</button></div></div></div>";
 					});
 					$("#courselist").html(courselist);
+					RefreshListener()
 				});
             }
+			function setTime(id, time) {
+				$.ajax({
+                      url: base_url+"/setTime?id="+id+"&time="+time,
+                      method: "GET"
+                  }).done((data) => {
+                      getCourses();
+                  });
+			}
 			function Check(data) {
 				let dataset = [];
 				$.each( data, function( key, value ) {
@@ -110,6 +119,15 @@
 				}
 				return false;
 			}
+			function RefreshListener() {
+                $('button').click(function() {
+                    if($(this).text() == "Select"){
+                       	let time = $(this).parent().find("input[type='radio']:checked").val();
+						let id = $(this).parent().parent().parent().attr('data-id');
+						setTime(id, time);
+                    }
+                });
+            }
 		</script>
 	</body>
 </html>
