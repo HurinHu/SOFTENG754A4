@@ -26,8 +26,8 @@ public class Api {
 	public Object userlist() {
 		List<User> users = new ArrayList<>();
 		users.add(new User(1, "Teacher", "Prof. xxx"));
-		users.add(new User(2, "Undergraduate Student", "Undergraduate aaa"));
-		users.add(new User(3, "Master Student", "Master bbb"));
+		users.add(new User(2, "Undergraduate Student", "aaa"));
+		users.add(new User(3, "Master Student", "bbb"));
         return users;
     }
 	
