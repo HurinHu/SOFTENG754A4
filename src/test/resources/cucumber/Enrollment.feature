@@ -9,7 +9,14 @@ Feature: Enrollment
     Then the selected course will be added to "Enrollment cart"
     And the course status shows "In cart"
 
-
+  Scenario:	Students want to confirm selected courses
+    Given the user logged in as a student and in enrollment page
+    And he has added courses "Softeng752" and "Softeng753" to enrollment cart
+    When "Softeng752" is selected in enrollment cart
+    And "Softeng753" is not selected in enrollment cart
+    And he click "confirm the selected courses" button in enrollment cart page
+    Then the selected course will be added to "Current Enrollment Status" tab view and the course status shows "enrolled"
+    And the unselected course will stay in "Enrollment cart" tab view and the course status shows "In cart"
 
 
 
