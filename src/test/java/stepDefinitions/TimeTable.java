@@ -165,6 +165,8 @@ public class TimeTable extends BaseUtil {
 	public void user_select_a_time_slots(String time) throws InterruptedException {
 		if(this.base.scenario.getName().equals("Student should select available course time slots")){
             this.base.setScreenShot("Timetable3.png");
+		 }else if(this.base.scenario.getName().equals("Student should know chosen course time slot is not time clash")){
+            this.base.setScreenShot("Timetable4.png");
 		 }
 		this.rows = this.base.driver.findElement(By.id("courselist")).findElements(By.className("card"));
         for (WebElement row : this.rows){
@@ -185,10 +187,12 @@ public class TimeTable extends BaseUtil {
 		}
 		this.rows = this.base.driver.findElement(By.id("courselist")).findElements(By.className("card"));
 		this.time = "";
+		this.timeclash = "";
         for (WebElement row : this.rows){
             List<WebElement> cells = row.findElement(By.className("card-header")).findElements(By.tagName("div"));
             if (cells.get(0).getText().equals(this.course)){
                 this.time = cells.get(1).getText();
+				this.timeclash = cells.get(2).getText();
                 break;
             }
 		}
