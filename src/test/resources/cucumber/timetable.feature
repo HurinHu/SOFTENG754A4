@@ -15,3 +15,8 @@ Feature: Timetable
 	Given the user logged in and select a course "SOFTENG 750" time slots
 	When user select a time slots "Mon 15:00-18:00"
 	Then available time slots "Mon 15:00-18:00" should be able to select
+
+  Scenario: Student should know chosen course time slot is not time clash
+	Given the user logged in and select a course "SOFTENG 750" time slots
+	When user select a time slots "Thu 09:00-10:00"
+	Then "time clash" notification should be shown
