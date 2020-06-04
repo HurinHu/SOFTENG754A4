@@ -103,6 +103,11 @@ public class ProgrammeRequirement extends BaseUtil {
         }
     }
 
+    @Given("user logged in as a Software Engineering Student {string}")
+    public void user_logged_in_as_a_Software_Engineering_Student(String string) {
+        // Write code here that turns the phrase above into concrete actions
+        throw new io.cucumber.java.PendingException();
+    }
 
     @Given("his is in his 3rd year of study")
     public void his_is_in_his_3rd_year_of_study() {
@@ -116,12 +121,11 @@ public class ProgrammeRequirement extends BaseUtil {
         throw new io.cucumber.java.PendingException();
     }
 
-    @Then("he should be told that if he has {string} for the 3rd year")
-    public void he_should_be_told_that_if_he_has_for_the_3rd_year(String string) {
+    @Then("he should be told that he has {string} for the 3rd year")
+    public void he_should_be_told_that_he_has_for_the_3rd_year(String string) {
         // Write code here that turns the phrase above into concrete actions
         throw new io.cucumber.java.PendingException();
     }
-
 
 
 }

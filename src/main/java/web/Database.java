@@ -172,6 +172,7 @@ public class Database {
 		}else if (userId == 2){
     		return false;
 		}
+    	return true;
 	}
 
 	public int getSelectedCompulsoryCourseNumber(int userId) {return 0;}
