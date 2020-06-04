@@ -1,4 +1,4 @@
-Feature: Is Course Information displayed?
+Feature: Course Information
   Every student use the system wants to know the course information
    
   Scenario: Student wants to know a single course’s location
