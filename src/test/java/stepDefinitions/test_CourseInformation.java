@@ -1,4 +1,5 @@
 import java.util.*;
+import base.BaseUtil;
 import java.util.concurrent.TimeUnit;
 import org.apache.commons.io.FileUtils;
 import java.io.File;
@@ -9,10 +10,10 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.TakesScreenshot;
-
+import org.openqa.selenium.support.ui.WebDriverWait;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
-
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -22,11 +23,22 @@ public class test_CourseInformation {
 	private String user_type;
 	private String actualLocation = "";
 	private String Softeng754Location = "";
+	private String Softeng751Location = "";
 	public static WebDriver driver;
 	private static String OS = System.getProperty("os.name").toLowerCase();
 	private String today;
     private String actualAnswer;
     private String courseNames;
+    private BaseUtil base;
+    private String course;
+    private String user_role;
+    private WebDriverWait wait;
+    private List<WebElement> rows;
+    
+    public test_CourseInformation(BaseUtil base) {
+        this.base = base;
+       // this.wait = new WebDriverWait(this.base.driver, 20);
+    }
 	@Before
 	public void startBrowser(){
 		String browser="Chrome";
@@ -49,7 +61,21 @@ public class test_CourseInformation {
 	}
 @Given("The student has logged in to the system")
 public void the_student_has_logged_in_to_the_system() {
+	 this.wait = new WebDriverWait(this.base.driver, 20);
+
     // Write code here that turns the phrase above into concrete actions
+	 if(this.base.scenario.getName().equals("Student wants to know a single course’s location")){
+         this.base.setScreenShot("CourseInfo1.png");
+     } else if(this.base.scenario.getName().equals("Student wants to know multiple courses’ locations")){
+         this.base.setScreenShot("CourseInfo2.png");
+     } else if(this.base.scenario.getName().equals("Students want to cancel selected courses")){
+         this.base.setScreenShot("Enrollment3.png");
+     } else if(this.base.scenario.getName().equals("Students want to see capacity of courses")){
+         this.base.setScreenShot("Enrollment4.png");
+     }
+     this.base.driver.get("http://localhost:8181/courseInfo.html");
+     this.base.driver.manage().window().maximize();
+
 	this.user_type = "student";
     
 }
@@ -66,7 +92,7 @@ public void the_student_clicked_the_course_information_button() {
 	
 }
 
-@When("he selected SOFTENG754")
+@And("he selected SOFTENG754")
 public void he_selected_SOFTENG754() {
     // Write code here that turns the phrase above into concrete actions
   //  throw new io.cucumber.java.PendingException();
@@ -95,6 +121,37 @@ public void student_should_be_told(String expectedAnswer) {
 	System.out.println(expectedAnswer);
     assertEquals(expectedAnswer, this.Softeng754Location.trim());
 }
+
+
+
+@When("he selected SOFTENG754 and SOFTENG751")
+public void he_selected_SOFTENG754_and_SOFTENG751() {
+	String[] actualResult = this.actualLocation.split("\n");
+	//String result = actualResult[actualResult.length-1];
+	//this.Softeng754Location = result;
+	String[] actualCourse = this.courseNames.split("\n");
+    // Write code here that turns the phrase above into concrete actions
+	for( int i = 0; i < actualCourse.length - 1; i++)
+	{
+	   if(actualCourse[i].trim().equals("SOFTENG754")) {
+		   this.Softeng754Location = actualResult[i];
+	   }
+	   if(actualCourse[i].trim().equals("SOFTENG751")) {
+		   this.Softeng751Location = actualResult[i];
+	   }
+	}
+}
+
+
+@Then("the student should be able to see {string}")
+public void the_student_should_be_able_to_see(String string) {
+    // Write code here that turns the phrase above into concrete actions
+	String output = this.Softeng754Location.trim() + ","+  this.Softeng751Location.trim();
+	  assertEquals(string,output);
+}
+
+
+
 
 @After
 public void closeBrowser(){
