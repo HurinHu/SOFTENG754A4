@@ -30,3 +30,9 @@ Feature: Is Course Information displayed?
     When the student clicked the course information button 
     And he clicked getDescription button for SOFTENG751
     Then the student should get "OTHERDESCRIPTION" as course description
+    
+  Scenario: Students want to know single course description
+    Given The student has logged in to the system   
+    When the student clicked the course information button 
+    And he clicked getDescription button for SOFTENG751 and SOFTENG754
+    Then the student should get "OTHERDESCRIPTION,SOMEDESCRIPTION" as course descriptions
