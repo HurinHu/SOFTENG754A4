@@ -22,24 +22,32 @@ public class CourseManagementSystem {
     private web.User user;
     private WebDriverWait wait;
     private String courseCode;
+    private int counter=1;
 
 
     public CourseManagementSystem(BaseUtil base){
         this.base = base;
-        this.wait = new WebDriverWait(this.base.driver, 20);
-        this.base.driver.get("http://localhost:8181/courseManage.html");
     }
 
 
     
     @Given("user logged in as Course Coordinator")
     public void user_logged_in_as_Course_Coordinator() {
+        if(this.base.scenario.getName().equals("Course Coordinator post new course to the system")){
+            this.base.setScreenShot("CourseManagement1.png");
+        }else if(this.base.scenario.getName().equals("Course Coordinator post new course to the system with incorrect format information")) {
+            this.base.setScreenShot("CourseManagement2.png");
+        }
         // Write code here that turns the phrase above into concrete actions
-
-        WebElement currentUser = base.driver.findElement(By.id("users"));
-        Select users = new Select(currentUser);
-        // undergrade student
-        users.selectByVisibleText("Prof. xxx");
+        this.wait = new WebDriverWait(this.base.driver, 20);
+        this.base.driver.get("http://localhost:8181/courseManage.html");
+        try {
+            this.wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(By.tagName("option"),1));
+        } catch(TimeoutException e){
+            throw new NoSuchElementException("user");
+        }
+        Select user= new Select(this.base.driver.findElement(By.id("users")));
+        user.selectByValue("Teacher");
         if(this.base.scenario.getName().equals("Course Coordinator post new course to the system")){
             this.base.setScreenShot("CourseManagement1.png");
         }else if(this.base.scenario.getName().equals("student want to know if his programme requirement of his programme has been met")) {
@@ -87,6 +95,10 @@ public class CourseManagementSystem {
 
     @Given("SOFTENG759 has {int} student enrolled")
     public void softeng759_has_student_enrolled(Integer int1) {
+        this.wait = new WebDriverWait(this.base.driver, 20);
+        this.base.driver.get("http://localhost:8181/courseManage.html");
+        this.base.setScreenShot("CourseManagementUpdateSeat"+this.counter+".png");
+        counter++;
     }
 
     @When("{int} student enrolled in the course negative reprsents swap out")
@@ -108,6 +120,11 @@ public class CourseManagementSystem {
             case -49:
                 id = "5";
                 break;
+        }
+        try {
+            this.wait.until(ExpectedConditions.elementToBeSelected(By.id(id)));
+        } catch(TimeoutException e){
+            throw new NoSuchElementException("user");
         }
         WebElement button = this.base.driver.findElement(By.id(id));
         button.click();

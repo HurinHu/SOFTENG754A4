@@ -23,6 +23,6 @@ Feature: Course Management System
       | CourseCode | EnrolledStudentNum | newStudent | RemainedSeat |
       | SOFTENG759 | 0                  | 1          | 49           |
       | SOFTENG759 | 1                  | 2          | 47           |
-      | SOFTENG759 | 2                  | 48         | 0            |
+      | SOFTENG759 | 3                  | 47         | 0            |
       | SOFTENG759 | 50                 | -1         | 1            |
       | SOFTENG759 | 49                 | -49        | 50           |
