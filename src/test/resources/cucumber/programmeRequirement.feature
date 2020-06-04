@@ -9,12 +9,13 @@ Feature: Programme Requirement
     And he should see "COMPSCI754", "COMPSCI751", "COMPSCI761" as elective
 
   Scenario: student want to know if his programme requirement of his programme has been met
-    Given user logged in as a Software Engineering Student
+    Given user logged in as a Software Engineering Student "1"
     And his is in his 3rd year of study
     When he clicks enrol
     And he is enrolled in "SOFTENG754", "SOFTENG751", "SOFTENG701"
     And he clicks my programme requirement tab
-    Then he should be told that if he has "met the requirement" for the 3rd year
+    Then he should be told that he has "met the requirement" for the 3rd year
+
 
 
 

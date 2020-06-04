@@ -93,7 +93,7 @@ public class Api {
     @RequestMapping(value="/api/metRequirement/{id}", method= {RequestMethod.GET})
 	public Object metProgrameRequirement(String id){
 		int userId = Integer.parseInt(id);
-
+		return db.metProgrammeRequirement(userId);
 	}
   
 }

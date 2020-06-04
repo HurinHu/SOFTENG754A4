@@ -104,7 +104,23 @@ public class ProgrammeRequirement extends BaseUtil {
     }
 
 
+    @Given("his is in his 3rd year of study")
+    public void his_is_in_his_3rd_year_of_study() {
+        // Write code here that turns the phrase above into concrete actions
+        throw new io.cucumber.java.PendingException();
+    }
 
+    @When("he is enrolled in {string}, {string}, {string}")
+    public void he_is_enrolled_in(String string, String string2, String string3) {
+        // Write code here that turns the phrase above into concrete actions
+        throw new io.cucumber.java.PendingException();
+    }
+
+    @Then("he should be told that if he has {string} for the 3rd year")
+    public void he_should_be_told_that_if_he_has_for_the_3rd_year(String string) {
+        // Write code here that turns the phrase above into concrete actions
+        throw new io.cucumber.java.PendingException();
+    }
 
 
 
