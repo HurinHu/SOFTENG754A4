@@ -63,6 +63,10 @@
                 <button id="btn_time1" onclick="getTime1()">getTime</button>
                 <div id="courseTime1" style="display: none;"></div>
             </div>
+            <div class="col">
+                <button id="btn_description1" onclick="getDescription1()">getDescription</button>
+                <div id="description1" style="display: none;"></div>
+            </div>
         </div>
         <div class="row">
             <div class="col">
@@ -75,6 +79,10 @@
             <div class="col">
                 <button id="btn_time2" onclick="getTime2()">getTime</button>
                 <div id="courseTime2" style="display: none;"></div>
+            </div>
+            <div class="col">
+                <button id="btn_description2" onclick="getDescription2()">getDescription</button>
+                <div id="description2" style="display: none;"></div>
             </div>
         </div>
     </div>
@@ -113,6 +121,21 @@
             $("#courseTime2").show()
 
         }
+
+        function getDescription1() {
+            $("#btn_description1").hide()
+
+            $("#description1").show()
+
+        }
+
+        function getDescription2() {
+            $("#btn_description2").hide()
+
+            $("#description2").show()
+
+        }
+
 
         function getTime() {
             $("#courseTimes").show()
@@ -173,10 +196,12 @@
                         $("#course1").html(data[i].courseName);
                         $("#location1").html(data[i].location);
                         $("#courseTime1").html(data[i].timeslots[0]);
+                        $("#description1").html(data[i].courseDescription);
                     } else if (i == 1) {
                         $("#course2").html(data[i].courseName);
                         $("#location2").html(data[i].location);
                         $("#courseTime2").html(data[i].timeslots[0]);
+                        $("#description2").html(data[i].courseDescription);
                     }
                 }
 

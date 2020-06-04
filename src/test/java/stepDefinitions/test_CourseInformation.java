@@ -30,6 +30,11 @@ public class test_CourseInformation  extends BaseUtil {
 	private String actualCourseTime2 = "";
 	private String Softeng754Time = "";
 	private String Softeng751Time = "";
+	private String Softeng751Description = "";
+	private String Softeng754Description = "";
+	private String actualCourseDes1 = "";
+	private String actualCourseDes2 = "";
+	
 	
 	public static WebDriver driver;
 	private static String OS = System.getProperty("os.name").toLowerCase();
@@ -223,5 +228,32 @@ public void the_student_should_receive(String string) {
 	String output = this.Softeng751Time.trim() + ","+  this.Softeng754Time.trim();
 	  assertEquals(string,output);
 }
+
+
+@When("he clicked getDescription button for SOFTENG751")
+public void he_clicked_getDescription_button_for_SOFTENG751() {
+    // Write code here that turns the phrase above into concrete actions
+	if(this.courseName1.trim().equals("SOFTENG751")) {
+		this.base.driver.findElement(By.id("btn_description1")).click();
+		List<WebElement> des1= this.base.driver.findElements(By.id("description1"));
+	    this.actualCourseDes1 = des1.get(0).getText();
+		this.Softeng751Description = this.actualCourseDes1;
+	}
+	else if(this.courseName2.trim().equals("SOFTENG751")) {
+		this.base.driver.findElement(By.id("btn_description2")).click();
+		List<WebElement> des2= this.base.driver.findElements(By.id("description2"));
+	    this.actualCourseDes2 = des2.get(0).getText();
+		this.Softeng751Description = this.actualCourseDes2;
+	}
+}
+
+@Then("the student should get {string} as course description")
+public void the_student_should_get_as_course_description(String string) {
+    // Write code here that turns the phrase above into concrete actions
+	 assertEquals(string, this.Softeng751Description.trim());
+}
+
+
+
 
 }
