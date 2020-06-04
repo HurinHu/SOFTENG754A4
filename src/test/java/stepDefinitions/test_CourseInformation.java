@@ -24,6 +24,11 @@ public class test_CourseInformation  extends BaseUtil {
 	private String actualLocation = "";
 	private String Softeng754Location = "";
 	private String Softeng751Location = "";
+	
+	private String actualCourseTime = "";
+	private String Softeng754Time = "";
+	private String Softeng751Time = "";
+	
 	public static WebDriver driver;
 	private static String OS = System.getProperty("os.name").toLowerCase();
 	private String today;
@@ -131,6 +136,25 @@ public void the_student_should_be_able_to_see(String string) {
 	  assertEquals(string,output);
 }
 
+@When("he selected SOFTENG751")
+public void he_selected_SOFTENG751() {
+    // Write code here that turns the phrase above into concrete actions
+	List<WebElement> locations= this.base.driver.findElements(By.id("courseTimes"));
+    this.actualCourseTime = locations.get(0).getText();
+    String[] actualResult = this.actualCourseTime.split("\n");
+	String[] actualCourse = this.courseNames.split("\n");
+    for( int i = 0; i < actualCourse.length - 1; i++)
+	{
+	   if(actualCourse[i].trim().equals("SOFTENG751")) {
+		   this.Softeng751Time = actualResult[i];
+	   }
+	}
+}
+
+@Then("the student should get {string}")
+public void the_student_should_get(String string) {
+    assertEquals(string, this.Softeng751Time.trim());
+}
 
 
 
