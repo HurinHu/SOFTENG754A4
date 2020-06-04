@@ -42,3 +42,9 @@ Feature: Is Course Information displayed?
     When the student clicked the course information button 
     And he clicked getPrerequisite button for SOFTENG751
     Then the student should get "SOFTENG211" as course prerequisite
+    
+  Scenario: Students want to know single course's conflicts
+    Given The student has logged in to the system   
+    When the student clicked the course information button 
+    And he clicked getConflict button for SOFTENG751
+    Then the student should get "SOFTENG752" as course conflict
