@@ -166,6 +166,15 @@ public class Database {
 	}
 	public int getProgramme(int userId) {return 0; }
 
+	public boolean metProgrammeRequirement(int userId){
+    	if (userId == 1){
+    		return true;
+		}else if (userId == 2){
+    		return false;
+		}
+    	return true;
+	}
+
 	public int getSelectedCompulsoryCourseNumber(int userId) {return 0;}
 
 	public int getCompulsoryCoursesRequirementOfProgram(int programmeId) {return 0;}

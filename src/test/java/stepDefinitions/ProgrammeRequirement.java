@@ -1,5 +1,7 @@
 import java.util.*;
 import java.util.concurrent.TimeUnit;
+
+import base.BaseUtil;
 import org.apache.commons.io.FileUtils;
 import java.io.File;
 import java.util.stream.Collectors;
@@ -20,43 +22,36 @@ import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import static org.junit.Assert.*;
 
 
-public class ProgrammeRequirement {
-
-    public static WebDriver driver;
+public class ProgrammeRequirement extends BaseUtil {
+    private BaseUtil base;
     private static String OS = System.getProperty("os.name").toLowerCase();
     private web.User user;
+    private WebDriverWait wait;
 
-    @Before
-    public void startBrowser(){
-        String browser="Chrome";
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("headless");
-        options.addArguments("window-size=1200x600");
-        if (isWindows()) {
-            System.setProperty("webdriver.chrome.driver", "driver/chromedriver.exe");
-            driver=new ChromeDriver(options);
-        } else if (isMac()) {
-            System.setProperty("webdriver.chrome.driver", "driver/chromedriver(mac)");
-            driver=new ChromeDriver(options);
-        } else if (isUnix()) {
-            System.setProperty("webdriver.chrome.driver", "driver/chromedriver(linux)");
-            driver=new ChromeDriver(options);
-        }
-        driver.get("http://localhost:8181/programmeRequirement.html");
-        driver.manage().window().maximize();
+    public ProgrammeRequirement(BaseUtil base){
+        this.base = base;
     }
+
 
     @Given("user logged in as a Software Engineering Student")
     public void user_logged_in_as_a_Software_Engineering() {
         // Write code here that turns the phrase above into concrete actions
-        WebElement currentUser = driver.findElement(By.id("users"));
+        this.wait = new WebDriverWait(this.base.driver, 20);
+        this.base.driver.get("http://localhost:8181/programmeRequirement.html");
+        WebElement currentUser = base.driver.findElement(By.id("users"));
         Select users = new Select(currentUser);
         // undergrade student
         users.selectByVisibleText("aaa");
+        if(this.base.scenario.getName().equals("student want to know if his programme requirement of his programme has been met")){
+            this.base.setScreenShot("ProgrammeRequirement1.png");
+        }else if(this.base.scenario.getName().equals("student want to know if his programme requirement of his programme has been met")) {
+            this.base.setScreenShot("ProgrammeRequirement2.png");
+        }
     }
 
     @Given("he is in his {string} year study")
@@ -77,11 +72,11 @@ public class ProgrammeRequirement {
         // on the page
     }
 
-    @Then("he should see all the compulsory courses for software engineering degree")
-    public void he_should_see_all_the_compulsory_courses_for_software_engineering_degree() {
+    @Then("he should see {string}, {string}, {string} as compulsory")
+    public void he_should_see(String string, String string2, String string3) {
         // Write code here that turns the phrase above into concrete actions
-        List<String> compulsoryList = Stream.of("SOFTENG754", "SOFTENG751", "SOFTENG701").collect(Collectors.toList());
-        List<WebElement> text= driver.findElements(By.id("compulsoryCourses"));
+        List<String> compulsoryList = Stream.of(string, string2, string3).collect(Collectors.toList());
+        List<WebElement> text= base.driver.findElements(By.id("compulsoryCourses"));
         List<String> compulsoryCoursesOnPage = new ArrayList<>();
         for (String item: text.get(0).getText().split("\n")) {
             compulsoryCoursesOnPage.add(item);
@@ -94,11 +89,11 @@ public class ProgrammeRequirement {
 
     }
 
-    @Then("he should see the available elective courses")
-    public void he_should_see_the_available_elective_courses() {
+    @Then("he should see {string}, {string}, {string} as elective")
+    public void he_should_see_the_available_elective_courses(String string, String string2, String string3) {
         // Write code here that turns the phrase above into concrete actions
-        List<String> electiveList = Stream.of("COMPSCI754", "COMPSCI751", "COMPSCI761").collect(Collectors.toList());
-        List<WebElement> text= driver.findElements(By.id("electiveCourses"));
+        List<String> electiveList = Stream.of(string, string2, string3).collect(Collectors.toList());
+        List<WebElement> text= base.driver.findElements(By.id("electiveCourses"));
         List<String> electiveCoursesOnPage = new ArrayList<>();
         for (String item: text.get(0).getText().split("\n")) {
             electiveCoursesOnPage.add(item);
@@ -109,30 +104,27 @@ public class ProgrammeRequirement {
     }
 
 
-    public boolean isWindows() {
-        return (OS.indexOf("win") >= 0);
+    @Given("his is in his 3rd year of study")
+    public void his_is_in_his_3rd_year_of_study() {
+        // Write code here that turns the phrase above into concrete actions
+
     }
 
-    public boolean isMac() {
-        return (OS.indexOf("mac") >= 0);
+    @When("he is enrolled in {string}, {string}, {string}")
+    public void he_is_enrolled_in(String string, String string2, String string3) {
+        // Write code here that turns the phrase above into concrete actions
+
     }
 
-    public boolean isUnix() {
-        return (OS.indexOf("nix") >= 0 || OS.indexOf("nux") >= 0 || OS.indexOf("aix") > 0 );
-    }
-
-    public void takeSnapShot(WebDriver webdriver,String fileWithPath) {
-        try{
-            TakesScreenshot scrShot =((TakesScreenshot)webdriver);
-            File SrcFile=scrShot.getScreenshotAs(OutputType.FILE);
-            File DestFile=new File(fileWithPath);
-            FileUtils.copyFile(SrcFile, DestFile);
-        } catch(Exception e){
-            System.out.println(e.getMessage());
+    @Then("he should be told that he has {string} for the 3rd year")
+    public void he_should_be_told_that_he_has_for_the_3rd_year(String string) {
+        // Write code here that turns the phrase above into concrete actions
+        List<WebElement> text= base.driver.findElements(By.id("if-met"));
+        String str = text.get(0).getText();
+        if (!str.equals(string)) {
+            fail();
         }
     }
-
-
 
 
 }
