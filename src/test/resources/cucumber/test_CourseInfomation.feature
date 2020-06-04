@@ -11,4 +11,4 @@ Feature: Is Course Information displayed?
     Given The student has logged in to the system   
     When the student clicked the course information button 
     And he selected SOFTENG754 and SOFTENG751
-    Then student should be told "303G01,303G02"
+    Then the student should be able to see "303G01,303G02"

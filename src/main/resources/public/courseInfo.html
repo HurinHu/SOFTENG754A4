@@ -75,8 +75,18 @@
         });
 
         $(document).ready(function() {
+
+
             $.ajax({
                 url: "http://localhost:8181/api/course?name=SOFTENG754&description=SOMEDESCRIPTION&concession=true&capacity=100&compulsory=SoftwareEngineering&prerequisite=SOFTENG306&timeslots=10:00&location=303G01&status=open",
+                method: "POST"
+            }).done(function(data) {
+
+
+            });
+
+            $.ajax({
+                url: "http://localhost:8181/api/course?name=SOFTENG751&description=OTHERDESCRIPTION&concession=true&capacity=150&compulsory=SoftwareEngineering&prerequisite=SOFTENG211&timeslots=12:00&location=303G02&status=open",
                 method: "POST"
             }).done(function(data) {
 
