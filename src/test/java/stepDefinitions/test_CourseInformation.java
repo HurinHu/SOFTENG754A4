@@ -19,7 +19,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import static org.junit.Assert.*;
 
-public class test_CourseInformation {
+public class test_CourseInformation  extends BaseUtil {
 	private String user_type;
 	private String actualLocation = "";
 	private String Softeng754Location = "";
@@ -39,30 +39,11 @@ public class test_CourseInformation {
         this.base = base;
        // this.wait = new WebDriverWait(this.base.driver, 20);
     }
-	@Before
-	public void startBrowser(){
-		String browser="Chrome";
-		ChromeOptions options = new ChromeOptions();
-        options.addArguments("headless");
-        options.addArguments("window-size=1200x600");
-		if (isWindows()) {System.setProperty("webdriver.chrome.driver", "driver/chromedriver.exe");
-			driver=new ChromeDriver(options);
-		} else if (isMac()) {
-			System.setProperty("webdriver.chrome.driver", "driver/chromedriver(mac)");
-			driver=new ChromeDriver(options);
-		} else if (isUnix()) {
-			System.setProperty("webdriver.chrome.driver", "driver/chromedriver(linux)");
-			driver=new ChromeDriver(options);
-		}
-		
-		driver.get("http://localhost:8181/courseInfo.html");
-		
-		driver.manage().window().maximize();
-	}
+    
 @Given("The student has logged in to the system")
 public void the_student_has_logged_in_to_the_system() {
 	 this.wait = new WebDriverWait(this.base.driver, 20);
-
+	 this.base.driver.get("http://localhost:8181/courseInfo.html");
     // Write code here that turns the phrase above into concrete actions
 	 if(this.base.scenario.getName().equals("Student wants to know a single course’s location")){
          this.base.setScreenShot("CourseInfo1.png");
@@ -84,10 +65,10 @@ public void the_student_has_logged_in_to_the_system() {
 public void the_student_clicked_the_course_information_button() {
     // Write code here that turns the phrase above into concrete actions
     //hrow new io.cucumber.java.PendingException();
-	List<WebElement> locations= driver.findElements(By.id("locations"));
+	List<WebElement> locations= this.base.driver.findElements(By.id("locations"));
     this.actualLocation = locations.get(0).getText();
     
-	List<WebElement> courses= driver.findElements(By.id("courses"));
+	List<WebElement> courses= this.base.driver.findElements(By.id("courses"));
     this.courseNames = courses.get(0).getText();
 	
 }
