@@ -119,11 +119,11 @@
                 <hr class="mb-4">
                 <button class="btn btn-primary btn-lg btn-block" type="submit" id="addCourse">Continue to Add Course</button>
 
-                <button class="d-flex" type="submit" id="1"></button>
-                <button  type="d-flex" id="2"></button>
-                <button  type="d-flex" id="3"></button>
-                <button type="d-flex" id="4"></button>
-                <button type="d-flex" id="5"></button>
+                <button class="d-flex" id="button1"></button>
+                <button  type="d-flex" id="button2"></button>
+                <button  type="d-flex" id="button3"></button>
+                <button type="d-flex" id="button4"></button>
+                <button type="d-flex" id="button5"></button>
             </form>
         </div>
     </div>
@@ -166,7 +166,7 @@
         });
 
 
-        $("#1").on("click",function(){
+        $("#button1").on("click",function(){
                 $.post("http://localhost:8181/api/enrol",
                     {
                         id: 12,
@@ -175,7 +175,7 @@
             location.reload()
         });
 
-        $("#2").on("click",function(){
+        $("#button2").on("click",function(){
             $.post("http://localhost:8181/api/enrol",
                 {
                     id: 12,
@@ -184,7 +184,7 @@
             location.reload()
         } );
 
-        $("#3").on("click",function(){
+        $("#button3").on("click",function(){
             $.post("http://localhost:8181/api/enrol",
                 {
                     id: 12,
@@ -193,7 +193,7 @@
             location.reload()
         } );
 
-        $("#4").on("click",function(){
+        $("#button4").on("click",function(){
             $.post("http://localhost:8181/api/enrol",
                 {
                     id: 12,
@@ -202,7 +202,7 @@
             location.reload()
         });
 
-        $("#5").on("click",function(){
+        $("#button5").on("click",function(){
             $.post("http://localhost:8181/api/enrol",
                 {
                     id: 12,

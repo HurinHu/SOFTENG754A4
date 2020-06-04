@@ -23,6 +23,7 @@ public class CourseManagementSystem {
     private WebDriverWait wait;
     private String courseCode;
     private int counter=1;
+    private String _id;
 
 
     public CourseManagementSystem(BaseUtil base){
@@ -95,44 +96,63 @@ public class CourseManagementSystem {
 
     @Given("SOFTENG759 has {int} student enrolled")
     public void softeng759_has_student_enrolled(Integer int1) {
-        this.wait = new WebDriverWait(this.base.driver, 20);
+
         this.base.driver.get("http://localhost:8181/courseManage.html");
         this.base.setScreenShot("CourseManagementUpdateSeat"+this.counter+".png");
+        this.wait = new WebDriverWait(this.base.driver, 20);
         counter++;
     }
 
     @When("{int} student enrolled in the course negative reprsents swap out")
     public void student_enrolled_in_the_course_negative_reprsents_swap_out(Integer int1) {
-        String id = "";
+
         switch(int1){
             case 1:
-                id = "1";
+                _id = "button1";
                 break;
             case 2:
-                id = "2";
+                _id = "button2";
                 break;
             case 48:
-                id = "3";
+                _id = "button3";
                 break;
             case -1:
-                id = "4";
+                _id = "button4";
                 break;
             case -49:
-                id = "5";
+                _id = "button5";
                 break;
         }
         try {
-            this.wait.until(ExpectedConditions.elementToBeSelected(By.id(id)));
+            this.wait.until(ExpectedConditions.numberOfElementsToBe(By.id(_id),1));
         } catch(TimeoutException e){
-            throw new NoSuchElementException("user");
+            throw new NoSuchElementException(_id);
         }
-        WebElement button = this.base.driver.findElement(By.id(id));
+        WebElement button = this.base.driver.findElement(By.id(_id));
         button.click();
     }
 
     @Then("the remained seating should be {int}")
     public void the_remained_seating_should_be(Integer int1) {
-        String str = this.base.driver.findElement(By.xpath(".//p[@class='badge']")).getText();
+//        int index = 0;
+//        switch(_id){
+//            case "button1":
+//                index = 1;
+//                break;
+//            case "button2":
+//                index = 2;
+//                break;
+//            case "button3":
+//                index = 3;
+//                break;
+//            case "button4":
+//                index = 4;
+//                break;
+//            case "button5":
+//                index = 5;
+//                break;
+//        }
+        String str = this.base.driver.findElements(By.xpath(".//p[@class='badge']")).get(0).getText();
 
         // Replacing every non-digit number
         // with a space(" ")
