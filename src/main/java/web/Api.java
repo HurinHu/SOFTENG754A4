@@ -74,6 +74,12 @@ public class Api {
         return new Response("success");
     }
 
+	@RequestMapping(value="/api/setTime", method= {RequestMethod.GET})
+	  public Object setTime(@RequestParam(value="id", required=true) int id, @RequestParam(value="time", required=true) String time) {
+		    db.setTime(id, time);
+        return new Response("success");
+    }
+
     @RequestMapping(value="/api/getProgrammeRequirement", method= {RequestMethod.GET})
     public Object getProgrammeRequirement() {
         return db.getCompulsoryCourses(1);
