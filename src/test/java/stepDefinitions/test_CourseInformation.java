@@ -35,6 +35,7 @@ public class test_CourseInformation  extends BaseUtil {
 	private String actualCourseDes1 = "";
 	private String actualCourseDes2 = "";
 	
+	private String actualCourseConflict = "";
 	
 	private String actualCoursePre2 = "";
 	private String actualCoursePre1 = "";
@@ -319,6 +320,21 @@ public void he_clicked_getPrerequisite_button_for_SOFTENG751() {
 public void the_student_should_get_as_course_prerequisite(String string) {
 	 assertEquals(string, this.Softeng751Prerequisite.trim());
 }
+
+@When("he clicked getConflict button for SOFTENG751")
+public void he_clicked_getConflict_button_for_SOFTENG751() {
+    // Write code here that turns the phrase above into concrete actions
+	this.base.driver.findElement(By.id("btn_conflict2")).click();
+	List<WebElement> conflict2= this.base.driver.findElements(By.id("conflict2"));
+    this.actualCourseConflict = conflict2.get(0).getText();
+}
+
+@Then("the student should get {string} as course conflict")
+public void the_student_should_get_as_course_conflict(String string) {
+    // Write code here that turns the phrase above into concrete actions
+	 assertEquals(string, this.actualCourseConflict.trim());
+}
+
 
 
 
