@@ -89,6 +89,12 @@ public class Api {
     public Object getElectiveCourses() {
         return db.getElectiveCourses(1);
     }
+
+    @RequestMapping(value="/api/metRequirement/{id}", method= {RequestMethod.GET})
+	public Object metProgrameRequirement(@PathVariable("id") String id){
+		int userId = Integer.parseInt(id);
+		return db.metProgrammeRequirement(userId);
+	}
   
 }
 

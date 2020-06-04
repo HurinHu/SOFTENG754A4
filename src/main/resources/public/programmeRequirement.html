@@ -30,6 +30,8 @@
                 <a class="nav-link" href="management.html">Management</a>
             </li>
         </ul>
+        <div id="if-met"></div>
+
         <select class="custom-select" id="users">
         </select>
     </div>
@@ -85,6 +87,19 @@
                 courses += "<p>"+ value.courseName +"</p>";
             });
             $("#ElectiveCourses").html(courses);
+        });
+
+        $.ajax({
+            url: "http://localhost:8181/api/metRequirement/1",
+            method: "GET"
+        }).done(function(data) {
+            let courses = "";
+            let ji = "not met the requirement"
+            if(data==true){
+                ji = "met the requirement"
+            }
+            courses += " <a class='nav-link disabled' href='#' tabindex='-1' aria-disabled='true' >"+ji+"</a>"
+            $("#if-met").html(courses);
         });
     });
 </script>

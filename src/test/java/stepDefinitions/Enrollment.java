@@ -31,7 +31,7 @@ public class Enrollment extends BaseUtil {
     @Given("the user logged in as a student and in enrollment page")
     public void the_user_logged_in_as_a_student_and_in_enrollment_page() {
         if(this.base.scenario.getName().equals("Students want to add courses to enrollment cart")){
-            this.base.setScreenShot("CourseInfo1.png");
+            this.base.setScreenShot("Enrollment1.png");
         } else if(this.base.scenario.getName().equals("Students want to confirm selected courses")){
             this.base.setScreenShot("Enrollment2.png");
         } else if(this.base.scenario.getName().equals("Students want to cancel selected courses")){
