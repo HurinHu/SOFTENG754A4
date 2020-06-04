@@ -47,6 +47,9 @@
             <div class="col">
                 <div id="locations"></div>
             </div>
+            <div class="col">
+                <div id="courseTimes"></div>
+            </div>
         </div>
     </div>
 
@@ -99,13 +102,15 @@
             }).done(function(data) {
                 let courses = "";
                 let locations = "";
+                let timeslots = "";
                 $.each(data, function(key, value) {
                     courses += "<p>" + value.courseName + "\n</p>";
                     locations += "<p>" + value.location + "\n</p>";
-
+                    timeslots += "<p>" + value.timeslots[0] + "\n</p>";
                 });
                 $("#courses").html(courses);
                 $("#locations").html(locations);
+                $("#courseTimes").html(timeslots);
             });
         });
     </script>
