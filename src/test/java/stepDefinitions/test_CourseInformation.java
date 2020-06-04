@@ -131,6 +131,17 @@ public void the_student_should_be_able_to_see(String string) {
 	  assertEquals(string,output);
 }
 
+@When("he selected SOFTENG751")
+public void he_selected_SOFTENG751() {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+
+@Then("the student should get {string}")
+public void the_student_should_get(String string) {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
 
 
 
