@@ -77,6 +77,10 @@ public void the_student_has_logged_in_to_the_system() {
          this.base.setScreenShot("CourseInfo5.png");
      }else if(this.base.scenario.getName().equals("Students want to know multiple courses' descriptions")){
          this.base.setScreenShot("CourseInfo6.png");
+     }else if(this.base.scenario.getName().equals("Students want to know single course's prerequisites")){
+         this.base.setScreenShot("CourseInfo7.png");
+     }else if(this.base.scenario.getName().equals("Students want to know single course's conflicts")){
+         this.base.setScreenShot("CourseInfo8.png");
      }
      this.base.driver.get("http://localhost:8181/courseInfo.html");
      this.base.driver.manage().window().maximize();
