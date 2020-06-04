@@ -91,25 +91,14 @@ public void the_student_has_logged_in_to_the_system() {
 
 @When("the student clicked the course information button")
 public void the_student_clicked_the_course_information_button() {
-    // Write code here that turns the phrase above into concrete actions
-    //hrow new io.cucumber.java.PendingException();
-
-    
 	List<WebElement> courses1= this.base.driver.findElements(By.id("course1"));
     this.courseName1 = courses1.get(0).getText();
-    
-    
 	List<WebElement> courses2= this.base.driver.findElements(By.id("course2"));
     this.courseName2 = courses2.get(0).getText();
-    
-	
 }
 
-@When("he selected SOFTENG754")
-public void he_selected_SOFTENG754() {
-    // Write code here that turns the phrase above into concrete actions
-  //  throw new io.cucumber.java.PendingException();
-	//String result = actualResult[actualResult.length-1];
+@When("he clicked getCourseLocation button for SOFTENG754")
+public void he_clicked_getCourseLocation_button_for_SOFTENG754() {
 	if(this.courseName1.trim().equals("SOFTENG754")) {
 		this.base.driver.findElement(By.id("btn_location1")).click();
 		List<WebElement> locations1= this.base.driver.findElements(By.id("location1"));
@@ -123,25 +112,19 @@ public void he_selected_SOFTENG754() {
 	    this.actualLocation2 = locations2.get(0).getText();
 		this.Softeng754Location = this.actualLocation2;
 	}
-	
-	
 }
 
 
 
 @Then("student should be told {string}")
 public void student_should_be_told(String expectedAnswer) {
-    // Write code here that turns the phrase above into concrete actions
-	
 	    assertEquals(expectedAnswer, this.Softeng754Location.trim());
 }
 
 
 
-@When("he selected SOFTENG754 and SOFTENG751")
-public void he_selected_SOFTENG754_and_SOFTENG751() {
-    // Write code here that turns the phrase above into concrete actions
-
+@When("he clicked getCourseLocation button for SOFTENG754 and SOFTENG751")
+public void he_clicked_getCourseLocation_button_for_SOFTENG751() {
 	if(this.courseName1.trim().equals("SOFTENG754")) {
 		this.base.driver.findElement(By.id("btn_location1")).click();
 		List<WebElement> locations1= this.base.driver.findElements(By.id("location1"));
@@ -172,18 +155,14 @@ public void he_selected_SOFTENG754_and_SOFTENG751() {
 
 @Then("the student should be able to see {string}")
 public void the_student_should_be_able_to_see(String string) {
-    // Write code here that turns the phrase above into concrete actions
+
 	String output = this.Softeng754Location.trim() + ","+  this.Softeng751Location.trim();
 	  assertEquals(string,output);
 }
 
-@When("he selected SOFTENG751")
-public void he_selected_SOFTENG751() {
-    // Write code here that turns the phrase above into concrete actions
 
-    
-
-    
+@When("he clicked getCourseTime button for SOFTENG751")
+public void he_clicked_getCourseTime_button_for_SOFTENG751() {
 	if(this.courseName1.trim().equals("SOFTENG751")) {
 		this.base.driver.findElement(By.id("btn_time1")).click();
 		List<WebElement> time1= this.base.driver.findElements(By.id("courseTime1"));
@@ -204,11 +183,9 @@ public void the_student_should_get(String string) {
 }
 
 
-@When("he selected SOFTENG751 and SOFTENG754")
-public void he_selected_SOFTENG751_and_SOFTENG754() {
-    // Write code here that turns the phrase above into concrete actions
+@When("he clicked getCourseTime button for SOFTENG751 and SOFTENG754")
+public void he_clicked_getCourseTime_button_for_SOFTENG751_and_SOFTENG754() {
 
-    
 	if(this.courseName1.trim().equals("SOFTENG751")) {
 		this.base.driver.findElement(By.id("btn_time1")).click();
 		List<WebElement> time1= this.base.driver.findElements(By.id("courseTime1"));
@@ -239,7 +216,6 @@ public void he_selected_SOFTENG751_and_SOFTENG754() {
 
 @Then("the student should receive {string}")
 public void the_student_should_receive(String string) {
-    // Write code here that turns the phrase above into concrete actions
 	String output = this.Softeng751Time.trim() + ","+  this.Softeng754Time.trim();
 	  assertEquals(string,output);
 }
@@ -247,7 +223,7 @@ public void the_student_should_receive(String string) {
 
 @When("he clicked getDescription button for SOFTENG751")
 public void he_clicked_getDescription_button_for_SOFTENG751() {
-    // Write code here that turns the phrase above into concrete actions
+
 	if(this.courseName1.trim().equals("SOFTENG751")) {
 		this.base.driver.findElement(By.id("btn_description1")).click();
 		List<WebElement> des1= this.base.driver.findElements(By.id("description1"));
@@ -264,13 +240,11 @@ public void he_clicked_getDescription_button_for_SOFTENG751() {
 
 @Then("the student should get {string} as course description")
 public void the_student_should_get_as_course_description(String string) {
-    // Write code here that turns the phrase above into concrete actions
 	 assertEquals(string, this.Softeng751Description.trim());
 }
 
 @When("he clicked getDescription button for SOFTENG751 and SOFTENG754")
 public void he_clicked_getDescription_button_for_SOFTENG751_and_SOFTENG754() {
-    // Write code here that turns the phrase above into concrete actions
 	if(this.courseName1.trim().equals("SOFTENG751")) {
 		this.base.driver.findElement(By.id("btn_description1")).click();
 		List<WebElement> des1= this.base.driver.findElements(By.id("description1"));
@@ -299,7 +273,6 @@ public void he_clicked_getDescription_button_for_SOFTENG751_and_SOFTENG754() {
 
 @Then("the student should get {string} as course descriptions")
 public void the_student_should_get_as_course_descriptions(String string) {
-    // Write code here that turns the phrase above into concrete actions
 	String output = this.Softeng751Description.trim() + ","+  this.Softeng754Description.trim();
 	  assertEquals(string,output);
 }
@@ -327,7 +300,6 @@ public void the_student_should_get_as_course_prerequisite(String string) {
 
 @When("he clicked getConflict button for SOFTENG751")
 public void he_clicked_getConflict_button_for_SOFTENG751() {
-    // Write code here that turns the phrase above into concrete actions
 	this.base.driver.findElement(By.id("btn_conflict2")).click();
 	List<WebElement> conflict2= this.base.driver.findElements(By.id("conflict2"));
     this.actualCourseConflict = conflict2.get(0).getText();
@@ -335,7 +307,6 @@ public void he_clicked_getConflict_button_for_SOFTENG751() {
 
 @Then("the student should get {string} as course conflict")
 public void the_student_should_get_as_course_conflict(String string) {
-    // Write code here that turns the phrase above into concrete actions
 	 assertEquals(string, this.actualCourseConflict.trim());
 }
 
