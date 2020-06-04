@@ -184,5 +184,44 @@ public void the_student_should_get(String string) {
 }
 
 
+@When("he selected SOFTENG751 and SOFTENG754")
+public void he_selected_SOFTENG751_and_SOFTENG754() {
+    // Write code here that turns the phrase above into concrete actions
+
+    
+	if(this.courseName1.trim().equals("SOFTENG751")) {
+		this.base.driver.findElement(By.id("btn_time1")).click();
+		List<WebElement> time1= this.base.driver.findElements(By.id("courseTime1"));
+	    this.actualCourseTime1 = time1.get(0).getText();
+		this.Softeng751Time = this.actualCourseTime1;
+	}
+	else if(this.courseName2.trim().equals("SOFTENG751")) {
+		this.base.driver.findElement(By.id("btn_time2")).click();
+		List<WebElement> time2= this.base.driver.findElements(By.id("courseTime2"));
+	    this.actualCourseTime2 = time2.get(0).getText();
+		this.Softeng751Time = this.actualCourseTime2;
+	}
+
+    
+	if(this.courseName1.trim().equals("SOFTENG754")) {
+		this.base.driver.findElement(By.id("btn_time1")).click();
+		List<WebElement> time1= this.base.driver.findElements(By.id("courseTime1"));
+	    this.actualCourseTime1 = time1.get(0).getText();
+		this.Softeng754Time = this.actualCourseTime1;
+	}
+	else if(this.courseName2.trim().equals("SOFTENG754")) {
+		this.base.driver.findElement(By.id("btn_time2")).click();
+		List<WebElement> time2= this.base.driver.findElements(By.id("courseTime2"));
+	    this.actualCourseTime2 = time2.get(0).getText();
+		this.Softeng754Time = this.actualCourseTime2;
+	}
+}
+
+@Then("the student should receive {string}")
+public void the_student_should_receive(String string) {
+    // Write code here that turns the phrase above into concrete actions
+	String output = this.Softeng751Time.trim() + ","+  this.Softeng754Time.trim();
+	  assertEquals(string,output);
+}
 
 }
