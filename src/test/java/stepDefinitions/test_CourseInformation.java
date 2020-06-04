@@ -36,6 +36,12 @@ public class test_CourseInformation  extends BaseUtil {
 	private String actualCourseDes2 = "";
 	
 	
+	private String actualCoursePre2 = "";
+	private String actualCoursePre1 = "";
+	
+	private String Softeng751Prerequisite = "";
+	
+	
 	public static WebDriver driver;
 	private static String OS = System.getProperty("os.name").toLowerCase();
 	private String today;
@@ -66,6 +72,10 @@ public void the_student_has_logged_in_to_the_system() {
          this.base.setScreenShot("CourseInfo3.png");
      } else if(this.base.scenario.getName().equals("Students want to know multiple course time")){
          this.base.setScreenShot("CourseInfo4.png");
+     }else if(this.base.scenario.getName().equals("Students want to know single course's description")){
+         this.base.setScreenShot("CourseInfo5.png");
+     }else if(this.base.scenario.getName().equals("Students want to know multiple courses' descriptions")){
+         this.base.setScreenShot("CourseInfo6.png");
      }
      this.base.driver.get("http://localhost:8181/courseInfo.html");
      this.base.driver.manage().window().maximize();
@@ -288,6 +298,28 @@ public void the_student_should_get_as_course_descriptions(String string) {
 	String output = this.Softeng751Description.trim() + ","+  this.Softeng754Description.trim();
 	  assertEquals(string,output);
 }
+
+@When("he clicked getPrerequisite button for SOFTENG751")
+public void he_clicked_getPrerequisite_button_for_SOFTENG751() {
+	if(this.courseName1.trim().equals("SOFTENG751")) {
+		this.base.driver.findElement(By.id("btn_prerequisite1")).click();
+		List<WebElement> pre1= this.base.driver.findElements(By.id("prerequisite1"));
+	    this.actualCoursePre1 = pre1.get(0).getText();
+		this.Softeng751Prerequisite = this.actualCoursePre1;
+	}
+	else if(this.courseName2.trim().equals("SOFTENG751")) {
+		this.base.driver.findElement(By.id("btn_prerequisite2")).click();
+		List<WebElement> pre2= this.base.driver.findElements(By.id("prerequisite2"));
+	    this.actualCoursePre2 = pre2.get(0).getText();
+		this.Softeng751Prerequisite = this.actualCoursePre2;
+	}
+}
+
+@Then("the student should get {string} as course prerequisite")
+public void the_student_should_get_as_course_prerequisite(String string) {
+	 assertEquals(string, this.Softeng751Prerequisite.trim());
+}
+
 
 
 }
