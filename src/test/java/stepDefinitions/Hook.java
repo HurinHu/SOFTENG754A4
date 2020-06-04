@@ -57,7 +57,7 @@ public class Hook  extends BaseUtil {
             System.out.println("Scenario Passed: "+scenario.getName());
         }
 		if (isWindows()) {
-			cleanCommand("taskkill /F /IM chromedriver.exe /T");
+//			cleanCommand("taskkill /F /IM chromedriver.exe /T");
 		} else if (isMac()) {
 			cleanCommand("ps aux | grep chromedriver | awk '{print $2}' | xargs kill -9 $1");
 		} else if (isUnix()) {
