@@ -153,11 +153,7 @@ public void the_student_should_be_able_to_see(String string) {
 
 
 
-@After
-public void closeBrowser(){
-	this.takeSnapShot(driver, "target/screenshot/Test_example.png") ;
-	driver.quit();
-}
+
 
 public boolean isWindows() {
 	return (OS.indexOf("win") >= 0);
