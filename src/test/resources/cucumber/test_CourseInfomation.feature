@@ -18,3 +18,9 @@ Feature: Is Course Information displayed?
     When the student clicked the course information button 
     And he selected SOFTENG751
     Then the student should get "12:00"
+    
+  Scenario: Students want to know multiple course time
+    Given The student has logged in to the system   
+    When the student clicked the course information button 
+    And he selected SOFTENG751 and SOFTENG754
+    Then the student should receive "12:00,10:00"

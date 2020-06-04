@@ -9,6 +9,14 @@
         .custom-select {
             width: 160px;
         }
+        
+        .show {
+            display: block;
+        }
+        
+        .hide {
+            display: none;
+        }
     </style>
 </head>
 
@@ -36,19 +44,37 @@
 			</select>
         </div>
     </nav>
-
-
+    <button id="location" onclick="getLocation1()">Location</button>
+    <button id="time" onclick="getTime1()">Time</button>
+    <button id="location" onclick="getLocation2()">Location</button>
+    <button id="time" onclick="getTime2()">Time</button>
     <div class="container">
         <h1>Course Infomation</h1>
         <div class="row">
             <div class="col">
-                <div id="courses"></div>
+
+                <div id="course1"></div>
             </div>
             <div class="col">
-                <div id="locations"></div>
+                <button id="btn_location1" onclick="getLocation1()">getLocation</button>
+                <div id="location1" style="display: none;"></div>
             </div>
             <div class="col">
-                <div id="courseTimes"></div>
+                <button id="btn_time1" onclick="getTime1()">getTime</button>
+                <div id="courseTime1" style="display: none;"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div id="course2"></div>
+            </div>
+            <div class="col">
+                <button id="btn_location2" onclick="getLocation2()">getLocation</button>
+                <div id="location2" style="display: none;"></div>
+            </div>
+            <div class="col">
+                <button id="btn_time2" onclick="getTime2()">getTime</button>
+                <div id="courseTime2" style="display: none;"></div>
             </div>
         </div>
     </div>
@@ -60,6 +86,37 @@
 
 
     <script>
+        function getLocation1() {
+            $("#btn_location1").hide()
+
+            $("#location1").show()
+
+        }
+
+        function getLocation2() {
+            $("#btn_location2").hide()
+
+            $("#location2").show()
+
+        }
+
+        function getTime1() {
+            $("#btn_time1").hide()
+
+            $("#courseTime1").show()
+
+        }
+
+        function getTime2() {
+            $("#btn_time2").hide()
+
+            $("#courseTime2").show()
+
+        }
+
+        function getTime() {
+            $("#courseTimes").show()
+        }
         $(document).ready(function() {
             $.ajax({
                 url: "http://localhost:8181/api/userlist",
@@ -103,14 +160,27 @@
                 let courses = "";
                 let locations = "";
                 let timeslots = "";
+                console.log(data);
                 $.each(data, function(key, value) {
+
                     courses += "<p>" + value.courseName + "\n</p>";
                     locations += "<p>" + value.location + "\n</p>";
                     timeslots += "<p>" + value.timeslots[0] + "\n</p>";
                 });
-                $("#courses").html(courses);
-                $("#locations").html(locations);
-                $("#courseTimes").html(timeslots);
+                var i;
+                for (i = 0; i < data.length; i++) {
+                    if (i == 0) {
+                        $("#course1").html(data[i].courseName);
+                        $("#location1").html(data[i].location);
+                        $("#courseTime1").html(data[i].timeslots[0]);
+                    } else if (i == 1) {
+                        $("#course2").html(data[i].courseName);
+                        $("#location2").html(data[i].location);
+                        $("#courseTime2").html(data[i].timeslots[0]);
+                    }
+                }
+
+
             });
         });
     </script>
