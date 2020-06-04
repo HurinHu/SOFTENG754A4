@@ -74,6 +74,13 @@ public class CourseManagementSystem {
 
     @Then("an alert message would pop up {string}")
     public void an_alert_message_would_pop_up(String string) {
-
+        try
+        {
+            this.base.driver.switchTo().alert();
+        }   // try
+        catch (NoAlertPresentException Ex)
+        {
+            fail();
+        }
     }
 }
