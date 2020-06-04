@@ -21,11 +21,13 @@ import static org.junit.Assert.*;
 
 public class test_CourseInformation  extends BaseUtil {
 	private String user_type;
-	private String actualLocation = "";
+	private String actualLocation1 = "";
+	private String actualLocation2 = "";
 	private String Softeng754Location = "";
 	private String Softeng751Location = "";
 	
-	private String actualCourseTime = "";
+	private String actualCourseTime1 = "";
+	private String actualCourseTime2 = "";
 	private String Softeng754Time = "";
 	private String Softeng751Time = "";
 	
@@ -33,7 +35,8 @@ public class test_CourseInformation  extends BaseUtil {
 	private static String OS = System.getProperty("os.name").toLowerCase();
 	private String today;
     private String actualAnswer;
-    private String courseNames;
+    private String courseName1;
+    private String courseName2;
     private BaseUtil base;
     private String course;
     private String user_role;
@@ -54,10 +57,10 @@ public void the_student_has_logged_in_to_the_system() {
          this.base.setScreenShot("CourseInfo1.png");
      } else if(this.base.scenario.getName().equals("Student wants to know multiple courses’ locations")){
          this.base.setScreenShot("CourseInfo2.png");
-     } else if(this.base.scenario.getName().equals("Students want to cancel selected courses")){
-         this.base.setScreenShot("Enrollment3.png");
-     } else if(this.base.scenario.getName().equals("Students want to see capacity of courses")){
-         this.base.setScreenShot("Enrollment4.png");
+     } else if(this.base.scenario.getName().equals("Students want to know single course time")){
+         this.base.setScreenShot("CourseInfo3.png");
+     } else if(this.base.scenario.getName().equals("Students want to know multiple course time")){
+         this.base.setScreenShot("CourseInfo4.png");
      }
      this.base.driver.get("http://localhost:8181/courseInfo.html");
      this.base.driver.manage().window().maximize();
@@ -70,31 +73,38 @@ public void the_student_has_logged_in_to_the_system() {
 public void the_student_clicked_the_course_information_button() {
     // Write code here that turns the phrase above into concrete actions
     //hrow new io.cucumber.java.PendingException();
-	List<WebElement> locations= this.base.driver.findElements(By.id("locations"));
-    this.actualLocation = locations.get(0).getText();
+
     
-	List<WebElement> courses= this.base.driver.findElements(By.id("courses"));
-    this.courseNames = courses.get(0).getText();
+	List<WebElement> courses1= this.base.driver.findElements(By.id("course1"));
+    this.courseName1 = courses1.get(0).getText();
+    
+    
+	List<WebElement> courses2= this.base.driver.findElements(By.id("course2"));
+    this.courseName2 = courses2.get(0).getText();
+    
 	
 }
 
-@And("he selected SOFTENG754")
+@When("he selected SOFTENG754")
 public void he_selected_SOFTENG754() {
     // Write code here that turns the phrase above into concrete actions
   //  throw new io.cucumber.java.PendingException();
-	String[] actualResult = this.actualLocation.split("\n");
 	//String result = actualResult[actualResult.length-1];
-	//this.Softeng754Location = result;
-	String[] actualCourse = this.courseNames.split("\n");
-	//String result = actualResult[actualResult.length-1];
-	//this.Softeng754Location = result;
-	
-	for( int i = 0; i < actualCourse.length - 1; i++)
-	{
-	   if(actualCourse[i].trim().equals("SOFTENG754")) {
-		   this.Softeng754Location = actualResult[i];
-	   }
+	if(this.courseName1.trim().equals("SOFTENG754")) {
+		this.base.driver.findElement(By.id("btn_location1")).click();
+		List<WebElement> locations1= this.base.driver.findElements(By.id("location1"));
+	    this.actualLocation1 = locations1.get(0).getText();
+	    
+		this.Softeng754Location = this.actualLocation1;
 	}
+	else if(this.courseName2.trim().equals("SOFTENG754")) {
+		this.base.driver.findElement(By.id("btn_location2")).click();
+		List<WebElement> locations2= this.base.driver.findElements(By.id("location2"));
+	    this.actualLocation2 = locations2.get(0).getText();
+		this.Softeng754Location = this.actualLocation2;
+	}
+	
+	
 }
 
 
@@ -103,29 +113,40 @@ public void he_selected_SOFTENG754() {
 public void student_should_be_told(String expectedAnswer) {
     // Write code here that turns the phrase above into concrete actions
 	
-	
-	System.out.println(expectedAnswer);
-    assertEquals(expectedAnswer, this.Softeng754Location.trim());
+	    assertEquals(expectedAnswer, this.Softeng754Location.trim());
 }
 
 
 
 @When("he selected SOFTENG754 and SOFTENG751")
 public void he_selected_SOFTENG754_and_SOFTENG751() {
-	String[] actualResult = this.actualLocation.split("\n");
-	//String result = actualResult[actualResult.length-1];
-	//this.Softeng754Location = result;
-	String[] actualCourse = this.courseNames.split("\n");
     // Write code here that turns the phrase above into concrete actions
-	for( int i = 0; i < actualCourse.length - 1; i++)
-	{
-	   if(actualCourse[i].trim().equals("SOFTENG754")) {
-		   this.Softeng754Location = actualResult[i];
-	   }
-	   if(actualCourse[i].trim().equals("SOFTENG751")) {
-		   this.Softeng751Location = actualResult[i];
-	   }
+
+	if(this.courseName1.trim().equals("SOFTENG754")) {
+		this.base.driver.findElement(By.id("btn_location1")).click();
+		List<WebElement> locations1= this.base.driver.findElements(By.id("location1"));
+	    this.actualLocation1 = locations1.get(0).getText();
+		this.Softeng754Location = this.actualLocation1;
 	}
+	else if(this.courseName2.trim().equals("SOFTENG754")) {
+		this.base.driver.findElement(By.id("btn_location2")).click();
+		List<WebElement> locations2= this.base.driver.findElements(By.id("location2"));
+	    this.actualLocation2 = locations2.get(0).getText();
+		this.Softeng754Location = this.actualLocation2;
+	}
+	if(this.courseName1.trim().equals("SOFTENG751")) {
+		this.base.driver.findElement(By.id("btn_location1")).click();
+		List<WebElement> locations1= this.base.driver.findElements(By.id("location1"));
+	    this.actualLocation1 = locations1.get(0).getText();
+		this.Softeng751Location = this.actualLocation1;
+	}
+	else if(this.courseName2.equals( "SOFTENG751")) {
+		this.base.driver.findElement(By.id("btn_location2")).click();
+		List<WebElement> locations2= this.base.driver.findElements(By.id("location2"));
+	    this.actualLocation2 = locations2.get(0).getText();
+		this.Softeng751Location = this.actualLocation2;
+	}
+	
 }
 
 
@@ -139,15 +160,21 @@ public void the_student_should_be_able_to_see(String string) {
 @When("he selected SOFTENG751")
 public void he_selected_SOFTENG751() {
     // Write code here that turns the phrase above into concrete actions
-	List<WebElement> locations= this.base.driver.findElements(By.id("courseTimes"));
-    this.actualCourseTime = locations.get(0).getText();
-    String[] actualResult = this.actualCourseTime.split("\n");
-	String[] actualCourse = this.courseNames.split("\n");
-    for( int i = 0; i < actualCourse.length - 1; i++)
-	{
-	   if(actualCourse[i].trim().equals("SOFTENG751")) {
-		   this.Softeng751Time = actualResult[i];
-	   }
+
+    
+
+    
+	if(this.courseName1.trim().equals("SOFTENG751")) {
+		this.base.driver.findElement(By.id("btn_time1")).click();
+		List<WebElement> time1= this.base.driver.findElements(By.id("courseTime1"));
+	    this.actualCourseTime1 = time1.get(0).getText();
+		this.Softeng751Time = this.actualCourseTime1;
+	}
+	else if(this.courseName2.trim().equals("SOFTENG751")) {
+		this.base.driver.findElement(By.id("btn_time2")).click();
+		List<WebElement> time2= this.base.driver.findElements(By.id("courseTime2"));
+	    this.actualCourseTime2 = time2.get(0).getText();
+		this.Softeng751Time = this.actualCourseTime2;
 	}
 }
 
@@ -157,32 +184,44 @@ public void the_student_should_get(String string) {
 }
 
 
+@When("he selected SOFTENG751 and SOFTENG754")
+public void he_selected_SOFTENG751_and_SOFTENG754() {
+    // Write code here that turns the phrase above into concrete actions
 
+    
+	if(this.courseName1.trim().equals("SOFTENG751")) {
+		this.base.driver.findElement(By.id("btn_time1")).click();
+		List<WebElement> time1= this.base.driver.findElements(By.id("courseTime1"));
+	    this.actualCourseTime1 = time1.get(0).getText();
+		this.Softeng751Time = this.actualCourseTime1;
+	}
+	else if(this.courseName2.trim().equals("SOFTENG751")) {
+		this.base.driver.findElement(By.id("btn_time2")).click();
+		List<WebElement> time2= this.base.driver.findElements(By.id("courseTime2"));
+	    this.actualCourseTime2 = time2.get(0).getText();
+		this.Softeng751Time = this.actualCourseTime2;
+	}
 
-
-public boolean isWindows() {
-	return (OS.indexOf("win") >= 0);
-}
-
-public boolean isMac() {
-	return (OS.indexOf("mac") >= 0);
-}
-
-public boolean isUnix() {
-	return (OS.indexOf("nix") >= 0 || OS.indexOf("nux") >= 0 || OS.indexOf("aix") > 0 );
-}
-
-public void takeSnapShot(WebDriver webdriver,String fileWithPath) {
-	try{
-		TakesScreenshot scrShot =((TakesScreenshot)webdriver);
-		File SrcFile=scrShot.getScreenshotAs(OutputType.FILE);
-		File DestFile=new File(fileWithPath);
-		FileUtils.copyFile(SrcFile, DestFile);
-	} catch(Exception e){
-		System.out.println(e.getMessage());
+    
+	if(this.courseName1.trim().equals("SOFTENG754")) {
+		this.base.driver.findElement(By.id("btn_time1")).click();
+		List<WebElement> time1= this.base.driver.findElements(By.id("courseTime1"));
+	    this.actualCourseTime1 = time1.get(0).getText();
+		this.Softeng754Time = this.actualCourseTime1;
+	}
+	else if(this.courseName2.trim().equals("SOFTENG754")) {
+		this.base.driver.findElement(By.id("btn_time2")).click();
+		List<WebElement> time2= this.base.driver.findElements(By.id("courseTime2"));
+	    this.actualCourseTime2 = time2.get(0).getText();
+		this.Softeng754Time = this.actualCourseTime2;
 	}
 }
 
-
+@Then("the student should receive {string}")
+public void the_student_should_receive(String string) {
+    // Write code here that turns the phrase above into concrete actions
+	String output = this.Softeng751Time.trim() + ","+  this.Softeng754Time.trim();
+	  assertEquals(string,output);
+}
 
 }
