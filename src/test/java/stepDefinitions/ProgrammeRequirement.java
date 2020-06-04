@@ -47,7 +47,7 @@ public class ProgrammeRequirement extends BaseUtil {
         Select users = new Select(currentUser);
         // undergrade student
         users.selectByVisibleText("aaa");
-        if(this.base.scenario.getName().equals("student want to know the programme requirement of his programme")){
+        if(this.base.scenario.getName().equals("student want to know if his programme requirement of his programme has been met")){
             this.base.setScreenShot("ProgrammeRequirement1.png");
         }else if(this.base.scenario.getName().equals("student want to know if his programme requirement of his programme has been met")) {
             this.base.setScreenShot("ProgrammeRequirement2.png");
@@ -103,28 +103,27 @@ public class ProgrammeRequirement extends BaseUtil {
         }
     }
 
-    @Given("user logged in as a Software Engineering Student {string}")
-    public void user_logged_in_as_a_Software_Engineering_Student(String string) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
-    }
 
     @Given("his is in his 3rd year of study")
     public void his_is_in_his_3rd_year_of_study() {
         // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+
     }
 
     @When("he is enrolled in {string}, {string}, {string}")
     public void he_is_enrolled_in(String string, String string2, String string3) {
         // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+
     }
 
     @Then("he should be told that he has {string} for the 3rd year")
     public void he_should_be_told_that_he_has_for_the_3rd_year(String string) {
         // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        List<WebElement> text= base.driver.findElements(By.id("if-met"));
+        String str = text.get(0).getText();
+        if (!str.equals(string)) {
+            fail();
+        }
     }
 
 

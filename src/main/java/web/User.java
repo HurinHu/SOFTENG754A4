@@ -74,6 +74,9 @@ public class User {
         return false;
     }
 
+    public void set_user_id(int id){
+        this._user_id = id;
+    }
 
     public boolean containsClash(Map<Integer, String> _enrolledCourses) {
         return true;
