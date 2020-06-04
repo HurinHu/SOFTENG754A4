@@ -26,6 +26,9 @@ public class CourseManagementSystem {
 
     public CourseManagementSystem(BaseUtil base){
         this.base = base;
+        this.wait = new WebDriverWait(this.base.driver, 20);
+        this.base.driver.get("http://localhost:8181/courseManage.html");
+        WebElement currentUser = base.driver.findElement(By.id("users"));
     }
 
 
@@ -86,25 +89,54 @@ public class CourseManagementSystem {
 
     @Given("SOFTENG754 has {int} student enrolled")
     public void softeng754_has_student_enrolled(Integer int1) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+
     }
 
     @When("{int} student enrolled in the course negative reprsents swap out")
     public void student_enrolled_in_the_course_negative_reprsents_swap_out(Integer int1) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        String id = "";
+        switch(int1){
+            case 1:
+                id = "1";
+                break;
+            case 2:
+                id = "2";
+                break;
+            case 48:
+                id = "3";
+                break;
+            case -1:
+                id = "4";
+                break;
+            case -49:
+                id = "5";
+                break;
+        }
+        WebElement button = this.base.driver.findElement(By.id(id));
+        button.click();
     }
 
     @Then("the remained seating should be {int}")
     public void the_remained_seating_should_be(Integer int1) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        String str = this.base.driver.findElement(By.xpath(".//p[@class='badge']")).getText();
+
+        // Replacing every non-digit number
+        // with a space(" ")
+        str = str.replaceAll("[^\\d]", " ");
+
+        // Remove extra spaces from the beginning
+        // and the ending of the string
+        str = str.trim();
+
+        // Replace all the consecutive white
+        // spaces with a single space
+        str = str.replaceAll(" +", " ");
+
+        Integer integer = Integer.parseInt(str);
+        if(!integer.equals(int1)){
+            fail();
+        }
+
     }
 
-    @Given("SOFTENG751 has {int} student enrolled")
-    public void softeng751_has_student_enrolled(Integer int1) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
-    }
 }

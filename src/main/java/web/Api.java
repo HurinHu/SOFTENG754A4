@@ -96,6 +96,12 @@ public class Api {
 		int userId = Integer.parseInt(id);
 		return db.metProgrammeRequirement(userId);
 	}
+
+	@RequestMapping(value="/api/enrol", method= {RequestMethod.POST})
+	public Object enrolAndUpdateSeating(@RequestParam(value="id", required=true) int id, @RequestParam(value="enrolNum", required=true) int enrol_student_num){
+		db.enrollInCourse(id,enrol_student_num);
+		return "success";
+	}
   
 }
 

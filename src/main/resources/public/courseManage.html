@@ -118,6 +118,12 @@
 
                 <hr class="mb-4">
                 <button class="btn btn-primary btn-lg btn-block" type="submit" id="addCourse">Continue to Add Course</button>
+
+                <button class="d-flex" type="submit" id="1"></button>
+                <button  type="d-flex" id="2"></button>
+                <button  type="d-flex" id="3"></button>
+                <button type="d-flex" id="4"></button>
+                <button type="d-flex" id="5"></button>
             </form>
         </div>
     </div>
@@ -153,11 +159,57 @@
         }).done(function(data) {
             let courses = "";
             $.each( data, function( key, value ) {
-                courses +="<h6 class=\'my-0\'>"+value.courseName+"</h6>"
+                courses +="<h6 class=\'my-0\'>"+value.courseName+"</h6>" + "<p class='badge' style='font-size: x-small;'>" +
+"Remaining Seats " + value.capacity + "</p>"
             });
             $("#courseList").html(courses);
         });
 
+
+        $("#1").on("click",function(){
+                $.post("http://localhost:8181/api/enrol",
+                    {
+                        id: 10,
+                        enrolNum: 1
+                    })
+            location.reload()
+        });
+
+        $("#2").on("click",function(){
+            $.post("http://localhost:8181/api/enrol",
+                {
+                    id: 10,
+                    enrolNum: 1
+                })
+            location.reload()
+        } );
+
+        $("#3").on("click",function(){
+            $.post("http://localhost:8181/api/enrol",
+                {
+                    id: 10,
+                    enrolNum: 48
+                })
+            location.reload()
+        } );
+
+        $("#4").on("click",function(){
+            $.post("http://localhost:8181/api/enrol",
+                {
+                    id: 10,
+                    enrolNum: -1
+                })
+            location.reload()
+        });
+
+        $("#5").on("click",function(){
+            $.post("http://localhost:8181/api/enrol",
+                {
+                    id: 10,
+                    enrolNum: -49
+                })
+            location.reload()
+        } );
 
         $("#addCourse").on("click",function(){
             if(document.getElementById("courseCode").value==""){

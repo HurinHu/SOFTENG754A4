@@ -187,4 +187,9 @@ public class Course {
 	public void setTime(String time) {
 		this._time = time;
 	}
+
+	public String enrol(int enrol_Student_num){
+    	this._capacity -= enrol_Student_num;
+    	return "";
+	}
 }
