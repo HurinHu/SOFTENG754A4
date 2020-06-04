@@ -224,4 +224,20 @@ public void the_student_should_receive(String string) {
 	  assertEquals(string,output);
 }
 
+
+@When("he clicked getDescription button for SOFTENG751")
+public void he_clicked_getDescription_button_for_SOFTENG751() {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+
+@Then("the student should get {string} as course description")
+public void the_student_should_get_as_course_description(String string) {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+
+
+
+
 }
