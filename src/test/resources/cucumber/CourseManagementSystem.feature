@@ -16,10 +16,12 @@ Feature: Course Management System
 
   Scenario Outline: update the student enrolled count when enrolled or swapped out
     Given <CourseCode> has <EnrolledStudentNum> student enrolled
-    When <newStudent> student enrolled in the course
+    When <newStudent> student enrolled in the course negative reprsents swap out
     Then the remained seating should be <RemainedSeat>
     Examples:
       | CourseCode | EnrolledStudentNum | newStudent | RemainedSeat |
       | SOFTENG754 | 0                  | 1          | 49           |
       | SOFTENG754 | 9                  | 1          | 40           |
       | SOFTENG754 | 49                 | 1          | 0            |
+      | SOFTENG751 | 49                 | -1         | 2            |
+      | SOFTENG751 | 2                  | -2         | 0            |

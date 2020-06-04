@@ -83,4 +83,28 @@ public class CourseManagementSystem {
             fail();
         }
     }
+
+    @Given("SOFTENG754 has {int} student enrolled")
+    public void softeng754_has_student_enrolled(Integer int1) {
+        // Write code here that turns the phrase above into concrete actions
+        throw new io.cucumber.java.PendingException();
+    }
+
+    @When("{int} student enrolled in the course negative reprsents swap out")
+    public void student_enrolled_in_the_course_negative_reprsents_swap_out(Integer int1) {
+        // Write code here that turns the phrase above into concrete actions
+        throw new io.cucumber.java.PendingException();
+    }
+
+    @Then("the remained seating should be {int}")
+    public void the_remained_seating_should_be(Integer int1) {
+        // Write code here that turns the phrase above into concrete actions
+        throw new io.cucumber.java.PendingException();
+    }
+
+    @Given("SOFTENG751 has {int} student enrolled")
+    public void softeng751_has_student_enrolled(Integer int1) {
+        // Write code here that turns the phrase above into concrete actions
+        throw new io.cucumber.java.PendingException();
+    }
 }
