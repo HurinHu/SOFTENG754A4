@@ -12,4 +12,4 @@ Feature: Course Management System
     Given user logged in as Course Coordinator
     When enters the course details in correct format name:"Software Architecture",code:""
     And he clicks "Add Course" in the course management page
-    Then an alert message would pop up
+    Then an alert message would pop up "Please fill the information correctly"

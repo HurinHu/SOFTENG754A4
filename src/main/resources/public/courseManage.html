@@ -160,24 +160,29 @@
 
 
         $("#addCourse").on("click",function(){
-            $.post("http://localhost:8181/api/course",
-                {
-                    id: 99,
-                    name: document.getElementById("courseCode").value,
-                    description: 'none',
-                    capacity: 100,
-                    concession: true,
-                    compulsory: 'software engineering',
-                    prerequisite: 'softeng250',
-                    timeslots: '9-10',
-                    location: 'New Market',
-                    status: 'unenrolled'
+            if(document.getElementById("courseCode").value==""){
+                alert("Please fill the information correctly")
+            }else{
+                $.post("http://localhost:8181/api/course",
+                    {
+                        id: 99,
+                        name: document.getElementById("courseCode").value,
+                        description: 'none',
+                        capacity: 100,
+                        concession: true,
+                        compulsory: 'software engineering',
+                        prerequisite: 'softeng250',
+                        timeslots: '9-10',
+                        location: 'New Market',
+                        status: 'unenrolled'
 
-                }
-                // function(data, status){
-                //     alert("Data: " + data + "\nStatus: " + status);
-                // }
-            );
+                    }
+                    // function(data, status){
+                    //     alert("Data: " + data + "\nStatus: " + status);
+                    // }
+                );
+            }
+
         });
     });
 
