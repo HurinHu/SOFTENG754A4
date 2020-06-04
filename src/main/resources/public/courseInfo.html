@@ -67,6 +67,10 @@
                 <button id="btn_description1" onclick="getDescription1()">getDescription</button>
                 <div id="description1" style="display: none;"></div>
             </div>
+            <div class="col">
+                <button id="btn_prerequisite1" onclick="getPrerequisite1()">getPrerequisite</button>
+                <div id="prerequisite1" style="display: none;"></div>
+            </div>
         </div>
         <div class="row">
             <div class="col">
@@ -83,6 +87,10 @@
             <div class="col">
                 <button id="btn_description2" onclick="getDescription2()">getDescription</button>
                 <div id="description2" style="display: none;"></div>
+            </div>
+            <div class="col">
+                <button id="btn_prerequisite2" onclick="getPrerequisite2()">getPrerequisite</button>
+                <div id="prerequisite2" style="display: none;"></div>
             </div>
         </div>
     </div>
@@ -136,10 +144,18 @@
 
         }
 
-
-        function getTime() {
-            $("#courseTimes").show()
+        function getPrerequisite1() {
+            $("#btn_prerequisite1").hide()
+            console.log($("#prerequisite1").text())
+            $("#prerequisite1").show()
         }
+
+        function getPrerequisite2() {
+            $("#btn_prerequisite2").hide()
+
+            $("#prerequisite2").show()
+        }
+
         $(document).ready(function() {
             $.ajax({
                 url: "http://localhost:8181/api/userlist",
@@ -180,16 +196,6 @@
                 url: "http://localhost:8181/api/courselist",
                 method: "GET"
             }).done(function(data) {
-                let courses = "";
-                let locations = "";
-                let timeslots = "";
-                console.log(data);
-                $.each(data, function(key, value) {
-
-                    courses += "<p>" + value.courseName + "\n</p>";
-                    locations += "<p>" + value.location + "\n</p>";
-                    timeslots += "<p>" + value.timeslots[0] + "\n</p>";
-                });
                 var i;
                 for (i = 0; i < data.length; i++) {
                     if (i == 0) {
@@ -197,11 +203,14 @@
                         $("#location1").html(data[i].location);
                         $("#courseTime1").html(data[i].timeslots[0]);
                         $("#description1").html(data[i].courseDescription);
+                        $("#prerequisite1").html(data[i].prerequisite[0]);
+                        console.log(data[i].prerequisite[0]);
                     } else if (i == 1) {
                         $("#course2").html(data[i].courseName);
                         $("#location2").html(data[i].location);
                         $("#courseTime2").html(data[i].timeslots[0]);
                         $("#description2").html(data[i].courseDescription);
+                        $("#prerequisite2").html(data[i].prerequisite[0]);
                     }
                 }
 
