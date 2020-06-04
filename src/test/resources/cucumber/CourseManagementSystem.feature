@@ -21,8 +21,8 @@ Feature: Course Management System
     Then the remained seating should be <RemainedSeat>
     Examples:
       | CourseCode | EnrolledStudentNum | newStudent | RemainedSeat |
-      | SOFTENG754 | 0                  | 1          | 49           |
-      | SOFTENG754 | 1                  | 2          | 47           |
-      | SOFTENG754 | 2                  | 48         | 0            |
-      | SOFTENG754 | 50                 | -1         | 1            |
-      | SOFTENG754 | 49                 | -49        | 50           |
+      | SOFTENG759 | 0                  | 1          | 49           |
+      | SOFTENG759 | 1                  | 2          | 47           |
+      | SOFTENG759 | 2                  | 48         | 0            |
+      | SOFTENG759 | 50                 | -1         | 1            |
+      | SOFTENG759 | 49                 | -49        | 50           |

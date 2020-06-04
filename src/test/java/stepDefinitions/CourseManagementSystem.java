@@ -28,7 +28,6 @@ public class CourseManagementSystem {
         this.base = base;
         this.wait = new WebDriverWait(this.base.driver, 20);
         this.base.driver.get("http://localhost:8181/courseManage.html");
-        WebElement currentUser = base.driver.findElement(By.id("users"));
     }
 
 
@@ -36,8 +35,7 @@ public class CourseManagementSystem {
     @Given("user logged in as Course Coordinator")
     public void user_logged_in_as_Course_Coordinator() {
         // Write code here that turns the phrase above into concrete actions
-        this.wait = new WebDriverWait(this.base.driver, 20);
-        this.base.driver.get("http://localhost:8181/courseManage.html");
+
         WebElement currentUser = base.driver.findElement(By.id("users"));
         Select users = new Select(currentUser);
         // undergrade student
@@ -87,9 +85,8 @@ public class CourseManagementSystem {
         }
     }
 
-    @Given("SOFTENG754 has {int} student enrolled")
-    public void softeng754_has_student_enrolled(Integer int1) {
-
+    @Given("SOFTENG759 has {int} student enrolled")
+    public void softeng759_has_student_enrolled(Integer int1) {
     }
 
     @When("{int} student enrolled in the course negative reprsents swap out")
@@ -133,6 +130,7 @@ public class CourseManagementSystem {
         str = str.replaceAll(" +", " ");
 
         Integer integer = Integer.parseInt(str);
+        System.out.println("actual seat was: "+integer +"should be: "+int1);
         if(!integer.equals(int1)){
             fail();
         }

@@ -51,7 +51,7 @@ public class Database {
 		timeslots.add("Mon 10:00-12:00");
 		timeslots.add("Wed 13:00-14:00");
         cartList.add(new Course(10, "SOFTENG 754", "Some description", 50, true, "404-403", "In Cart", timeslots,""));
-		courseList.add(new Course(10, "SOFTENG 754", "Some description", 50, true, "404-403", "In Cart", timeslots,""));
+		courseList.add(new Course(12, "SOFTENG 759", "Some description", 50, true, "404-403", "In Cart", timeslots,""));
         timeslots = new ArrayList<>();
 		timeslots.add("Mon 09:00-11:00");
 		timeslots.add("Thu 13:00-15:00");
