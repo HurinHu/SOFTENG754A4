@@ -51,7 +51,8 @@ public class Database {
 		timeslots.add("Mon 10:00-12:00");
 		timeslots.add("Wed 13:00-14:00");
         cartList.add(new Course(10, "SOFTENG 754", "Some description", 50, true, "404-403", "In Cart", timeslots,""));
-		timeslots = new ArrayList<>();
+		courseList.add(new Course(12, "SOFTENG 759", "Some description", 50, true, "404-403", "In Cart", timeslots,""));
+        timeslots = new ArrayList<>();
 		timeslots.add("Mon 09:00-11:00");
 		timeslots.add("Thu 13:00-15:00");
         cartList.add(new Course(11, "SOFTENG 756", "Some description", 50, true, "404-403", "Enrolled", timeslots,"Thu 13:00-15:00"));
@@ -91,8 +92,21 @@ public class Database {
 		return true;
 	}
 
+	public void enrollInCourse(int course_id, int enrol_Student_Num){
+		Optional<String> d = courseList.stream()
+				.filter(c -> c.getCourseId()==course_id)
+				.findFirst()
+				.map(c -> c.enrol(enrol_Student_Num));
+	}
+
 	public int getCapacity(int course_id) {
-		return 0;
+		final int[] capacity = new int[1];
+    	courseList.forEach(course -> {
+    		if (course.getCourseId()==10){
+    			capacity[0] = course.getCapacity();
+			}
+		});
+		return capacity[0];
 	}
 
 	public int getEnrolled(int course_id) {

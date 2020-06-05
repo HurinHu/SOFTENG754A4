@@ -36,6 +36,7 @@ public class Api {
 		List<Course> courses = db.getCourses();
         return courses;
     }
+
 	
 	@RequestMapping(value="/api/course", method= {RequestMethod.POST})
 	public Object createcourse(@RequestParam(value="name", required=true) String name, @RequestParam(value="description", required=true) String description, @RequestParam(value="concession", required=true) boolean concession,@RequestParam(value="capacity", required=true) int capacity,@RequestParam(value="compulsory", required=true) String[] compulsory,@RequestParam(value="prerequisite", required=true) String[] prerequisite, @RequestParam(value="timeslots", required=true) String[] timeslot, @RequestParam(value="location", required=true) String location,@RequestParam(value="status", required=true) String status) {
@@ -94,6 +95,12 @@ public class Api {
 	public Object metProgrameRequirement(@PathVariable("id") String id){
 		int userId = Integer.parseInt(id);
 		return db.metProgrammeRequirement(userId);
+	}
+
+	@RequestMapping(value="/api/enrol", method= {RequestMethod.POST})
+	public Object enrolAndUpdateSeating(@RequestParam(value="id", required=true) int id, @RequestParam(value="enrolNum", required=true) int enrol_student_num){
+		db.enrollInCourse(id,enrol_student_num);
+		return "success";
 	}
   
 }
