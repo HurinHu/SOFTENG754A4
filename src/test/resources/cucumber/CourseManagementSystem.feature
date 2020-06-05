@@ -22,7 +22,7 @@ Feature: Course Management System
     Examples:
       | CourseCode | EnrolledStudentNum | newStudent | RemainedSeat |
       | SOFTENG759 | 0                  | 1          | 49           |
-      | SOFTENG759 | 1                  | 2          | 47           |
-      | SOFTENG759 | 3                  | 47         | 0            |
-      | SOFTENG759 | 50                 | -1         | 1            |
-      | SOFTENG759 | 49                 | -49        | 50           |
+      | SOFTENG759 | 0                  | 2          | 48           |
+      | SOFTENG759 | 0                  | 47         | 3            |
+      | SOFTENG759 | 0                  | -1         | 51           |
+      | SOFTENG759 | 0                  | -49        | 99           |

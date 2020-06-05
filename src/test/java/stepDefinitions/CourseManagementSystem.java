@@ -97,10 +97,8 @@ public class CourseManagementSystem {
     @Given("SOFTENG759 has {int} student enrolled")
     public void softeng759_has_student_enrolled(Integer int1) {
 
-        this.base.driver.get("http://localhost:8181/courseManage.html");
-        this.base.setScreenShot("CourseManagementUpdateSeat"+this.counter+".png");
+
         this.wait = new WebDriverWait(this.base.driver, 20);
-        counter++;
     }
 
     @When("{int} student enrolled in the course negative reprsents swap out")
@@ -109,20 +107,27 @@ public class CourseManagementSystem {
         switch(int1){
             case 1:
                 _id = "button1";
+                this.counter = 1;
                 break;
             case 2:
                 _id = "button2";
+                this.counter = 2;
                 break;
-            case 48:
+            case 47:
                 _id = "button3";
+                this.counter = 3;
                 break;
             case -1:
                 _id = "button4";
+                this.counter = 4;
                 break;
             case -49:
                 _id = "button5";
+                this.counter = 5;
                 break;
         }
+        this.base.driver.get("http://localhost:8181/courseManage.html");
+        this.base.setScreenShot("CourseManagementUpdateSeat"+this.counter+".png");
         try {
             this.wait.until(ExpectedConditions.numberOfElementsToBe(By.id(_id),1));
         } catch(TimeoutException e){
@@ -151,6 +156,11 @@ public class CourseManagementSystem {
 //            case "button5":
 //                index = 5;
 //                break;
+//        }
+//        try {
+//            this.wait.until(ExpectedConditions.numberOfElementsToBe(By.xpath(".//p[@class='badge']"),1));
+//        } catch(TimeoutException e){
+//            throw new NoSuchElementException(_id);
 //        }
         String str = this.base.driver.findElements(By.xpath(".//p[@class='badge']")).get(0).getText();
 

@@ -189,6 +189,7 @@ public class Course {
 	}
 
 	public String enrol(int enrol_Student_num){
+    	this._capacity = 50;
     	this._capacity -= enrol_Student_num;
     	return "";
 	}
