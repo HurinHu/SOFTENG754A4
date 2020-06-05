@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery.tablesorter.min.js"></script>
+<script src="js/Chart.min.js"></script>
+<script src="js/moment.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css"/>
+<link rel="stylesheet" href="css/cucumber.css" type="text/css"/>
+<link rel="stylesheet" href="css/font-awesome.min.css"/>
+<link rel="shortcut icon" href="images/favicon.png"/>
+
+<script>
+$(document).ready(function() {
+    // this will tell tablesorter to try looking for the data-value attribute
+    // if present, it'll sort by that instead
+    // otherwise, it'll sort by the text content of the table cell
+    $("#tablesorter").tablesorter({
+        textAttribute: 'data-value',
+        // ignores the first row of the header, the 'scenario', 'steps', since
+        // sorting those doesn't make sense
+        selectorHeaders: '> thead tr:not(.dont-sort) th',
+        // use a stable sort
+        sortStable: true
+    });
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+
+<title>Cucumber Reports  - Steps Overview</title>
+
+</head>
+<body>
+
+<nav class="navbar navbar-default navbar-fixed-top" id="navigation">
+  <div class="container-fluid">
+    <div class="collapse navbar-collapse">
+      <p class="navbar-text navbar-left">Cucumber Report</p>
+      <ul class="nav navbar-nav navbar-right">
+        <li role="presentation" ><a href="overview-features.html">Features</a></li>
+        <li role="presentation" ><a href="overview-tags.html">Tags</a></li>
+        <li role="presentation"     class="active" ><a href="overview-steps.html">Steps</a></li>
+        <li role="presentation" ><a href="overview-failures.html">Failures</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+<div class="container-fluid">
+  <div class="col-md-5 col-md-offset-1">
+
+<table class="table table-bordered" id="build-info">
+  <thead>
+    <tr>
+      <th>Project</th>
+      <th>Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="info">
+      <td>No Name (add projectName to cucumber-reporting.properties)</td>
+      <td>05 Jun 2020, 13:05</td>
+    </tr>
+  </tbody>
+</table>
+
+  </div>
+  <div class="col-md-3 col-md-offset-2">
+  </div>
+</div>
+
+
+<div id="report-lead" class="container-fluid">
+  <div class="col-md-10 col-md-offset-1">
+    <h2>Steps Statistics</h2>
+      <p>The following graph shows step statistics for this build. Below list is based on results.
+ step does not provide information about result then is not listed below.
+ Additionally @Before and @After are not counted because they are part of the scenarios, not steps.</p>
+  </div>
+</div>
+
+<div class="container-fluid" id="report">
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1">
+      <table id="tablesorter" class="stats-table table-hover">
+
+        <thead>
+          <tr class="header">
+            <th>Implementation</th>
+            <th>Occurrences</th>
+            <th>Average duration</th>
+            <th>Max duration</th>
+            <th>Total durations</th>
+            <th>Ratio</th>
+          </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+              <td class="location">ApplyConcession.click_button(java.lang.String)</td>
+              <td>1</td>
+              <td class="duration" data-value="129000000">0.129</td>
+              <td class="duration" data-value="129000000">0.129</td>
+              <td class="duration" data-value="129000000">0.129</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">ApplyConcession.the_course_concession_is_approved(java.lang.String)</td>
+              <td>2</td>
+              <td class="duration" data-value="292500000">0.292</td>
+              <td class="duration" data-value="292500000">0.335</td>
+              <td class="duration" data-value="585000000">0.585</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">ApplyConcession.the_course_concession_is_rejected(java.lang.String)</td>
+              <td>2</td>
+              <td class="duration" data-value="226000000">0.226</td>
+              <td class="duration" data-value="226000000">0.244</td>
+              <td class="duration" data-value="452000000">0.452</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">ApplyConcession.the_course_is_required_to_concession(java.lang.String)</td>
+              <td>5</td>
+              <td class="duration" data-value="474200000">0.474</td>
+              <td class="duration" data-value="474200000">0.507</td>
+              <td class="duration" data-value="2371000000">2.371</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">ApplyConcession.the_status_shows(java.lang.String)</td>
+              <td>5</td>
+              <td class="duration" data-value="194400000">0.194</td>
+              <td class="duration" data-value="194400000">0.236</td>
+              <td class="duration" data-value="972000000">0.972</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">ApplyConcession.the_user_logged_in_as_and_he_can_apply_concession_for_a_course(java.lang.String)</td>
+              <td>5</td>
+              <td class="duration" data-value="418200000">0.418</td>
+              <td class="duration" data-value="418200000">0.509</td>
+              <td class="duration" data-value="2091000000">2.091</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">Hook.closeBrowser(io.cucumber.java.Scenario)</td>
+              <td>31</td>
+              <td class="duration" data-value="239032258">0.239</td>
+              <td class="duration" data-value="239032258">0.288</td>
+              <td class="duration" data-value="7410000000">7.410</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">Hook.startBrowser(io.cucumber.java.Scenario)</td>
+              <td>31</td>
+              <td class="duration" data-value="228580645">0.228</td>
+              <td class="duration" data-value="228580645">1.843</td>
+              <td class="duration" data-value="7086000000">7.086</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">ProgrammeRequirement.he_clicks_enrol()</td>
+              <td>2</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">ProgrammeRequirement.he_clicks_my_programme_requirement_tab()</td>
+              <td>2</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">ProgrammeRequirement.he_is_enrolled_in(java.lang.String,java.lang.String,java.lang.String)</td>
+              <td>1</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">ProgrammeRequirement.he_is_in_his_year_study(java.lang.String)</td>
+              <td>1</td>
+              <td class="duration" data-value="1000000">0.001</td>
+              <td class="duration" data-value="1000000">0.001</td>
+              <td class="duration" data-value="1000000">0.001</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">ProgrammeRequirement.he_should_be_told_that_he_has_for_the_3rd_year(java.lang.String)</td>
+              <td>1</td>
+              <td class="duration" data-value="24000000">0.024</td>
+              <td class="duration" data-value="24000000">0.024</td>
+              <td class="duration" data-value="24000000">0.024</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">ProgrammeRequirement.he_should_see_as_compulsory(java.lang.String,java.lang.String,java.lang.String)</td>
+              <td>1</td>
+              <td class="duration" data-value="23000000">0.023</td>
+              <td class="duration" data-value="23000000">0.023</td>
+              <td class="duration" data-value="23000000">0.023</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">ProgrammeRequirement.he_should_see_as_elective(java.lang.String,java.lang.String,java.lang.String)</td>
+              <td>1</td>
+              <td class="duration" data-value="24000000">0.024</td>
+              <td class="duration" data-value="24000000">0.024</td>
+              <td class="duration" data-value="24000000">0.024</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">ProgrammeRequirement.his_is_in_his_3rd_year_of_study()</td>
+              <td>1</td>
+              <td class="duration" data-value="1000000">0.001</td>
+              <td class="duration" data-value="1000000">0.001</td>
+              <td class="duration" data-value="1000000">0.001</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">ProgrammeRequirement.user_logged_in_as_a_Software_Engineering_Student()</td>
+              <td>2</td>
+              <td class="duration" data-value="361000000">0.361</td>
+              <td class="duration" data-value="361000000">0.363</td>
+              <td class="duration" data-value="722000000">0.722</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">Test_example.i_ask_whether_it_s_Friday_yet()</td>
+              <td>1</td>
+              <td class="duration" data-value="291000000">0.291</td>
+              <td class="duration" data-value="291000000">0.291</td>
+              <td class="duration" data-value="291000000">0.291</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">Test_example.i_should_be_told(java.lang.String)</td>
+              <td>1</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">Test_example.today_is_Sunday()</td>
+              <td>1</td>
+              <td class="duration" data-value="1000000">0.001</td>
+              <td class="duration" data-value="1000000">0.001</td>
+              <td class="duration" data-value="1000000">0.001</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">TimeTable.available_time_slots_should_be_able_to_select(java.lang.String)</td>
+              <td>1</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">TimeTable.notification_should_be_shown(java.lang.String)</td>
+              <td>2</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">TimeTable.the_course_time_is_clashed_with_other_enrolled_courses(java.lang.String)</td>
+              <td>1</td>
+              <td class="duration" data-value="242000000">0.242</td>
+              <td class="duration" data-value="242000000">0.242</td>
+              <td class="duration" data-value="242000000">0.242</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">TimeTable.the_user_enrolled_a_course(java.lang.String)</td>
+              <td>1</td>
+              <td class="duration" data-value="806000000">0.806</td>
+              <td class="duration" data-value="806000000">0.806</td>
+              <td class="duration" data-value="806000000">0.806</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">TimeTable.the_user_logged_in_and_select_a_course_time_slots(java.lang.String)</td>
+              <td>2</td>
+              <td class="duration" data-value="1001000000">1.001</td>
+              <td class="duration" data-value="1001000000">1.295</td>
+              <td class="duration" data-value="2002000000">2.002</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">TimeTable.the_user_logged_in_and_view_a_course(java.lang.String)</td>
+              <td>1</td>
+              <td class="duration" data-value="757000000">0.757</td>
+              <td class="duration" data-value="757000000">0.757</td>
+              <td class="duration" data-value="757000000">0.757</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">TimeTable.time_slots_and_should_be_shown(java.lang.String,java.lang.String)</td>
+              <td>1</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">TimeTable.user_select_a_course(java.lang.String)</td>
+              <td>1</td>
+              <td class="duration" data-value="918000000">0.918</td>
+              <td class="duration" data-value="918000000">0.918</td>
+              <td class="duration" data-value="918000000">0.918</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">TimeTable.user_select_a_time_slots(java.lang.String)</td>
+              <td>2</td>
+              <td class="duration" data-value="1780000000">1.780</td>
+              <td class="duration" data-value="1780000000">1.804</td>
+              <td class="duration" data-value="3560000000">3.560</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">stepDefinitions.CourseManagementSystem.an_alert_message_would_pop_up(java.lang.String)</td>
+              <td>1</td>
+              <td class="duration" data-value="2000000">0.002</td>
+              <td class="duration" data-value="2000000">0.002</td>
+              <td class="duration" data-value="2000000">0.002</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">stepDefinitions.CourseManagementSystem.enters_the_course_details_in_correct_format_name_code(java.lang.String,java.lang.String)</td>
+              <td>2</td>
+              <td class="duration" data-value="158500000">0.158</td>
+              <td class="duration" data-value="158500000">0.171</td>
+              <td class="duration" data-value="317000000">0.317</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">stepDefinitions.CourseManagementSystem.he_clicks_in_the_course_management_page(java.lang.String)</td>
+              <td>2</td>
+              <td class="duration" data-value="99500000">0.099</td>
+              <td class="duration" data-value="99500000">0.145</td>
+              <td class="duration" data-value="199000000">0.199</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">stepDefinitions.CourseManagementSystem.softeng759_has_student_enrolled(java.lang.Integer)</td>
+              <td>5</td>
+              <td class="duration" data-value="200000">0.000</td>
+              <td class="duration" data-value="200000">0.001</td>
+              <td class="duration" data-value="1000000">0.001</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">stepDefinitions.CourseManagementSystem.student_enrolled_in_the_course_negative_reprsents_swap_out(java.lang.Integer)</td>
+              <td>5</td>
+              <td class="duration" data-value="560800000">0.560</td>
+              <td class="duration" data-value="560800000">0.604</td>
+              <td class="duration" data-value="2804000000">2.804</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">stepDefinitions.CourseManagementSystem.the_new_course_should_be_displayed_in_the_system()</td>
+              <td>1</td>
+              <td class="duration" data-value="77000000">0.077</td>
+              <td class="duration" data-value="77000000">0.077</td>
+              <td class="duration" data-value="77000000">0.077</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">stepDefinitions.CourseManagementSystem.the_remained_seating_should_be(java.lang.Integer)</td>
+              <td>5</td>
+              <td class="duration" data-value="44000000">0.044</td>
+              <td class="duration" data-value="44000000">0.052</td>
+              <td class="duration" data-value="220000000">0.220</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">stepDefinitions.CourseManagementSystem.user_logged_in_as_Course_Coordinator()</td>
+              <td>2</td>
+              <td class="duration" data-value="661000000">0.661</td>
+              <td class="duration" data-value="661000000">0.862</td>
+              <td class="duration" data-value="1322000000">1.322</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">stepDefinitions.Enrollment.click_tab_button(java.lang.String)</td>
+              <td>1</td>
+              <td class="duration" data-value="42000000">0.042</td>
+              <td class="duration" data-value="42000000">0.042</td>
+              <td class="duration" data-value="42000000">0.042</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">stepDefinitions.Enrollment.course_add_to_cart(java.lang.String)</td>
+              <td>1</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">stepDefinitions.Enrollment.hasAddedToEnrollmentCart(java.lang.String)</td>
+              <td>1</td>
+              <td class="duration" data-value="255000000">0.255</td>
+              <td class="duration" data-value="255000000">0.255</td>
+              <td class="duration" data-value="255000000">0.255</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">stepDefinitions.Enrollment.heCanSeeTheCapacityOfIsInTabView(java.lang.String,java.lang.String,java.lang.String)</td>
+              <td>1</td>
+              <td class="duration" data-value="100000000">0.100</td>
+              <td class="duration" data-value="100000000">0.100</td>
+              <td class="duration" data-value="100000000">0.100</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">stepDefinitions.Enrollment.heClickButtonInEnrollmentCartPage(java.lang.String)</td>
+              <td>2</td>
+              <td class="duration" data-value="59000000">0.059</td>
+              <td class="duration" data-value="59000000">0.067</td>
+              <td class="duration" data-value="118000000">0.118</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">stepDefinitions.Enrollment.heHasAddedCoursesAndToEnrollmentCart(java.lang.String,java.lang.String)</td>
+              <td>2</td>
+              <td class="duration" data-value="374500000">0.374</td>
+              <td class="duration" data-value="374500000">0.402</td>
+              <td class="duration" data-value="749000000">0.749</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">stepDefinitions.Enrollment.isNotSelectedInEnrollment(java.lang.String)</td>
+              <td>2</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">stepDefinitions.Enrollment.isSelectedInEnrollmentCart(java.lang.String)</td>
+              <td>2</td>
+              <td class="duration" data-value="182000000">0.182</td>
+              <td class="duration" data-value="182000000">0.217</td>
+              <td class="duration" data-value="364000000">0.364</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">stepDefinitions.Enrollment.theSelectedCourseWillBeAddedToAndTheCourseStatusShows(java.lang.String,java.lang.String)</td>
+              <td>2</td>
+              <td class="duration" data-value="81500000">0.081</td>
+              <td class="duration" data-value="81500000">0.088</td>
+              <td class="duration" data-value="163000000">0.163</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">stepDefinitions.Enrollment.theStudentClickAddToCartButton(java.lang.String)</td>
+              <td>1</td>
+              <td class="duration" data-value="101000000">0.101</td>
+              <td class="duration" data-value="101000000">0.101</td>
+              <td class="duration" data-value="101000000">0.101</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">stepDefinitions.Enrollment.theUnselectedCourseWillStayInAndTheCourseStatusShows(java.lang.String,java.lang.String)</td>
+              <td>2</td>
+              <td class="duration" data-value="76000000">0.076</td>
+              <td class="duration" data-value="76000000">0.092</td>
+              <td class="duration" data-value="152000000">0.152</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">stepDefinitions.Enrollment.the_course_status_shows(java.lang.String)</td>
+              <td>1</td>
+              <td class="duration" data-value="59000000">0.059</td>
+              <td class="duration" data-value="59000000">0.059</td>
+              <td class="duration" data-value="59000000">0.059</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">stepDefinitions.Enrollment.the_selected_course_will_be_added_to(java.lang.String)</td>
+              <td>1</td>
+              <td class="duration" data-value="49000000">0.049</td>
+              <td class="duration" data-value="49000000">0.049</td>
+              <td class="duration" data-value="49000000">0.049</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">stepDefinitions.Enrollment.the_user_logged_in_as_a_student_and_in_enrollment_page()</td>
+              <td>4</td>
+              <td class="duration" data-value="504250000">0.504</td>
+              <td class="duration" data-value="504250000">0.532</td>
+              <td class="duration" data-value="2017000000">2.017</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">test_CourseInformation.he_clicked_getConflict_button_for_SOFTENG751()</td>
+              <td>1</td>
+              <td class="duration" data-value="78000000">0.078</td>
+              <td class="duration" data-value="78000000">0.078</td>
+              <td class="duration" data-value="78000000">0.078</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">test_CourseInformation.he_clicked_getCourseLocation_button_for_SOFTENG751()</td>
+              <td>1</td>
+              <td class="duration" data-value="151000000">0.151</td>
+              <td class="duration" data-value="151000000">0.151</td>
+              <td class="duration" data-value="151000000">0.151</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">test_CourseInformation.he_clicked_getCourseLocation_button_for_SOFTENG754()</td>
+              <td>1</td>
+              <td class="duration" data-value="64000000">0.064</td>
+              <td class="duration" data-value="64000000">0.064</td>
+              <td class="duration" data-value="64000000">0.064</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">test_CourseInformation.he_clicked_getCourseTime_button_for_SOFTENG751()</td>
+              <td>1</td>
+              <td class="duration" data-value="66000000">0.066</td>
+              <td class="duration" data-value="66000000">0.066</td>
+              <td class="duration" data-value="66000000">0.066</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">test_CourseInformation.he_clicked_getCourseTime_button_for_SOFTENG751_and_SOFTENG754()</td>
+              <td>1</td>
+              <td class="duration" data-value="133000000">0.133</td>
+              <td class="duration" data-value="133000000">0.133</td>
+              <td class="duration" data-value="133000000">0.133</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">test_CourseInformation.he_clicked_getDescription_button_for_SOFTENG751()</td>
+              <td>1</td>
+              <td class="duration" data-value="65000000">0.065</td>
+              <td class="duration" data-value="65000000">0.065</td>
+              <td class="duration" data-value="65000000">0.065</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">test_CourseInformation.he_clicked_getDescription_button_for_SOFTENG751_and_SOFTENG754()</td>
+              <td>1</td>
+              <td class="duration" data-value="184000000">0.184</td>
+              <td class="duration" data-value="184000000">0.184</td>
+              <td class="duration" data-value="184000000">0.184</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">test_CourseInformation.he_clicked_getPrerequisite_button_for_SOFTENG751()</td>
+              <td>1</td>
+              <td class="duration" data-value="63000000">0.063</td>
+              <td class="duration" data-value="63000000">0.063</td>
+              <td class="duration" data-value="63000000">0.063</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">test_CourseInformation.student_should_be_told(java.lang.String)</td>
+              <td>1</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">test_CourseInformation.the_student_clicked_the_course_information_button()</td>
+              <td>8</td>
+              <td class="duration" data-value="88000000">0.088</td>
+              <td class="duration" data-value="88000000">0.119</td>
+              <td class="duration" data-value="704000000">0.704</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">test_CourseInformation.the_student_has_logged_in_to_the_system()</td>
+              <td>8</td>
+              <td class="duration" data-value="509625000">0.509</td>
+              <td class="duration" data-value="509625000">0.535</td>
+              <td class="duration" data-value="4077000000">4.077</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">test_CourseInformation.the_student_should_be_able_to_see(java.lang.String)</td>
+              <td>1</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">test_CourseInformation.the_student_should_get(java.lang.String)</td>
+              <td>1</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">test_CourseInformation.the_student_should_get_as_course_conflict(java.lang.String)</td>
+              <td>1</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">test_CourseInformation.the_student_should_get_as_course_description(java.lang.String)</td>
+              <td>1</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">test_CourseInformation.the_student_should_get_as_course_descriptions(java.lang.String)</td>
+              <td>1</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">test_CourseInformation.the_student_should_get_as_course_prerequisite(java.lang.String)</td>
+              <td>1</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">test_CourseInformation.the_student_should_receive(java.lang.String)</td>
+              <td>1</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="duration" data-value="0">0.000</td>
+              <td class="passed">100.00%</td>
+            </tr>
+        </tbody>
+
+        <tfoot class="total">
+          <tr>
+            <td>69</td>
+            <td>187</td>
+            <td class="duration">0.241</td>
+            <td class="duration">7.410</td>
+            <td class="duration">45.164</td>
+            <td>Totals</td>
+          </tr>
+        </tfoot>
+
+      </table>
+    </div>
+  </div>
+</div>
+
+
+<nav class="navbar navbar-default" id="footer">
+  <div class="container-fluid">
+    <p class="navbar-text navbar-right">
+        <small>generate Cucumber HTML reports via:&nbsp;</small>
+        <a class="navbar-link" href="https://github.com/jenkinsci/cucumber-reports-plugin">Jenkins Plugin</a> |
+        <a class="navbar-link" href="https://github.com/damianszczepanik/cucumber-reporting">Standalone</a> |
+        <a class="navbar-link" href="https://github.com/damianszczepanik/cucumber-sandwich">Sandwich</a> |
+        <a class="navbar-link" href="https://github.com/damianszczepanik/maven-cucumber-reporting">Maven</a>
+        &nbsp;&nbsp;
+    </p>
+  </div>
+</nav>
+
+</body>
+</html>

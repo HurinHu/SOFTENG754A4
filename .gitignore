@@ -2,5 +2,4 @@
 **/._*
 .gradle/
 build/
-target/
 bin/
