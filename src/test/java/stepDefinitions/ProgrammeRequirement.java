@@ -45,7 +45,7 @@ public class ProgrammeRequirement extends BaseUtil {
         Select users = new Select(currentUser);
         // undergrade student
         users.selectByVisibleText("aaa");
-        if(this.base.scenario.getName().equals("student want to know if his programme requirement of his programme has been met")){
+        if(this.base.scenario.getName().equals("student want to know the programme requirement of his programme")){
             this.base.setScreenShot("ProgrammeRequirement1.png");
         }else if(this.base.scenario.getName().equals("student want to know if his programme requirement of his programme has been met")) {
             this.base.setScreenShot("ProgrammeRequirement2.png");
