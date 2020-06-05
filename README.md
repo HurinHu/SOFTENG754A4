@@ -30,7 +30,7 @@ Frontend `src/main/resources/public`
 ## BDD Tests
 `src/test/java/stepDefinitions/`
 
-#Screen Shot
+# Screen Shot
 ## Apply Concession
 ![Alt text](target/screenshot/ApplyConcession1.png)
 ![Alt text](target/screenshot/ApplyConcession2.png)
